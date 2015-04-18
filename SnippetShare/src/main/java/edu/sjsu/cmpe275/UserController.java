@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
+public class UserController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -34,6 +34,35 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
+	}
+	
+	//********************************Snippet Share APIs**********************************//
+	
+	//User APIs
+	
+	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
+	public String createAccount(Locale locale, Model model){
+		return null;
+	}
+	
+	@RequestMapping(value = "/signin", method = RequestMethod.POST)
+	public String signin(Locale locale, Model model){
+		return null;
+	}
+	
+	@RequestMapping(value = "/signout", method = RequestMethod.POST)
+	public String signout(Locale locale, Model model){
+		return null;
+	}
+	
+	@RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
+	public String updateProfile(Locale locale, Model model){
+		return null;
+	}
+	
+	@RequestMapping(value = "/deleteProfile", method = RequestMethod.DELETE)
+	public String deleteProfile(Locale locale, Model model){
+		return null;
 	}
 	
 }
