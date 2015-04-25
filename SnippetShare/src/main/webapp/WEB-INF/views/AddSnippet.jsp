@@ -20,8 +20,7 @@
         <h3 class="text-muted">Snippet Share</h3>
       </div>
 
-      <div class="Dashboard">
-		<form class="container">
+      <form class="Dashboard">
 			<h2 class="form-signin-heading">Create a New Snippet</h2>
 			
 			<label for="inputName" class="sr-only">Title</label><br>
@@ -46,12 +45,12 @@
 			<input type="url" id="inputUrl" class="form-control" placeholder="URLs" required>
 		
 			<p>By creating a snippet you agree to our Terms of Service.</p>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Create Snippet</button>			
+			<button class="btn btn-mg btn-primary" type="submit">Create Snippet</button>			
 		</form>
-      </div>	
+
       <footer class="footer">
         <p>&copy; CMPE275 2015</p>
       </footer>
-
+</div>
 </body>
 </html>

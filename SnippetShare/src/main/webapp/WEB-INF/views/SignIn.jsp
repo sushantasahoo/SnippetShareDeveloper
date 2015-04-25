@@ -8,7 +8,7 @@
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
 	<link href="./css/Style.css" rel="stylesheet">
 </head>
-<body>
+<body bgcolor="#E6E6FA">
 <div class="container">
       <div class="header clearfix">
         <nav>
@@ -37,8 +37,7 @@
 		</form>
 
       </div>
-
-
+      
       <footer class="footer">
         <p>&copy; CMPE275 2014</p>
       </footer>

@@ -13,47 +13,25 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-			<li role="presentation" ><a href="#">Private Board</a></li>
+            <li role="presentation" class="active"><a href="#">Dashboard</a></li>
+            <li role="presentation" ><a href="#">Activity</a></li>
+			<li role="presentation" ><a href="#">History</a></li>
+			<li role="presentation" ><a href="#">Profile</a></li>
 			<li role="presentation" ><a href="Home.html" >Log Out</a></li>
 			
           </ul>
         </nav>
         <h3 class="text-muted">Snippet Share</h3>
       </div>
-
-      <div class="Dashboard">
-		<form class="container">
-			<h2 class="form-signin-heading">Create a New Snippet</h2>
-			
-			<label for="inputName" class="sr-only">Title</label><br>
-			<input height="50px" type="text" id="inputName" class="form-control" placeholder="Title" required autofocus>
-			
-			<label for="inputEmail" class="sr-only">Category</label>
-			<input type="email" id="inputEmail" class="form-control" placeholder="Category" required>
-			
-			<form:select path="country">
-				<form:option value="NONE" label="--- Select ---" />
-				<form:options items="${countryList}" />
-		     </form:select>
-			
-			
-			<label class="radio-inline"><input type="radio" name="Access"  value="Public" checked>Public </label>
-			<label class="radio-inline"><input type="radio" name="Access"  value="Private">Private</label> <br>
-			
-			
-			<label for="inputContent" class="sr-only">Add Content</label>
-			<textarea  rows="10" id="inputContent" class="form-control" placeholder="Add Content Here" required ></textarea>
-			
-			<label for="inputUrl" class="sr-only">URLs</label>
-			<input type="url" id="inputUrl" class="form-control" placeholder="URLs" required>
-		
-			<p>By creating a snippet you agree to our Terms of Service.</p>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Create Snippet</button>			
+      
+		<form class="Dashboard">
+		   <h2> TO DO :// List all public and private board according to category</h2>
+		   <h3> ON click on a particular board.. should navigae to View Board... View board should display all the snippets</h3>
 		</form>
-      </div>	
+      	
       <footer class="footer">
         <p>&copy; CMPE275 2015</p>
       </footer>
-
+</div>
 </body>
 </html>

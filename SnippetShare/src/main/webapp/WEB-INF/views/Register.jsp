@@ -54,6 +54,7 @@
       <footer class="footer">
         <p>&copy; CMPE275 2015</p>
       </footer>
+</div>      
 
 </body>
 </html>

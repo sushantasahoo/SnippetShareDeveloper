@@ -2,7 +2,10 @@
 body {
   padding-top: 20px;
   padding-bottom: 20px;
-  background-color: #CFCFCF;
+  background: linear-gradient(#F5F5F5, #A1A1A1 );
+  background-size: cover;
+  background-repeat : no-repeat;
+  min-height: 650px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -90,7 +93,9 @@ padding : 10px;
   }
   
   .Dashboard {
-  max-width: 840px;
+ 	 max-width: 550px;
+  	margin-left: auto;
+    margin-right: auto;
   }
 }
 .container-narrow > hr {
@@ -101,7 +106,7 @@ padding : 10px;
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
-  background:  transparent url("../images/blogging-people-1.jpg") no-repeat;
+  background:  transparent url("../images/blogging-people-2.jpg") no-repeat;
 }
 
 /*.jumbotron img{
