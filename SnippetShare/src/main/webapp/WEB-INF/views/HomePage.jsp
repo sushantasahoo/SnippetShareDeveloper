@@ -12,9 +12,9 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="Home.html">Home</a></li>
-            <li role="presentation"><a href="SignIn.html">Sign In</a></li>
-            <li role="presentation"><a href="Register.html">Register</a></li>
+            <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
+            <li role="presentation"><a href="${pageContext.request.contextPath}/SignIn">Sign In</a></li>
+            <li role="presentation"><a href="${pageContext.request.contextPath}/Register">Register</a></li>
           </ul>
         </nav>
         <h3 class="text-muted">Snippet Share</h3>
