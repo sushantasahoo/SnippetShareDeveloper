@@ -16,8 +16,8 @@
             <li role="presentation" class="active"><a href="#">Dashboard</a></li>
             <li role="presentation" ><a href="#">Activity</a></li>
 			<li role="presentation" ><a href="#">History</a></li>
-			<li role="presentation" ><a href="#">Profile</a></li>
-			<li role="presentation" ><a href="Home.html" >Log Out</a></li>
+			<li role="presentation" ><a href="${pageContext.request.contextPath}/viewProfile">Profile</a></li>
+			<li role="presentation" ><a href="${pageContext.request.contextPath}/SignIn">Log Out</a></li>
 			
           </ul>
         </nav>

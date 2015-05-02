@@ -6,6 +6,6 @@ public interface BoardAccessDao {
 
 	public void createBoardAccess(BoardAccessVO user);
 	public void updateBoardAccess(BoardAccessVO user);
-	public BoardAccessVO getBoardAccess(String boardId, String email);
-	public void deleteBoardAccess(String boardId, String email);
+	public BoardAccessVO getBoardAccess(long boardId, String email);
+	public void deleteBoardAccess(long boardId, String email);
 }

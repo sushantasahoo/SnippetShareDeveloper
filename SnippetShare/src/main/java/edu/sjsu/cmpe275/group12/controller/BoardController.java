@@ -6,44 +6,71 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
+import edu.sjsu.cmpe275.group12.dao.BoardAccessDao;
 import edu.sjsu.cmpe275.group12.dao.BoardDao;
+import edu.sjsu.cmpe275.group12.dao.UserDao;
+import edu.sjsu.cmpe275.group12.model.BoardVO;
+import edu.sjsu.cmpe275.group12.model.UserVO;
 
 /**
  * Handles requests for the application home page.
  */
 @RestController
+@SessionAttributes("userSession")
 public class BoardController {
+	/*@Autowired
+	BoardDao boardDao;
+	@Autowired
+	BoardAccessDao boardAccessDao;*/
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-
 
 	//********************************Snippet Share APIs**********************************//
 	
 	//Board APIs
 	
 	//access is public or private
-	@RequestMapping(value = "/createBoard/{access}", method = RequestMethod.POST)
-	public String createBoard(Locale locale, Model model){
-		return null;
+	@RequestMapping(value = "/createBoard", method = RequestMethod.POST)
+	public ModelAndView createBoard(@ModelAttribute("board") BoardVO board){
+		ModelAndView modelAndView=new ModelAndView();
+		//boardDao.createBoard(board);
+		modelAndView.setViewName("ViewBoard");
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/editBoard", method = RequestMethod.POST)
-	public String editBoard(Locale locale, Model model){
-		return null;
+	public ModelAndView editBoard(@ModelAttribute("board") BoardVO board){
+		ModelAndView modelAndView=new ModelAndView();
+		//boardDao.updateBoard(board);
+		modelAndView.setViewName("ViewBoard");
+		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/listPublicBoard", method = RequestMethod.GET)
-	public String listPublicBoard(Locale locale, Model model){
-		return null;
+	@RequestMapping(value = "/viewPublicBoard/{boardId}", method = RequestMethod.POST)
+	public ModelAndView viewPublicBoard(@PathVariable("id") long boardId){
+		ModelAndView modelAndView=new ModelAndView();
+		//boardDao.getBoardById(boardId);
+		modelAndView.setViewName("ViewBoard");
+		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/listPrivateBoard", method = RequestMethod.GET)
-	public String listPrivateBoard(Locale locale, Model model){
-		return null;
+	@RequestMapping(value = "/viewPrivateBoard/{boardId}", method = RequestMethod.POST)
+	public ModelAndView viewPrivateBoard(@ModelAttribute("userSession") UserVO userSession, @PathVariable("id") long boardId){
+		ModelAndView modelAndView=new ModelAndView();
+		/*if(null!=boardAccessDao.getBoardAccess(boardId, userSession.getEmail())){
+			
+		}
+		boardDao.getBoardById(boardId);*/
+		modelAndView.setViewName("ViewBoard");
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/requestBoardAccess", method = RequestMethod.GET)
@@ -51,14 +78,38 @@ public class BoardController {
 		return null;
 	}
 	
-	@RequestMapping(value = "/viewPublicBoard", method = RequestMethod.POST)
-	public String viewPublicBoard(Locale locale, Model model){
-		return null;
+	
+	@RequestMapping(value = "/listPublicBoard", method = RequestMethod.GET)
+	public ModelAndView listPublicBoard(){
+		ModelAndView modelAndView=new ModelAndView();
+		//modelAndView.addObject("publicBoards", boardDao.getBoardsByAccessType('U'));
+		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/viewPrivateBoard", method = RequestMethod.POST)
-	public String viewPrivateBoard(Locale locale, Model model){
-		return null;
+	@RequestMapping(value = "/listPrivateBoard", method = RequestMethod.GET)
+	public ModelAndView listPrivateBoard(){
+		ModelAndView modelAndView=new ModelAndView();
+		//modelAndView.addObject("publicBoards", boardDao.getBoardsByAccessType('U'));
+		return modelAndView;
 	}
+	boolean authenticateUser(UserVO user) {
+		// UserVO user1=userDao.getUser(user.getEmail());
+		// --mocking
+		UserVO user1 = new UserVO();
+		user1.setEmail("vin@gmail.com");
+		user1.setPassword("12345");
+		// --mocking
 
+		// Authenticate User
+		if (user != null) {
+			if (user1.getPassword().equals(user.getPassword())) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+
+	}
 }

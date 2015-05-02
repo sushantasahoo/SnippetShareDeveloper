@@ -16,7 +16,9 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/**" location="/" />
-
+	<view-controller path="/" view-name="HomePage"/>
+	<view-controller path="/SignIn" view-name="SignIn"/>
+	<view-controller path="/Register" view-name="Register"/>
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<beans:bean
@@ -41,6 +43,6 @@
 	</beans:bean>
 	<beans:bean id="userDao" class="edu.sjsu.cmpe275.group12.dao.UserDao">
 		<beans:property name="sessionFactory" ref="sessionFactory" />
-	</beans:bean>
- -->
+	</beans:bean> -->
+
 </beans:beans>

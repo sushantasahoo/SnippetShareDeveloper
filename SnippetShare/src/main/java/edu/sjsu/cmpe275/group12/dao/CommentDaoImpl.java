@@ -10,7 +10,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import edu.sjsu.cmpe275.group12.model.CommentVO;
 
 public class CommentDaoImpl implements CommentDao{
-		protected SessionFactory sessionFactory;
+		//protected SessionFactory sessionFactory;
 		protected HibernateTemplate template;
 
 		private Log log = LogFactory.getLog(this.getClass());

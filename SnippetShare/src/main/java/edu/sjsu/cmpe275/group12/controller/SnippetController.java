@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.sjsu.cmpe275.group12.dao.BoardDao;
 import edu.sjsu.cmpe275.group12.dao.SnippetDao;
 
 /**
@@ -17,15 +18,15 @@ import edu.sjsu.cmpe275.group12.dao.SnippetDao;
  */
 @RestController
 public class SnippetController {
-	
+	/*@Autowired
+	SnippetDao snippetDao;*/
 	private static final Logger logger = LoggerFactory.getLogger(SnippetController.class);
 
 	
 	//********************************Snippet Share APIs**********************************//
 	
 	//Snippet APIs
-	
-	
+
 	@RequestMapping(value = "/addSnippet", method = RequestMethod.POST)
 	public String addSnippet(Locale locale, Model model){
 		return null;

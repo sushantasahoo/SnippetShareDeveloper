@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.sjsu.cmpe275.group12.model.UserVO;
 
 public class UserDaoImpl implements UserDao{
-		protected SessionFactory sessionFactory;
+		//protected SessionFactory sessionFactory;
 		protected HibernateTemplate template;
 
 		private Log log = LogFactory.getLog(this.getClass());
