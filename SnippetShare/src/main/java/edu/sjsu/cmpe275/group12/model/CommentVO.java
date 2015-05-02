@@ -9,7 +9,7 @@ public class CommentVO {
 
 	private String comment;
 
-
+	//UserId is email
 	private String userId;
 
 

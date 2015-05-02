@@ -7,8 +7,11 @@ public class BoardAccessVO implements Serializable {
 
 	private static final long serialVersionUID = 2L;
 
+	private long boardAccessId;
+	
 	private long boardId;
 
+	//Email id is UserID
 	private String userId;
 
 	private char accessStatus;
@@ -53,6 +56,20 @@ public class BoardAccessVO implements Serializable {
 	 */
 	public void setAccessStatus(char accessStatus) {
 		this.accessStatus = accessStatus;
+	}
+
+	/**
+	 * @return the boardAccessId
+	 */
+	public long getBoardAccessId() {
+		return boardAccessId;
+	}
+
+	/**
+	 * @param boardAccessId the boardAccessId to set
+	 */
+	public void setBoardAccessId(long boardAccessId) {
+		this.boardAccessId = boardAccessId;
 	}
 
 	

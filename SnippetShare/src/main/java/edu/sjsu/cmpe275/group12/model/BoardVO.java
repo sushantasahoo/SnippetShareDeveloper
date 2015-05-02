@@ -12,6 +12,7 @@ public class BoardVO implements Serializable {
 
 	private String category;
 
+	//Email id is owner
 	private String owner;
 
 	private String description;

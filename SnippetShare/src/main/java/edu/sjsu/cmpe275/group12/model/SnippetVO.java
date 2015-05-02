@@ -9,14 +9,15 @@ public class SnippetVO implements Serializable {
 	
 	private long snippetId;
 
-	private String boardId;
+	private long boardId;
 
 	private String title;
 
 	private String tags;
 
-	private String contentt;
+	private String content;
 
+	//Owner will be email id of user
 	private String owner;
 	
 	/**
@@ -36,14 +37,14 @@ public class SnippetVO implements Serializable {
 	/**
 	 * @return the boardId
 	 */
-	public String getBoardId() {
+	public long getBoardId() {
 		return boardId;
 	}
 
 	/**
 	 * @param boardId the boardId to set
 	 */
-	public void setBoardId(String boardId) {
+	public void setBoardId(long boardId) {
 		this.boardId = boardId;
 	}
 
@@ -78,15 +79,15 @@ public class SnippetVO implements Serializable {
 	/**
 	 * @return the contentt
 	 */
-	public String getContentt() {
-		return contentt;
+	public String getContent() {
+		return content;
 	}
 
 	/**
 	 * @param contentt the contentt to set
 	 */
-	public void setContentt(String contentt) {
-		this.contentt = contentt;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	/**

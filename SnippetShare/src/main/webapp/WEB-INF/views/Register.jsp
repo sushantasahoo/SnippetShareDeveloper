@@ -51,7 +51,7 @@
 			<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required>
 
 			<label for="inputPhone" class="sr-only">Phone</label>
-			<input type="tel" name="mobileNumber" id="inputPhone" class="form-control" placeholder="Phone" required>
+			<input type="number" name="mobileNumber" id="inputPhone" class="form-control" placeholder="Phone" required>
 			
 			<label for="inputEmail" class="sr-only">Password</label>
 			<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>

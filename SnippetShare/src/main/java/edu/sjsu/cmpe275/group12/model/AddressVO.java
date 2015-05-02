@@ -9,7 +9,7 @@ public class AddressVO {
 	private String street;
 	private String city;
 	private String state;
-	private String zip;
+	private long zip;
 
 	/**
 	 * @return the street
@@ -51,13 +51,13 @@ public class AddressVO {
 	/**
 	 * @return the zip
 	 */
-	public String getZip() {
+	public long getZip() {
 		return zip;
 	}
 	/**
 	 * @param zip the zip to set
 	 */
-	public void setZip(String zip) {
+	public void setZip(long zip) {
 		this.zip = zip;
 	}
 
