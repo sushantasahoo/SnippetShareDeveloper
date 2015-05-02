@@ -1,20 +1,14 @@
 package edu.sjsu.cmpe275.group12.model;
 
-import javax.persistence.Column;
 
 public class AddressVO {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	@Column(name="street")  	
 	private String street;
-	@Column(name="city") 
 	private String city;
-	@Column(name="state") 
 	private String state;
-	@Column(name="zip") 
 	private String zip;
 
 	/**

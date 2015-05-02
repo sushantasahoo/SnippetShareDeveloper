@@ -2,35 +2,21 @@ package edu.sjsu.cmpe275.group12.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "SNIPPET")
+
 public class SnippetVO implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "SNIPPETID")
+	
 	private long snippetId;
 
-	@Column(name = "BOARDID", nullable = false)
 	private String boardId;
 
-	@Column(name = "TITLE", nullable = false)
 	private String title;
 
-	@Column(name = "TAGS", nullable = false)
 	private String tags;
 
-	@Column(name = "CONTENT")
 	private String contentt;
 
-	@Column(name = "OWNER", nullable = false)
 	private String owner;
 	
 	/**
