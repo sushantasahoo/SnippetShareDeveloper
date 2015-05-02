@@ -13,16 +13,16 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" ><a href="Home.html">Home</a></li>
-            <li role="presentation"><a href="SignIn.html">Sign In</a></li>
-            <li role="presentation" class="active"><a href="Register.html">Register</a></li>
+            <li role="presentation" ><a href="${pageContext.request.contextPath}/">Home</a></li>
+            <li role="presentation"> <a href="${pageContext.request.contextPath}/SignIn">SignIn</a></li>
+            <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/Register">Register</a></li>
           </ul>
         </nav>
         <h3 class="text-muted">Snippet Share</h3>
       </div>
 
       <div class="RegisterForm">
-		<form class="form-horizontal" role="form">
+		<form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/updateProfile">
 			<h2 class="form-signin-heading">Profile</h2>
 			
 			    <div class="form-group">

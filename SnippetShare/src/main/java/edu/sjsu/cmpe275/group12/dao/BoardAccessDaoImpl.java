@@ -4,15 +4,20 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.transaction.annotation.Propagation;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.sjsu.cmpe275.group12.model.BoardAccessVO;
-
+@Repository
+@Transactional
 public class BoardAccessDaoImpl implements BoardAccessDao{
 
-	protected SessionFactory sessionFactory;
+	//protected SessionFactory sessionFactory;
 	protected HibernateTemplate template;
+
+	/**
+	 * @param sessionFactory the sessionFactory to set
+	 */
 
 	private Log log = LogFactory.getLog(this.getClass());
 
@@ -36,13 +41,13 @@ public class BoardAccessDaoImpl implements BoardAccessDao{
 	}
 
 	@Override
-	public BoardAccessVO getBoardAccess(String boardId, String email) {
+	public BoardAccessVO getBoardAccess(long boardId, String email) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteBoardAccess(String boardId, String email) {
+	public void deleteBoardAccess(long boardId, String email) {
 		// TODO Auto-generated method stub
 		
 	}
