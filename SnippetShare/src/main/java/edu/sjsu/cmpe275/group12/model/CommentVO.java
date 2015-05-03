@@ -1,15 +1,24 @@
 package edu.sjsu.cmpe275.group12.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "COMMENT")
 public class CommentVO {
 
+	@Column(name = "COMMENTID", nullable = false)
 	private long commentId;
 	
+	@Column(name = "SNIPPETID", nullable = false)
 	private long snippetId;
 
+	@Column(name = "COMMENT", nullable = false)
 	private String comment;
 
-	//UserId is email
+
+	@Column(name = "COMMENTEDBY", nullable = false)
 	private String userId;
 
 

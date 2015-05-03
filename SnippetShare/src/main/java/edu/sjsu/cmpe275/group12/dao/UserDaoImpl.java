@@ -23,28 +23,36 @@ public class UserDaoImpl implements UserDao{
 		}
 
 		@Override
+		@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 		public void createUser(UserVO user) {
 			template.save(user);
 			
 		}
 
 		@Override
+		@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 		public void updateUser(UserVO user) {
 			
 		}
 
 		@Override
+		@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 		public UserVO getUser(String email) {
 			return null;
 		}
 
 		@Override
+		@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 		public void deleteUser(String email) {
 			// TODO Auto-generated method stub
 			
 		}
 		
-	
+	/*	@Override
+		@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+		public void createUser(UserVO user) {	
+				template.save(user);
+		}*/
 		
 		
 }

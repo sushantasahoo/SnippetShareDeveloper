@@ -67,6 +67,7 @@ public class UserController {
 		System.out.println(user.getEmail());
 		System.out.println(user.getMobileNumber());
 		System.out.println(user.getPassword());
+		System.out.println(user.getAddress());
 		//--mocking
 		modelAndView.addObject("userSession", user);
 		//modelAndView.addObject("publicBoards", boardDao.getBoardsByAccessType('R'));

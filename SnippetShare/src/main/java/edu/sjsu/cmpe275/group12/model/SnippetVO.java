@@ -2,22 +2,35 @@ package edu.sjsu.cmpe275.group12.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name = "SNIPPET")
 public class SnippetVO implements Serializable {
 
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "SNIPPETID")
 	private long snippetId;
 
-	private long boardId;
+	@Column(name = "BOARDID", nullable = false)
+	private String boardId;
 
+	@Column(name = "TITLE", nullable = false)
 	private String title;
 
+	@Column(name = "TAGS", nullable = false)
 	private String tags;
 
-	private String content;
+	@Column(name = "CONTENT")
+	private String contentt;
 
-	//Owner will be email id of user
+	@Column(name = "OWNER", nullable = false)
 	private String owner;
 	
 	/**
@@ -37,14 +50,14 @@ public class SnippetVO implements Serializable {
 	/**
 	 * @return the boardId
 	 */
-	public long getBoardId() {
+	public String getBoardId() {
 		return boardId;
 	}
 
 	/**
 	 * @param boardId the boardId to set
 	 */
-	public void setBoardId(long boardId) {
+	public void setBoardId(String boardId) {
 		this.boardId = boardId;
 	}
 
@@ -79,15 +92,15 @@ public class SnippetVO implements Serializable {
 	/**
 	 * @return the contentt
 	 */
-	public String getContent() {
-		return content;
+	public String getContentt() {
+		return contentt;
 	}
 
 	/**
 	 * @param contentt the contentt to set
 	 */
-	public void setContent(String content) {
-		this.content = content;
+	public void setContentt(String contentt) {
+		this.contentt = contentt;
 	}
 
 	/**

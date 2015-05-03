@@ -2,18 +2,21 @@ package edu.sjsu.cmpe275.group12.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 
 public class BoardAccessVO implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 2L;
-
-	private long boardAccessId;
-	
+	@Column(name = "BOARDID")
 	private long boardId;
 
-	//Email id is UserID
+	@Column(name = "USERID", nullable = false)
 	private String userId;
 
+	@Column(name = "ACCESSSTATUS", nullable = false)
 	private char accessStatus;
 
 	/**
@@ -56,20 +59,6 @@ public class BoardAccessVO implements Serializable {
 	 */
 	public void setAccessStatus(char accessStatus) {
 		this.accessStatus = accessStatus;
-	}
-
-	/**
-	 * @return the boardAccessId
-	 */
-	public long getBoardAccessId() {
-		return boardAccessId;
-	}
-
-	/**
-	 * @param boardAccessId the boardAccessId to set
-	 */
-	public void setBoardAccessId(long boardAccessId) {
-		this.boardAccessId = boardAccessId;
 	}
 
 	

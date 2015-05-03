@@ -1,19 +1,37 @@
 package edu.sjsu.cmpe275.group12.model;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "User")
 public class UserVO {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "UserId")
 	private int userId;
-	
+	@Column(name = "firstname", nullable = false)
 	private String firstname;
 
+	@Column(name = "lastname", nullable = false)
 	private String lastname;
 
+	@Column(name = "email", nullable = false)
 	private String email;
 
+	@Column(name = "Mobile", nullable = false)
 	private long mobileNumber;
 
+	@Column(name = "Password", nullable = false)
 	private String password;
 
+	@Embedded
+	private AddressVO address;
 
 	/**
 	 * @return the userId
@@ -99,4 +117,18 @@ public class UserVO {
 		this.password = password;
 	}
 
+	/**
+	 * @return the address
+	 */
+	public AddressVO getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(AddressVO address) {
+		this.address = address;
+	}
+	
 }

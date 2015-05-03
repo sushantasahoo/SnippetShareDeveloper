@@ -1,15 +1,21 @@
 package edu.sjsu.cmpe275.group12.model;
 
+import javax.persistence.Column;
 
 public class AddressVO {
 
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1L;
+	@Column(name="street")  	
 	private String street;
+	@Column(name="city") 
 	private String city;
+	@Column(name="state") 
 	private String state;
-	private long zip;
+	@Column(name="zip") 
+	private String zip;
 
 	/**
 	 * @return the street
@@ -51,13 +57,13 @@ public class AddressVO {
 	/**
 	 * @return the zip
 	 */
-	public long getZip() {
+	public String getZip() {
 		return zip;
 	}
 	/**
 	 * @param zip the zip to set
 	 */
-	public void setZip(long zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 
