@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.sjsu.cmpe275.group12.dao.BoardDao;
 import edu.sjsu.cmpe275.group12.dao.UserDao;
 import edu.sjsu.cmpe275.group12.model.UserVO;
+import edu.sjsu.cmpe275.group12.service.UserService;
 
 /**
  * Handles requests for the application home page.
@@ -58,26 +59,18 @@ public class UserController {
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
 	public ModelAndView createAccount(@ModelAttribute("user") UserVO user){
 		ModelAndView modelAndView=new ModelAndView();
-		//if(null==userDao.getUser(user.getEmail())){
-		//userDao.createUser(user);
-		//--mocking
 		System.out.println(user.getFirstname());
 		System.out.println(user.getLastname());
 		System.out.println(user.getUserId());
 		System.out.println(user.getEmail());
 		System.out.println(user.getMobileNumber());
 		System.out.println(user.getPassword());
-		System.out.println(user.getAddress());
-		//--mocking
 		modelAndView.addObject("userSession", user);
-		//modelAndView.addObject("publicBoards", boardDao.getBoardsByAccessType('R'));
-		//modelAndView.addObject("privateBoards", boardDao.getBoardsByAccessType('U'));
+		UserService userService = new UserService();
+		userService.createUser(user);
+		
 		modelAndView.setViewName("Dashboard");
-		//}
-		/*else{
-			modelAndView.addObject("AlreadyExists", "User already exists");
-			modelAndView.setViewName("Register");
-		}*/
+		
 		return modelAndView;	
 	}
 	

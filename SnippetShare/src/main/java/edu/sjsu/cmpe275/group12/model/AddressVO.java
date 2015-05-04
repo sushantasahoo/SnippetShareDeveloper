@@ -1,21 +1,29 @@
 package edu.sjsu.cmpe275.group12.model;
 
-import javax.persistence.Column;
+import java.io.Serializable;
 
-public class AddressVO {
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class AddressVO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	@Column(name="street")  	
 	private String street;
+	
 	@Column(name="city") 
 	private String city;
+	
 	@Column(name="state") 
 	private String state;
+	
 	@Column(name="zip") 
-	private String zip;
+	private long zip;
 
 	/**
 	 * @return the street
@@ -57,13 +65,13 @@ public class AddressVO {
 	/**
 	 * @return the zip
 	 */
-	public String getZip() {
+	public long getZip() {
 		return zip;
 	}
 	/**
 	 * @param zip the zip to set
 	 */
-	public void setZip(String zip) {
+	public void setZip(long zip) {
 		this.zip = zip;
 	}
 
