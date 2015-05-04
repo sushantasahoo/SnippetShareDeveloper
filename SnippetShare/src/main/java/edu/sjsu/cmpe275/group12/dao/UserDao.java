@@ -9,5 +9,6 @@ public interface UserDao {
 	public boolean createUser(UserVO user);
 	public void updateUser(UserVO user);
 	public UserVO getUser(String email, String password);
-	public void deleteUser(String email);
+	public void deleteUser(int userId);
+	public UserVO getUserById(int userId);
 }

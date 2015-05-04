@@ -63,6 +63,7 @@ public class UserController {
 		UserService userService = new UserService();
 		boolean isCreated = userService.createUser(user);	
 		if(isCreated){
+			System.out.println(user.getUserId());
 		modelAndView.setViewName("Dashboard");	
 		}
 		else{
