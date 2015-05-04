@@ -1,8 +1,11 @@
 package edu.sjsu.cmpe275.group12.dao;
 
+import javax.sql.DataSource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +16,15 @@ import edu.sjsu.cmpe275.group12.model.BoardAccessVO;
 public class BoardAccessDaoImpl implements BoardAccessDao{
 
 	//protected SessionFactory sessionFactory;
-	protected HibernateTemplate template;
+	private DataSource dataSource;
+	private JdbcTemplate jdbcTemplateObject;
+
+
+
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+	}
 
 	/**
 	 * @param sessionFactory the sessionFactory to set
@@ -21,23 +32,17 @@ public class BoardAccessDaoImpl implements BoardAccessDao{
 
 	private Log log = LogFactory.getLog(this.getClass());
 
-	/**
-	 * Setting Hibernate session factory
-	 */
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		template = new HibernateTemplate(sessionFactory);
-	}
 
 	@Override
 	public void createBoardAccess(BoardAccessVO user) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateBoardAccess(BoardAccessVO user) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -49,8 +54,8 @@ public class BoardAccessDaoImpl implements BoardAccessDao{
 	@Override
 	public void deleteBoardAccess(long boardId, String email) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	
+
+
 }

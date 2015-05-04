@@ -23,7 +23,7 @@
       <div class="jumbotron">
 	  		<h1>The simplest way to create and share snippets</h1>
             <p class="lead">Light, clean, and free.</p>
-            <p><a class="btn btn-lg btn-success" href="Register.html" role="button">Sign up today</a></p>
+            <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/Register" role="button">Sign up today</a></p>
       </div>
 
       <div class="row marketing">

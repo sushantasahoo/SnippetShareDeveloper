@@ -14,14 +14,30 @@
    </bean>
 
    <!-- Definition for studentJDBCTemplate bean -->
-   <bean id="commentsDaoImpl" 
+   <bean id="commentDaoImpl" 
       class="edu.sjsu.cmpe275.group12.dao.CommentDaoImpl">
       <property name="dataSource"  ref="dataSource" />    
    </bean>
    
-   
     <bean id="userDaoImpl" 
       class="edu.sjsu.cmpe275.group12.dao.UserDaoImpl">
       <property name="dataSource"  ref="dataSource" />    
-   </bean>   
+   </bean>
+   
+    <bean id="boardDaoImpl" 
+      class="edu.sjsu.cmpe275.group12.dao.BoardDaoImpl">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+    <bean id="snippetDaoImpl" 
+      class="edu.sjsu.cmpe275.group12.dao.SnippetDaoImpl">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+    <bean id="boardAccessDaoImpl" 
+      class="edu.sjsu.cmpe275.group12.dao.BoardAccessDaoImpl">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+    
 </beans>

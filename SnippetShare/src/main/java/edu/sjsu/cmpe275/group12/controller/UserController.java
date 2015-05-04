@@ -59,37 +59,29 @@ public class UserController {
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
 	public ModelAndView createAccount(@ModelAttribute("user") UserVO user){
 		ModelAndView modelAndView=new ModelAndView();
-		System.out.println(user.getFirstname());
-		System.out.println(user.getLastname());
-		System.out.println(user.getUserId());
-		System.out.println(user.getEmail());
-		System.out.println(user.getMobileNumber());
-		System.out.println(user.getPassword());
 		modelAndView.addObject("userSession", user);
 		UserService userService = new UserService();
-		userService.createUser(user);
-		
-		modelAndView.setViewName("Dashboard");
-		
+		boolean isCreated = userService.createUser(user);	
+		if(isCreated){
+		modelAndView.setViewName("Dashboard");	
+		}
+		else{
+			modelAndView.addObject("Cannot Create Account", "Email ID already exists");
+			modelAndView.setViewName("Register");
+		}
 		return modelAndView;	
 	}
 	
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
 	public ModelAndView signin(@ModelAttribute("user") UserVO user){
 		ModelAndView modelAndView=new ModelAndView();
-		//UserVO user1=userDao.getUser(user.getEmail());
-		//--mocking
-		UserVO user1=new UserVO();
-		user1.setEmail("vin@gmail.com");
-		user1.setPassword("12345");
-		//--mocking
+		UserService userService = new UserService();
+		UserVO user1=userService.getUser(user.getEmail(), user.getPassword());
 		
 		//Authenticate User
-		if(user!=null){
+		if(user1!=null){
 			if(user1.getPassword().equals(user.getPassword())){
 				modelAndView.addObject("userSession", user);
-				//modelAndView.addObject("publicBoards", boardDao.getBoardsByAccessType('R'));
-				//modelAndView.addObject("privateBoards", boardDao.getBoardsByAccessType('U'));
 				modelAndView.setViewName("Dashboard");
 			}
 			else{
@@ -99,8 +91,9 @@ public class UserController {
 		}
 		else{
 			modelAndView.addObject("AuthenticationFailure", "UserId and Password Invalid");
-			modelAndView.setViewName("SignIn");
+			modelAndView.setViewName("SignIn");	
 		}
+		
 		return modelAndView;
 	}
 	
