@@ -7,13 +7,9 @@ import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.SessionFactory;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.orm.hibernate4.HibernateTemplate;
-
 import edu.sjsu.cmpe275.group12.model.BoardVO;
-import edu.sjsu.cmpe275.group12.model.UserVO;
 
 public class BoardDaoImpl implements BoardDao{
 	//protected SessionFactory sessionFactory;
@@ -29,15 +25,16 @@ public class BoardDaoImpl implements BoardDao{
 
 
 	@Override
-	public void createBoard(BoardVO board) {
+	public boolean createBoard(BoardVO board) {
 		String SQL = "INSERT INTO `snippet`.`board`(`title`,`category`,`user_id`,`description`,`access_type`) VALUES(?,?,?,?,?);";
 		try{
 			jdbcTemplateObject.update(SQL, board.getTitle(), board.getCategory(), board.getUserId(), board.getDescription(), board.getAccessType());
+			return true;
 		}
 		catch(DuplicateKeyException ex){
-			return;
+			return false;
 		}
-		return;
+		
 	}
 
 	@Override

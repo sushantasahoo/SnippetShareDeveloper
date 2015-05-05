@@ -6,7 +6,7 @@ import edu.sjsu.cmpe275.group12.model.BoardVO;
 
 public interface BoardDao {
 	
-	public void createBoard(BoardVO board);
+	public boolean createBoard(BoardVO board);
 	public void updateBoard(BoardVO board);
 	public BoardVO getBoardbyId(int boardId);
 	public List<BoardVO> getBoardByUserId(int userId);
