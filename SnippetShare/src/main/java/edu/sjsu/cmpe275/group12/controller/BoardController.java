@@ -33,7 +33,7 @@ public class BoardController {
 	 * 
 	 * @Autowired BoardAccessDao boardAccessDao;
 	 */
-	public List<String> categotyList = new ArrayList<String>() {
+/*	public List<String> categotyList = new ArrayList<String>() {
 		{
 			add("Health");
 			add("Business");
@@ -46,7 +46,7 @@ public class BoardController {
 			add("History");
 			add("Environment");
 		}
-	};
+	};*/
 	
 	private static final Logger logger = LoggerFactory
 			.getLogger(BoardController.class);

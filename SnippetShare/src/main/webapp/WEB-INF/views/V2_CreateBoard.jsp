@@ -50,8 +50,8 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
-				<li><a class="page-scroll" href="#">Back</a></li>
-				<li><a class="page-scroll" href="#">Log Out</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Back</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signout">Log Out</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -63,7 +63,7 @@
 	<div class="container">
 		<div class="intro-text">
 		<div class="intro-lead-in">Board Details</div>
-			<form class="Dashboard method="post">
+			<form class="Dashboard" method="post"  action=${pageContext.request.contextPath}/createBoard>
 				<div class="form-group" >
 					<input type="text" class="form-control" placeholder="Title *"
 						name="title" id="inputTitle" required
@@ -87,11 +87,18 @@
 				</div>
 
 				<div class="form-group">
-						<textarea rows="10" id="inputContent" class="form-control" 
+						<textarea name="description" rows="10" id="inputContent" class="form-control" 
 					       placeholder="Add Content Here" required></textarea>
 					<p class="help-block text-danger"></p>
 				</div>
-
+				
+				<div class="form-group">
+					<select name="accessType" class="form-control">
+						<option value="U">Public</option>
+						<option value="R">Private</option>
+					</select>
+				</div>
+				
 				<p>By creating/editing a board you agree to our Terms of Service.</p>
 				<br />
 				<button class="btn btn-lg btn-success" type="submit">Create</button>
@@ -100,7 +107,6 @@
 				
 				<button class="btn btn-lg btn-danger" type="submit">Delete</button>
 				
-
 			</form>
 		</div>
 	</div>
@@ -137,7 +143,6 @@
 
 	<!-- Contact Form JavaScript -->
 	<script src="js/jqBootstrapValidation.js"></script>
-	<script src="js/contact_me.js"></script>
 
 	<!-- Custom Theme JavaScript -->
 	<script src="js/agency.js"></script>
