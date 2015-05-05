@@ -72,6 +72,8 @@ body {
 
 .form-signin .form-control input[type="text"] {
   margin-top: 0px;
+  margin-bottom: 0px;
+  padding:0px; 
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
