@@ -69,22 +69,21 @@
 				<div class="intro-lead-in">Profile Details</div>
 				<form class="form-signin" method="post">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="First Name *"
-							name="firstname" id="inputFirstName" required
-							data-validation-required-message="Please enter your first name.">
+						<input type="text" class="form-control" placeholder="First Name *" value =${userSession.getFirstName()} 
+							name="firstname" id="inputFirstName" required data-validation-required-message="Please enter your first name.">
 						<p class="help-block text-danger"></p>
 					</div>
 
 					<div class="form-group">
 						<input type="text" class="form-control" name="lastname"
-							placeholder="Last Name *" id="inputLastName" required
+							placeholder="Last Name *" value =${userSession.getLastName()}  id="inputLastName" required
 							data-validation-required-message="Please enter your last name.">
 						<p class="help-block text-danger"></p>
 					</div>
 
 					<div class="form-group">
 						<input type="email" class="form-control" placeholder="Email *"
-							name="email" id="inputEmail" required
+							name="email" id="inputEmail" value =${userSession.getEmail()} required
 							data-validation-required-message="Please enter your email address.">
 						<p class="help-block text-danger"></p>
 					</div>
@@ -92,23 +91,8 @@
 
 					<div class="form-group">
 						<input type="tel" class="form-control" placeholder="Phone *"
-							name="mobileNumber" id="inputPhone" required
+							name="mobileNumber" id="inputPhone" value =${userSession.getPhone()} required
 							data-validation-required-message="Please enter your phone number.">
-						<p class="help-block text-danger"></p>
-					</div>
-					
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Address *"
-							name="address" id="inputAddress" required
-							data-validation-required-message="Please enter your phone number.">
-						<p class="help-block text-danger"></p>
-					</div>
-
-					<div class="form-group">
-						<input type="password" class="form-control"
-							placeholder="Password *" name="password" id="inputPassword"
-							required
-							data-validation-required-message="Please enter password.">
 						<p class="help-block text-danger"></p>
 					</div>
 
