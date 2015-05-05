@@ -1,7 +1,6 @@
 package edu.sjsu.cmpe275.group12.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -19,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.sjsu.cmpe275.group12.model.BoardVO;
 import edu.sjsu.cmpe275.group12.model.UserVO;
 import edu.sjsu.cmpe275.group12.service.BoardService;
+import edu.sjsu.cmpe275.group12.service.SnippetService;
 import edu.sjsu.cmpe275.group12.service.UserService;
 
 /**
@@ -60,6 +60,8 @@ public class BoardController {
 			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
 		BoardService boardService = new BoardService();
+		SnippetService snippetService = new SnippetService();
+		
 		boardVO.setUserId(userSession.getUserId());
 		
 		if (authenticateUser(userSession)) {
@@ -84,9 +86,26 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/editBoard", method = RequestMethod.POST)
-	public ModelAndView editBoard(@ModelAttribute("board") BoardVO board) {
+	public ModelAndView editBoard(@ModelAttribute("board") BoardVO boardVO,
+			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("ViewBoard");
+		BoardService boardService = new BoardService();
+		SnippetService snippetService = new SnippetService();
+
+		boardVO.setUserId(userSession.getUserId());
+
+		if (authenticateUser(userSession)) {
+			BoardVO boardVO1 = boardService.updateBoard(boardVO);
+			System.out.println("Board Created: Title ID: "
+					+ boardVO1.getTitle() + "  Category: "
+					+ boardVO1.getCategory());
+			modelAndView.addObject(boardVO1);
+			modelAndView.setViewName("ViewBoard");
+		} else {
+			modelAndView.addObject("AuthenticationFailure",
+					"UserId and Password Invalid");
+			modelAndView.setViewName("ViewBoard");
+		}
 		return modelAndView;
 	}
 
@@ -118,6 +137,14 @@ public class BoardController {
 		return null;
 	}
 
+	@RequestMapping(value = "/deleteBoard/{id}", method = RequestMethod.GET)
+	public ModelAndView deleteBoard(@ModelAttribute("board") BoardVO boardVO,
+			@ModelAttribute("userSession") UserVO userSession) {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		return modelAndView;
+	}
+	
 	@RequestMapping(value = "/listPublicBoard", method = RequestMethod.GET)
 	public ModelAndView listPublicBoard() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -143,6 +170,6 @@ public class BoardController {
 		} else {
 			return false;
 		}
-
 	}
+	
 }

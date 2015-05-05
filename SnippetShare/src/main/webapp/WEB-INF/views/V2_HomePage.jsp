@@ -172,7 +172,7 @@
 	</section>
 
 	<section id="signin" style="color:white">
-	<div class="signinform" method="post" action="${pageContext.request.contextPath}/signin">
+	<div class="signinform">
 		<form class="form-signin" method="post"
 			action="${pageContext.request.contextPath}/signin">
 			<h2 class="form-signin-heading">Please sign in</h2>
@@ -191,9 +191,9 @@
 				<p class="help-block text-danger"></p>
 			</div>
 
-			<input class="btn btn-lg btn-primary btn-block" type="submit"
-				value="Sign In">
-		</form>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+					In</button>
+			</form>
 	</div>
 	</section>
 
@@ -286,7 +286,6 @@
 
 	<!-- Contact Form JavaScript -->
 	<script src="js/jqBootstrapValidation.js"></script>
-	<script src="js/contact_me.js"></script>
 
 	<!-- Custom Theme JavaScript -->
 	<script src="js/agency.js"></script>
