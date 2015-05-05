@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import edu.sjsu.cmpe275.group12.model.UserVO;
+import edu.sjsu.cmpe275.group12.service.UserService;
 
 public class SnippetUtil {
 
@@ -32,25 +33,19 @@ public class SnippetUtil {
 		return generatedPassword;
 	}
 
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
 	public static boolean authenticateUser(UserVO user) {
-		// UserVO user1=userDao.getUser(user.getEmail());
-		// --mocking
-		UserVO user1 = new UserVO();
-		user1.setEmail("vin@gmail.com");
-		user1.setPassword("12345");
-		// --mocking
+		UserService userService = new UserService();
+		UserVO user1 = userService.getUser(user.getEmail(), user.getPassword());
 
-		// Authenticate User
-		if (user != null) {
-			if (user1.getPassword().equals(user.getPassword())) {
-				return true;
-			} else {
-				return false;
-			}
+		if (user1 != null) {
+			return true;
 		} else {
 			return false;
 		}
-
 	}
-
 }
