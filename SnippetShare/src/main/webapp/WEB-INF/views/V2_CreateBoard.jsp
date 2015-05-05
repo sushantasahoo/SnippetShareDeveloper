@@ -103,10 +103,6 @@
 				<br />
 				<button class="btn btn-lg btn-success" type="submit">Create</button>
 					
-				<button class="btn btn-lg btn-default" type="submit">Update</button>
-				
-				<button class="btn btn-lg btn-danger" type="submit">Delete</button>
-				
 			</form>
 		</div>
 	</div>
