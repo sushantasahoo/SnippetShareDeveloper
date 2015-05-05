@@ -20,6 +20,7 @@ import edu.sjsu.cmpe275.group12.model.UserVO;
 import edu.sjsu.cmpe275.group12.service.BoardService;
 import edu.sjsu.cmpe275.group12.service.SnippetService;
 import edu.sjsu.cmpe275.group12.service.UserService;
+import edu.sjsu.cmpe275.group12.util.SnippetUtil;
 
 /**
  * Handles requests for the application home page.
@@ -64,7 +65,7 @@ public class BoardController {
 		
 		boardVO.setUserId(userSession.getUserId());
 		
-		if (authenticateUser(userSession)) {
+		if (SnippetUtil.authenticateUser(userSession)) {
 			boolean isCreated = boardService.createBoard(boardVO);
 			System.out.println("Board Created: Title ID: "+ boardVO.getTitle()+"  Category: "+boardVO.getCategory());
 			
@@ -94,7 +95,7 @@ public class BoardController {
 
 		boardVO.setUserId(userSession.getUserId());
 
-		if (authenticateUser(userSession)) {
+		if (SnippetUtil.authenticateUser(userSession)) {
 			BoardVO boardVO1 = boardService.updateBoard(boardVO);
 			System.out.println("Board Created: Title ID: "
 					+ boardVO1.getTitle() + "  Category: "
@@ -161,15 +162,6 @@ public class BoardController {
 		return modelAndView;
 	}
 
-	boolean authenticateUser(UserVO user) {
-		UserService userService = new UserService();
-		UserVO user1 = userService.getUser(user.getEmail(), user.getPassword());
 
-		if (user1 != null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
 }
