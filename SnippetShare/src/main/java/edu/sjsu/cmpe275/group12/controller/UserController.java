@@ -27,12 +27,14 @@ import edu.sjsu.cmpe275.group12.service.UserService;
 @RestController
 @SessionAttributes("userSession")
 public class UserController {
-	/*@Autowired
-	UserDao userDao;
-	@Autowired
-	BoardDao boardDao;*/
-	
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	/*
+	 * @Autowired UserDao userDao;
+	 * 
+	 * @Autowired BoardDao boardDao;
+	 */
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(UserController.class);
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -40,121 +42,125 @@ public class UserController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-		
+
 		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
+				DateFormat.LONG, locale);
+
 		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		
+
+		model.addAttribute("serverTime", formattedDate);
+
 		return new ModelAndView("HomePage");
 	}
-	
-	//********************************Snippet Share APIs**********************************//
-	
-	//User APIs
-	
+
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
-	public ModelAndView createAccount(@ModelAttribute("user") UserVO user){
-		ModelAndView modelAndView=new ModelAndView();
-		System.out.println(user.getFirstname());
-		System.out.println(user.getLastname());
-		System.out.println(user.getUserId());
-		System.out.println(user.getEmail());
-		System.out.println(user.getMobileNumber());
-		System.out.println(user.getPassword());
+	public ModelAndView createAccount(@ModelAttribute("user") UserVO user) {
+		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("userSession", user);
 		UserService userService = new UserService();
-		userService.createUser(user);
-		
-		modelAndView.setViewName("Dashboard");
-		
-		return modelAndView;	
-	}
-	
-	@RequestMapping(value = "/signin", method = RequestMethod.POST)
-	public ModelAndView signin(@ModelAttribute("user") UserVO user){
-		ModelAndView modelAndView=new ModelAndView();
-		//UserVO user1=userDao.getUser(user.getEmail());
-		//--mocking
-		UserVO user1=new UserVO();
-		user1.setEmail("vin@gmail.com");
-		user1.setPassword("12345");
-		//--mocking
-		
-		//Authenticate User
-		if(user!=null){
-			if(user1.getPassword().equals(user.getPassword())){
-				modelAndView.addObject("userSession", user);
-				//modelAndView.addObject("publicBoards", boardDao.getBoardsByAccessType('R'));
-				//modelAndView.addObject("privateBoards", boardDao.getBoardsByAccessType('U'));
-				modelAndView.setViewName("Dashboard");
-			}
-			else{
-				modelAndView.addObject("AuthenticationFailure", "UserId and Password Invalid");
-				modelAndView.setViewName("SignIn");
-			}
-		}
-		else{
-			modelAndView.addObject("AuthenticationFailure", "UserId and Password Invalid");
-			modelAndView.setViewName("SignIn");
+		boolean isCreated = userService.createUser(user);
+		if (isCreated) {
+			modelAndView.setViewName("Dashboard");
+		} else {
+			modelAndView.addObject("Cannot Create Account",
+					"Email ID already exists");
+			modelAndView.setViewName("Register");
 		}
 		return modelAndView;
 	}
-	
+
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value = "/signin", method = RequestMethod.POST)
+	public ModelAndView signin(@ModelAttribute("user") UserVO user) {
+		ModelAndView modelAndView = new ModelAndView();
+		UserService userService = new UserService();
+		UserVO user1 = userService.getUser(user.getEmail(), user.getPassword());
+
+		// Authenticate User
+		if (user1 != null) {
+			if (user1.getPassword().equals(user.getPassword())) {
+				modelAndView.addObject("userSession", user);
+				modelAndView.setViewName("Dashboard");
+			} else {
+				modelAndView.addObject("AuthenticationFailure",
+						"UserId and Password Invalid");
+				modelAndView.setViewName("SignIn");
+			}
+		} else {
+			modelAndView.addObject("AuthenticationFailure",
+					"UserId and Password Invalid");
+			modelAndView.setViewName("SignIn");
+		}
+
+		return modelAndView;
+	}
+
 	@RequestMapping(value = "/signout", method = RequestMethod.POST)
-	public ModelAndView signout(SessionStatus sessionStatus){
-		ModelAndView modelAndView=new ModelAndView();
+	public ModelAndView signout(SessionStatus sessionStatus) {
+		ModelAndView modelAndView = new ModelAndView();
 		sessionStatus.setComplete();
 		modelAndView.setViewName("SignIn");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/viewProfile", method = RequestMethod.GET)
-	public ModelAndView viewProfile(@ModelAttribute("userSession") UserVO userSession){
+	public ModelAndView viewProfile(
+			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
-		if(authenticateUser(userSession)){
+		if (authenticateUser(userSession)) {
 			modelAndView.setViewName("Profile");
-		}
-		else{
-			modelAndView.addObject("AuthenticationFailure", "UserId and Password Invalid");
+		} else {
+			modelAndView.addObject("AuthenticationFailure",
+					"UserId and Password Invalid");
 			modelAndView.setViewName("SignIn");
 		}
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
-	public ModelAndView updateProfile(@ModelAttribute("userSession") UserVO userSession, @ModelAttribute("user") UserVO user){
+	public ModelAndView updateProfile(
+			@ModelAttribute("userSession") UserVO userSession,
+			@ModelAttribute("user") UserVO user) {
 		ModelAndView modelAndView = new ModelAndView();
-		if(authenticateUser(userSession)){
-			//userDao.updateUser(user);
+		if (authenticateUser(userSession)) {
+			// userDao.updateUser(user);
 			System.out.println("Updated");
 			modelAndView.setViewName("Profile");
-		}
-		else{
-			modelAndView.addObject("AuthenticationFailure", "Login Again Session Expired");
+		} else {
+			modelAndView.addObject("AuthenticationFailure",
+					"Login Again Session Expired");
 			modelAndView.setViewName("SignIn");
 		}
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/deleteProfile", method = RequestMethod.DELETE)
-	public ModelAndView deleteProfile(@ModelAttribute("userSession") UserVO userSession, @ModelAttribute("user") UserVO user){
+	public ModelAndView deleteProfile(
+			@ModelAttribute("userSession") UserVO userSession,
+			@ModelAttribute("user") UserVO user) {
 		ModelAndView modelAndView = new ModelAndView();
-		if(authenticateUser(userSession)){
-			//userDao.deleteUser(email);
+		if (authenticateUser(userSession)) {
+			// userDao.deleteUser(email);
 			System.out.println("Deleted");
 			modelAndView.setViewName("HomePage");
-		}
-		else{
-			modelAndView.addObject("AuthenticationFailure", "UserId and Password Invalid");
+		} else {
+			modelAndView.addObject("AuthenticationFailure",
+					"UserId and Password Invalid");
 			modelAndView.setViewName("SignIn");
 		}
 		return modelAndView;
 	}
-	
+
 	boolean authenticateUser(UserVO user) {
 		// UserVO user1=userDao.getUser(user.getEmail());
 		// --mocking
@@ -175,5 +181,5 @@ public class UserController {
 		}
 
 	}
-	
+
 }

@@ -3,20 +3,19 @@ package edu.sjsu.cmpe275.group12.model;
 
 public class CommentVO {
 
-	private long commentId;
+	private int commentId;
 	
-	private long snippetId;
+	private int snippetId;
 
 	private String comment;
 
-	//UserId is email
-	private String userId;
+	private int userId;
 
 
 	/**
 	 * @return the commentId
 	 */
-	public long getCommentId() {
+	public int getCommentId() {
 		return commentId;
 	}
 
@@ -24,7 +23,7 @@ public class CommentVO {
 	/**
 	 * @param commentId the commentId to set
 	 */
-	public void setCommentId(long commentId) {
+	public void setCommentId(int commentId) {
 		this.commentId = commentId;
 	}
 	
@@ -32,7 +31,7 @@ public class CommentVO {
 	/**
 	 * @return the snippetId
 	 */
-	public long getSnippetId() {
+	public int getSnippetId() {
 		return snippetId;
 	}
 
@@ -40,7 +39,7 @@ public class CommentVO {
 	/**
 	 * @param snippetId the snippetId to set
 	 */
-	public void setSnippetId(long snippetId) {
+	public void setSnippetId(int snippetId) {
 		this.snippetId = snippetId;
 	}
 
@@ -64,7 +63,7 @@ public class CommentVO {
 	/**
 	 * @return the userId
 	 */
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
@@ -72,7 +71,7 @@ public class CommentVO {
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

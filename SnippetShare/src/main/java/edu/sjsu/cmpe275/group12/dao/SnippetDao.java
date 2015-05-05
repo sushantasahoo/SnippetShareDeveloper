@@ -6,6 +6,6 @@ public interface SnippetDao {
 
 	public void createSnippet(SnippetVO snippet);
 	public void updateSnippet(SnippetVO snippet);
-	public SnippetVO getSnippet(long snippetId);
-	public void deleteSnippet(long snippetId);
+	public SnippetVO getSnippet(int snippetId);
+	public void deleteSnippet(int snippetId);
 }

@@ -6,30 +6,30 @@ import java.io.Serializable;
 public class BoardVO implements Serializable {
 
 
-	private long boardId;
+	private int boardId;
 
 	private String title;
 
+	private int userId;
+	
 	private String category;
-
-	//Email id is owner
-	private String owner;
 
 	private String description;
 
 	private char accessType;
 
+	
 	/**
 	 * @return the boardId
 	 */
-	public long getBoardId() {
+	public int getBoardId() {
 		return boardId;
 	}
 
 	/**
 	 * @param boardId the boardId to set
 	 */
-	public void setBoardId(long boardId) {
+	public void setBoardId(int boardId) {
 		this.boardId = boardId;
 	}
 
@@ -62,20 +62,6 @@ public class BoardVO implements Serializable {
 	}
 
 	/**
-	 * @return the owner
-	 */
-	public String getOwner() {
-		return owner;
-	}
-
-	/**
-	 * @param owner the owner to set
-	 */
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
-
-	/**
 	 * @return the description
 	 */
 	public String getDescription() {
@@ -101,6 +87,20 @@ public class BoardVO implements Serializable {
 	 */
 	public void setAccessType(char accessType) {
 		this.accessType = accessType;
+	}
+
+	/**
+	 * @return the userId
+	 */
+	public int getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 }

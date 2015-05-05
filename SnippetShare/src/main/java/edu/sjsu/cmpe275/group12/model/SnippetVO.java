@@ -7,9 +7,9 @@ import java.io.Serializable;
 public class SnippetVO implements Serializable {
 
 	
-	private long snippetId;
+	private int snippetId;
 
-	private long boardId;
+	private int boardId;
 
 	private String title;
 
@@ -17,34 +17,33 @@ public class SnippetVO implements Serializable {
 
 	private String content;
 
-	//Owner will be email id of user
-	private String owner;
+	private int userId;
 	
 	/**
 	 * @return the snippetId
 	 */
-	public long getSnippetId() {
+	public int getSnippetId() {
 		return snippetId;
 	}
 
 	/**
 	 * @param snippetId the snippetId to set
 	 */
-	public void setSnippetId(long snippetId) {
+	public void setSnippetId(int snippetId) {
 		this.snippetId = snippetId;
 	}
 
 	/**
 	 * @return the boardId
 	 */
-	public long getBoardId() {
+	public int getBoardId() {
 		return boardId;
 	}
 
 	/**
 	 * @param boardId the boardId to set
 	 */
-	public void setBoardId(long boardId) {
+	public void setBoardId(int boardId) {
 		this.boardId = boardId;
 	}
 
@@ -84,26 +83,25 @@ public class SnippetVO implements Serializable {
 	}
 
 	/**
-	 * @param contentt the contentt to set
+	 * @param contentt the content to set
 	 */
 	public void setContent(String content) {
 		this.content = content;
 	}
 
 	/**
-	 * @return the owner
+	 * @return the userId
 	 */
-	public String getOwner() {
-		return owner;
+	public int getUserId() {
+		return userId;
 	}
 
 	/**
-	 * @param owner the owner to set
+	 * @param userId the userId to set
 	 */
-	public void setOwner(String owner) {
-		this.owner = owner;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
-	
-	
+
 }
