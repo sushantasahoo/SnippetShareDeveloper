@@ -35,7 +35,7 @@
 								class="badge">5</span></a></li>
 						<li role="presentation"><a href="#">History</a></li>
 					</ul></li>
-                <li role="presentation" ><a href="#">New Board</a></li>
+                <li role="presentation" ><a href="${pageContext.request.contextPath}/CreateBoard">New Board</a></li>
 				<li role="presentation"><a href="${pageContext.request.contextPath}/SignIn">Log Out</a></li>
 			</ul>
 			</nav>

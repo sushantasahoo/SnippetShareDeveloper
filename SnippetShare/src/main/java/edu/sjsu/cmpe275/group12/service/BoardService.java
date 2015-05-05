@@ -3,14 +3,13 @@ package edu.sjsu.cmpe275.group12.service;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import edu.sjsu.cmpe275.group12.dao.BoardDaoImpl;
+import edu.sjsu.cmpe275.group12.dao.BoardDao;
 import edu.sjsu.cmpe275.group12.model.BoardVO;
-import edu.sjsu.cmpe275.group12.model.UserVO;
 
 public class BoardService {
 	ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 
-	BoardDaoImpl boardDao = (BoardDaoImpl) context.getBean("boardDaoImpl");
+	BoardDao boardDao = (BoardDao) context.getBean("boardDaoImpl");
 
 	/**
 	 * Creates user with and returns sets Created UserId to user Object and
@@ -26,7 +25,6 @@ public class BoardService {
 		} else {
 			return false;
 		}
-
 	}
 
 	/**
@@ -60,10 +58,7 @@ public class BoardService {
 		return boardVO; 
 	}
 
-	
 //	
-	
-	
 	/**
 	 * delete user with given userID and Returns boolean as token of success
 	 * 

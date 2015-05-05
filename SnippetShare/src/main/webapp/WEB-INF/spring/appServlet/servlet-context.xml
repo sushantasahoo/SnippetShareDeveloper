@@ -19,6 +19,7 @@
 	<view-controller path="/" view-name="HomePage"/>
 	<view-controller path="/SignIn" view-name="SignIn"/>
 	<view-controller path="/Register" view-name="Register"/>
+	<view-controller path="/CreateBoard" view-name="CreateBoard"/>
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<beans:bean

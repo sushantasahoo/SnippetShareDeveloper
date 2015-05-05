@@ -16,7 +16,7 @@ public class BoardVO implements Serializable {
 
 	private String description;
 
-	private char accessType;
+	private String accessType;
 
 	
 	/**
@@ -78,14 +78,14 @@ public class BoardVO implements Serializable {
 	/**
 	 * @return the accessType
 	 */
-	public char getAccessType() {
+	public String getAccessType() {
 		return accessType;
 	}
 
 	/**
 	 * @param accessType the accessType to set
 	 */
-	public void setAccessType(char accessType) {
+	public void setAccessType(String accessType) {
 		this.accessType = accessType;
 	}
 

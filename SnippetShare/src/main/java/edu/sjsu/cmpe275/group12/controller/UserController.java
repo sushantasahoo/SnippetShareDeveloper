@@ -42,7 +42,7 @@ public class UserController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-
+		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
 				DateFormat.LONG, locale);
@@ -61,8 +61,9 @@ public class UserController {
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
 	public ModelAndView createAccount(@ModelAttribute("user") UserVO user) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("userSession", user);
 		UserService userService = new UserService();
+		modelAndView.addObject("userSession", user);
+		
 		boolean isCreated = userService.createUser(user);
 		if (isCreated) {
 			modelAndView.setViewName("Dashboard");
@@ -88,7 +89,7 @@ public class UserController {
 		// Authenticate User
 		if (user1 != null) {
 			if (user1.getPassword().equals(user.getPassword())) {
-				modelAndView.addObject("userSession", user);
+				modelAndView.addObject("userSession", user1);
 				modelAndView.setViewName("Dashboard");
 			} else {
 				modelAndView.addObject("AuthenticationFailure",
