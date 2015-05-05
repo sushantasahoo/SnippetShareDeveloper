@@ -7,27 +7,19 @@ import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.SessionFactory;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import edu.sjsu.cmpe275.group12.model.BoardAccessVO;
-import edu.sjsu.cmpe275.group12.model.BoardVO;
-@Repository
-@Transactional
+
+
 public class BoardAccessDaoImpl implements BoardAccessDao{
 
-	//protected SessionFactory sessionFactory;
-	private DataSource dataSource;
+
 	private JdbcTemplate jdbcTemplateObject;
 
 
 
 	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
