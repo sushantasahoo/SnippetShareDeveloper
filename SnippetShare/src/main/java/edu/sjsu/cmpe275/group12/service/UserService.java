@@ -3,6 +3,7 @@ package edu.sjsu.cmpe275.group12.service;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import edu.sjsu.cmpe275.group12.dao.UserDao;
 import edu.sjsu.cmpe275.group12.dao.UserDaoImpl;
 import edu.sjsu.cmpe275.group12.model.UserVO;
 
@@ -11,8 +12,8 @@ public class UserService {
 	 ApplicationContext context = 
              new ClassPathXmlApplicationContext("Beans.xml");
 
-      UserDaoImpl userDao = 
-      (UserDaoImpl)context.getBean("userDaoImpl");
+      UserDao userDao = 
+      (UserDao)context.getBean("userDaoImpl");
 	
 	/**
 	 * Creates user with and returns sets Created UserId to user Object and returns success
