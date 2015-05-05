@@ -1,11 +1,11 @@
 package edu.sjsu.cmpe275.group12.controller;
 
-import java.util.Locale;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.sjsu.cmpe275.group12.model.SnippetVO;
 import edu.sjsu.cmpe275.group12.model.UserVO;
 import edu.sjsu.cmpe275.group12.service.SnippetService;
+import edu.sjsu.cmpe275.group12.util.SnippetConstants;
 import edu.sjsu.cmpe275.group12.util.SnippetUtil;
 
 /**
@@ -21,57 +22,158 @@ import edu.sjsu.cmpe275.group12.util.SnippetUtil;
  */
 @RestController
 public class SnippetController {
-	/*@Autowired
-	SnippetDao snippetDao;*/
-	private static final Logger logger = LoggerFactory.getLogger(SnippetController.class);
+	/*
+	 * @Autowired SnippetDao snippetDao;
+	 */
+	private static final Logger logger = LoggerFactory
+			.getLogger(SnippetController.class);
 
-	
-	//********************************Snippet Share APIs**********************************//
-	
-	//Snippet APIs
-
-	@RequestMapping(value = "/addSnippet", method = RequestMethod.POST)
-	public ModelAndView addSnippet(@ModelAttribute("snippetVO") SnippetVO snippetVO,
-			@ModelAttribute("userSession") UserVO userSession){
+	/**
+	 * 
+	 * @param userSession
+	 * @return
+	 */
+	@RequestMapping(value = "/createSnippet", method = RequestMethod.GET)
+	public ModelAndView snippetDashboard(
+			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
-		SnippetService snippetService = new SnippetService();
-		
-		snippetVO.setUserId(userSession.getUserId());
-		
+
 		if (SnippetUtil.authenticateUser(userSession)) {
-			boolean isCreated = snippetService.createSnippet(snippetVO);
-			System.out.println("Board Created: Title ID: "+ snippetVO.getTitle()+"  Category: "+snippetVO.getContent());
-			
-			if (isCreated) {
-				modelAndView.addObject(snippetVO);
-				modelAndView.setViewName("V2_ViewSnippet");
-			} else {
-				modelAndView.addObject("Cannot Create Board",
-						"Board already exists");
-				modelAndView.setViewName("DashBoard");
-			}
-		}
-		else{
+			modelAndView.setViewName("V2_SnippetDetails");
+		} else {
 			modelAndView.addObject("AuthenticationFailure",
 					"UserId and Password Invalid");
 			modelAndView.setViewName("ViewBoard");
 		}
 		return modelAndView;
-		
+
 	}
-	
+
+	/**
+	 * 
+	 * @param snippetVO
+	 * @param userSession
+	 * @return
+	 */
+	@RequestMapping(value = "/addSnippet", method = RequestMethod.POST)
+	public ModelAndView addSnippet(
+			@ModelAttribute("snippetVO") SnippetVO snippetVO,
+			@ModelAttribute("userSession") UserVO userSession) {
+		ModelAndView modelAndView = new ModelAndView();
+		SnippetService snippetService = new SnippetService();
+
+		snippetVO.setUserId(userSession.getUserId());
+
+		if (SnippetUtil.authenticateUser(userSession)) {
+			boolean isCreated = snippetService.createSnippet(snippetVO);
+			System.out.println("Snippet Created: Title ID: "
+					+ snippetVO.getTitle() + "  Category: "
+					+ snippetVO.getContent());
+
+			if (isCreated) {
+				// TODO :: Change the name of the view to redirect to all
+				// snippets under particular board
+				modelAndView.addObject(snippetVO);
+				modelAndView.setViewName("ViewBoard");
+			} else {
+				modelAndView.addObject("Cannot Create Board",
+						SnippetConstants.SNIPPET_CREATION_FAILED);
+				modelAndView.setViewName("V2_SnippetDetails");
+			}
+		} else {
+			modelAndView.addObject("AuthenticationFailure",
+					SnippetConstants.INVALID_USER);
+			modelAndView.setViewName("V2_HomePage");
+		}
+		return modelAndView;
+
+	}
+
+	/**
+	 * 
+	 * @param snippetVO
+	 * @param userSession
+	 * @return
+	 */
 	@RequestMapping(value = "/updateSnippet", method = RequestMethod.POST)
-	public String updateSnippet(Locale locale, Model model){
-		return null;
+	public ModelAndView updateSnippet(
+			@ModelAttribute("snippetVO") SnippetVO snippetVO,
+			@ModelAttribute("userSession") UserVO userSession) {
+		ModelAndView modelAndView = new ModelAndView();
+		SnippetService snippetService = new SnippetService();
+
+		if (SnippetUtil.authenticateUser(userSession)) {
+			boolean isCreated = snippetService.updateSnippet(snippetVO);
+			System.out.println("Snippet Created: Title ID: "
+					+ snippetVO.getTitle() + "  Category: "
+					+ snippetVO.getContent());
+
+			if (isCreated) {
+				// TODO :: Change the name of the view to redirect to all
+				// snippets under particular board
+				modelAndView.addObject(snippetVO);
+				modelAndView.setViewName("ViewBoard");
+			} else {
+				modelAndView.addObject("Cannot Create Board",
+						SnippetConstants.SNIPPET_CREATION_FAILED);
+				modelAndView.setViewName("V2_SnippetDetails");
+			}
+		} else {
+			modelAndView.addObject("AuthenticationFailure",
+					SnippetConstants.INVALID_USER);
+			modelAndView.setViewName("V2_HomePage");
+		}
+		return modelAndView;
 	}
-	
+
+	/**
+	 * 
+	 * @param snippetVO
+	 * @param userSession
+	 * @return
+	 */
 	@RequestMapping(value = "/deleteSnippet", method = RequestMethod.DELETE)
-	public String deleteSnippet(Locale locale, Model model){
+	public ModelAndView deleteSnippet(
+			@ModelAttribute("snippetVO") SnippetVO snippetVO,
+			@ModelAttribute("userSession") UserVO userSession) {
+
 		return null;
 	}
-	
+
+	/**
+	 * 
+	 * @param snippetVO
+	 * @param userSession
+	 * @return
+	 */
 	@RequestMapping(value = "/commentOnSnippet", method = RequestMethod.POST)
-	public String commentOnSnippet(Locale locale, Model model){
+	public ModelAndView commentOnSnippet(
+			@ModelAttribute("snippetVO") SnippetVO snippetVO,
+			@ModelAttribute("userSession") UserVO userSession) {
+
 		return null;
 	}
+
+	/**
+	 * 
+	 * @param boardId
+	 * @param userSession
+	 * @return
+	 */
+	@RequestMapping(value = "/getSnippet/{boardId}", method = RequestMethod.POST)
+	public ModelAndView getSnippetList(
+			@PathVariable("boardId") int boardId ,
+			@ModelAttribute("userSession") UserVO userSession) {
+		ModelAndView modelAndView = new ModelAndView();
+		SnippetService snippetService = new SnippetService();
+		if (SnippetUtil.authenticateUser(userSession)) {
+			List <SnippetVO>lst = snippetService.getSnippetsByBoardId(boardId);
+			modelAndView.addObject(lst);
+			modelAndView.setViewName("V2_ViewBoard");
+		}
+		return null;
+	}
+			
 }
+
+

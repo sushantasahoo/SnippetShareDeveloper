@@ -53,5 +53,14 @@ public class SnippetService {
 	}
 
 
+	
+	public boolean updateSnippet(SnippetVO snippet){
+		if(snippet.getBoardId()!=0 && snippet.getTitle()!=null && snippet.getUserId() != 0){
+			return snippetDao.createSnippet(snippet);
+		}
+		return false;
+	}
+
+	
 
 }

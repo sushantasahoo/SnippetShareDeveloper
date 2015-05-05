@@ -1,12 +1,11 @@
 package edu.sjsu.cmpe275.group12.model;
 
 import java.io.Serializable;
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class SnippetVO implements Serializable {
 
-	
 	private int snippetId;
 
 	private int boardId;
@@ -18,7 +17,9 @@ public class SnippetVO implements Serializable {
 	private String content;
 
 	private int userId;
-	
+
+	private List<SnippetVO> snippetList = new ArrayList<SnippetVO>();
+
 	/**
 	 * @return the snippetId
 	 */
@@ -27,7 +28,8 @@ public class SnippetVO implements Serializable {
 	}
 
 	/**
-	 * @param snippetId the snippetId to set
+	 * @param snippetId
+	 *            the snippetId to set
 	 */
 	public void setSnippetId(int snippetId) {
 		this.snippetId = snippetId;
@@ -41,7 +43,8 @@ public class SnippetVO implements Serializable {
 	}
 
 	/**
-	 * @param boardId the boardId to set
+	 * @param boardId
+	 *            the boardId to set
 	 */
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
@@ -55,7 +58,8 @@ public class SnippetVO implements Serializable {
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title
+	 *            the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -69,7 +73,8 @@ public class SnippetVO implements Serializable {
 	}
 
 	/**
-	 * @param tags the tags to set
+	 * @param tags
+	 *            the tags to set
 	 */
 	public void setTags(String tags) {
 		this.tags = tags;
@@ -83,7 +88,8 @@ public class SnippetVO implements Serializable {
 	}
 
 	/**
-	 * @param contentt the content to set
+	 * @param contentt
+	 *            the content to set
 	 */
 	public void setContent(String content) {
 		this.content = content;
@@ -97,11 +103,25 @@ public class SnippetVO implements Serializable {
 	}
 
 	/**
-	 * @param userId the userId to set
+	 * @param userId
+	 *            the userId to set
 	 */
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
+	/**
+	 * @return the snippetList
+	 */
+	public List<SnippetVO> getSnippetList() {
+		return snippetList;
+	}
+
+	/**
+	 * @param snippetList the snippetList to set
+	 */
+	public void setSnippetList(List<SnippetVO> snippetList) {
+		this.snippetList = snippetList;
+	}
 
 }
