@@ -1,5 +1,6 @@
 package edu.sjsu.cmpe275.group12.dao;
 
+import java.sql.Types;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -30,7 +31,7 @@ public class CommentDaoImpl implements CommentDao {
 
 	@Override
 	public void createComment(CommentVO comment) {
-		String SQL = "insert into Comment (comment_id, snippet_id, email, comment) values (?, ?, ?, ?)";
+		String SQL = "insert into `snippet`.`comment` (comment_id, snippet_id, email, comment) values (?, ?, ?, ?)";
 
 		jdbcTemplateObject.update(SQL, comment.getCommentId(),
 				comment.getSnippetId(), "avdhut.thakar@gmail.com","hello");
@@ -48,8 +49,11 @@ public class CommentDaoImpl implements CommentDao {
 
 	@Override
 	public void deleteComment(int commentId) {
-		// TODO Auto-generated method stub
-		
+		String SQL = "DELETE FROM `snippet`.`comment` WHERE board_id = ? ;";
+		Object[] param_boardId = { commentId };
+		int[] types = {Types.INTEGER};
+		int rows = jdbcTemplateObject.update(SQL, param_boardId, types);
+		System.out.println(rows + " row(s) deleted.");
 	}
 
 }

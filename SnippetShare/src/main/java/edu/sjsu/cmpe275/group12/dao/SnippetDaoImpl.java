@@ -43,13 +43,13 @@ public class SnippetDaoImpl implements SnippetDao{
 		}
 
 		@Override
-		public SnippetVO getSnippet(long snippetId) {
+		public SnippetVO getSnippet(int snippetId) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public void deleteSnippet(long snippetId) {
+		public void deleteSnippet(int snippetId) {
 			// TODO Auto-generated method stub
 			
 		}

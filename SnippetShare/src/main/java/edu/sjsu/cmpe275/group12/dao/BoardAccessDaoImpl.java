@@ -1,6 +1,7 @@
 package edu.sjsu.cmpe275.group12.dao;
 
 import java.sql.Types;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.sjsu.cmpe275.group12.model.BoardAccessVO;
+import edu.sjsu.cmpe275.group12.model.BoardVO;
 @Repository
 @Transactional
 public class BoardAccessDaoImpl implements BoardAccessDao{
@@ -37,27 +39,35 @@ public class BoardAccessDaoImpl implements BoardAccessDao{
 
 
 	@Override
-	public void createBoardAccess(BoardAccessVO bAccess) {
+	public boolean createBoardAccess(BoardAccessVO bAccess) {
 		String SQL = "INSERT INTO `snippet`.`board_access`(`board_access_id`,`board_id`,`user_id`,`access_status`) VALUES(?,?,?,?)";
 		try{
 			jdbcTemplateObject.update(SQL, bAccess.getBoardAccessId(), bAccess.getBoardId(), bAccess.getUserId(), bAccess.getAccessStatus());
+			return true;
 		}
 		catch(DuplicateKeyException ex){
-			return;
+			return false;
 		}
-		return;
+		
 	}
 
 	@Override
-	public void updateBoardAccess(BoardAccessVO user) {
-		// TODO Auto-generated method stub
-
+	public void updateBoardAccess(BoardAccessVO bAccess) {
+		String SQL = "UPDATE `snippet`.`board_access` SET `board_id` = ? , `user_id` = ?, `access_status` = ? WHERE `board_access_id` = ?;";
+		jdbcTemplateObject.update(SQL, bAccess.getBoardId(), bAccess.getUserId(), bAccess.getAccessStatus(), bAccess.getBoardAccessId());
 	}
 
 	@Override
 	public BoardAccessVO getBoardAccess(int boardId, int userId) {
-		// TODO Auto-generated method stub
-		return null;
+		String SQL = "SELECT * from `snippet`.board_access` WHERE `board_id` = ? AND user_id= ?";
+		List<BoardAccessVO> boardAccess =  jdbcTemplateObject.query(SQL, 
+				new Object[]{boardId, userId}, new BoardAccessMapper());
+
+		if(boardAccess!=null && boardAccess.size()>0){
+			return boardAccess.get(0);
+		}
+		else 
+			return null;
 	}
 
 	@Override
