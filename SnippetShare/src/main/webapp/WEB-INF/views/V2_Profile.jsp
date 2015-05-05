@@ -50,7 +50,7 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll" href="#">New Board</a></li>
+					<li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Dashboard</a></li>
 					<li><a class="page-scroll" href="#">Profile</a></li>
 					<li><a class="page-scroll" href="#">Activity</a></li>
 					<li><a class="page-scroll" href="#">History</a></li>
@@ -69,14 +69,14 @@
 				<div class="intro-lead-in">Profile Details</div>
 				<form class="form-signin" method="post">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="First Name *" value =${userSession.getFirstName()} 
+						<input type="text" class="form-control" placeholder="First Name *" value =${userSession.getFirstname()} 
 							name="firstname" id="inputFirstName" required data-validation-required-message="Please enter your first name.">
 						<p class="help-block text-danger"></p>
 					</div>
 
 					<div class="form-group">
 						<input type="text" class="form-control" name="lastname"
-							placeholder="Last Name *" value =${userSession.getLastName()}  id="inputLastName" required
+							placeholder="Last Name *" value =${userSession.getLastname()}  id="inputLastName" required
 							data-validation-required-message="Please enter your last name.">
 						<p class="help-block text-danger"></p>
 					</div>
@@ -91,7 +91,7 @@
 
 					<div class="form-group">
 						<input type="tel" class="form-control" placeholder="Phone *"
-							name="mobileNumber" id="inputPhone" value =${userSession.getPhone()} required
+							name="mobileNumber" id="inputPhone" value =${userSession.getMobileNumber()} required
 							data-validation-required-message="Please enter your phone number.">
 						<p class="help-block text-danger"></p>
 					</div>
@@ -184,7 +184,6 @@
 
 	<!-- Contact Form JavaScript -->
 	<script src="js/jqBootstrapValidation.js"></script>
-	<script src="js/contact_me.js"></script>
 
 	<!-- Custom Theme JavaScript -->
 	<script src="js/agency.js"></script>

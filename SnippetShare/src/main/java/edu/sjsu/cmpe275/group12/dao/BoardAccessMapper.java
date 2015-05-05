@@ -22,7 +22,7 @@ public class BoardAccessMapper implements RowMapper<BoardAccessVO> {
 		board.setBoardAccessId(rs.getInt("board_access_id"));
 		board.setBoardId(rs.getInt("board_id"));
 		board.setUserId(rs.getInt("user_id"));
-		board.setAccessStatus(rs.getString("access_status").charAt(0));
+		board.setAccessStatus(rs.getString("access_status"));
 	    return board;
 	}
 

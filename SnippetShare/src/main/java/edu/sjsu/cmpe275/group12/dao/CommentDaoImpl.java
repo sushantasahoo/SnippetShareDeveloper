@@ -8,43 +8,51 @@ import javax.sql.DataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import edu.sjsu.cmpe275.group12.model.BoardAccessVO;
 import edu.sjsu.cmpe275.group12.model.CommentVO;
 
 public class CommentDaoImpl implements CommentDao {
-	// protected SessionFactory sessionFactory;
-	private DataSource dataSource;
+
 	private JdbcTemplate jdbcTemplateObject;
 
 	private Log log = LogFactory.getLog(this.getClass());
 
-	/**
-	 * Setting Hibernate session factory
-	 */
 
 
 	public void setDataSource(DataSource dataSource) {
-		 this.dataSource = dataSource;
-	      this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
 	@Override
-	public void createComment(CommentVO comment) {
-		String SQL = "insert into `snippet`.`comment` (comment_id, snippet_id, email, comment) values (?, ?, ?, ?)";
+	public boolean createComment(CommentVO comment) {
+		String SQL = "insert into `snippet`.`comment` (snippet_id, comment, user_id) values (?, ?, ?)";
 
-		jdbcTemplateObject.update(SQL, comment.getCommentId(),
-				comment.getSnippetId(), "avdhut.thakar@gmail.com","hello");
-		System.out.println("Created Record Name = " + comment.getCommentId()
-				+ " Age = " + comment.getCommentId());
-		return;
+		try{
+			jdbcTemplateObject.update(SQL, comment.getSnippetId(), comment.getComment(), comment.getUserId());
+			return false;
+		}
+		catch(DuplicateKeyException ex){
+			return false;
+		}
+
+
 
 	}
 
 	@Override
 	public List<CommentVO> getComment(int snippetId) {
-		// TODO Auto-generated method stub
-		return null;
+		String SQL = "SELECT * from `snippet`.comment` WHERE `snippet_id` = ?";
+		List<CommentVO> comments =  jdbcTemplateObject.query(SQL, 
+				new Object[]{ snippetId }, new CommentMapper());
+
+		if(comments!=null && comments.size()>0){
+			return comments;
+		}
+		else 
+			return null;
 	}
 
 	@Override
@@ -54,6 +62,12 @@ public class CommentDaoImpl implements CommentDao {
 		int[] types = {Types.INTEGER};
 		int rows = jdbcTemplateObject.update(SQL, param_boardId, types);
 		System.out.println(rows + " row(s) deleted.");
+	}
+
+	@Override
+	public void updateComment(CommentVO comment) {
+		String SQL = "UPDATE `snippet`.`comment` SET `comment` =  ?  WHERE `comment_id` = ? ;";
+		jdbcTemplateObject.update(SQL, comment.getComment(), comment.getCommentId() );
 	}
 
 }

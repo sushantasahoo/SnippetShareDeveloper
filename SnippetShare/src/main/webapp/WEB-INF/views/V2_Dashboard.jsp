@@ -50,11 +50,11 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
-				<li><a class="page-scroll" href="#">New Board</a></li>
-				<li><a class="page-scroll" href="#">Profile</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/CreateBoard">New Board</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/viewProfile">Profile</a></li>
 				<li><a class="page-scroll" href="#">Activity</a></li>
 				<li><a class="page-scroll" href="#">History</a></li>
-				<li><a class="page-scroll" href="#">Log Out</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signout">Log Out</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

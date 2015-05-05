@@ -20,22 +20,22 @@
         <h3 class="text-muted">Snippet Share</h3>
       </div>
 
-      <form class="Dashboard">
+      <form class="Dashboard" method="post" action=${pageContext.request.contextPath}/createBoard>
 			<h2 class="form-signin-heading">Create a New Board</h2>
 			
 			<label for="inputName" class="sr-only">Title</label><br>
-			<input height="50px" type="text" id="inputName" class="form-control" placeholder="Title" required autofocus>
+			<input name="title" height="50px" type="text" id="inputName" class="form-control" placeholder="Title" required autofocus>
 			
 			<label for="inputEmail" class="sr-only">Category</label>
-			<input type="email" id="inputEmail" class="form-control" placeholder="Category" required>
+			<input name="category" type="text" id="inputEmail" class="form-control" placeholder="Category" required>
 			
 			<form:select path="Category">
 				<form:option value="NONE" label="--- Select ---" />
 				<form:options items="${categoryList}" />
 		     </form:select>
 			
-			<label class="radio-inline"><input type="radio" name="Access"  value="Public" checked>Public </label>
-			<label class="radio-inline"><input type="radio" name="Access"  value="Private">Private</label> <br>
+			<label class="radio-inline"><input type="radio" name="accessType"  value="U" checked>Public </label>
+			<label class="radio-inline"><input type="radio" name="accessType"  value="R">Private</label> <br>
 			
 			<p>By creating a board you agree to our Terms of Service.</p>
 			<button class="btn btn-mg btn-primary" type="submit">Create Board</button>			
