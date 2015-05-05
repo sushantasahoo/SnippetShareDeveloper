@@ -27,6 +27,23 @@
 	rel='stylesheet' type='text/css'>
 
 </head>
+
+<script>
+    function myFunction() {
+        var pass1 = document.getElementById("inputPassword").value;
+        var pass2 = document.getElementById("inputConfirmPassword").value;
+        var ok = true;
+        if (pass1 != pass2) {
+            //alert("Passwords Do not match");
+            document.getElementById("inputPassword").style.borderColor = "#E34234";
+            document.getElementById("inputConfirmPassword").style.borderColor = "#E34234";
+            alert("Passwords Mis-match!!!");
+            ok=false;
+        }
+
+        return ok;
+    }
+</script>
 <body id="page-top" class="index">
 
 	<!-- Navigation -->
@@ -155,7 +172,7 @@
 	</section>
 
 	<section id="signin" style="color:white">
-	<div class="signinform">
+	<div class="signinform" method="post" action="${pageContext.request.contextPath}/signin">
 		<form class="form-signin" method="post"
 			action="${pageContext.request.contextPath}/signin">
 			<h2 class="form-signin-heading">Please sign in</h2>
@@ -181,7 +198,7 @@
 	</section>
 
 	<section id="register" style="color:white">
-	<div class="RegisterForm">
+	<div class="RegisterForm" method="post" action="${pageContext.request.contextPath}/createAccount" onsubmit="return myFunction()">
 		<form class="form-signin" method="post"
 			action="${pageContext.request.contextPath}/createAccount"
 			onsubmit="return myFunction()">
