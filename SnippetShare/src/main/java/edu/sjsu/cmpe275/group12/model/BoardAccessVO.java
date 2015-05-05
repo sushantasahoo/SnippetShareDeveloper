@@ -11,8 +11,7 @@ public class BoardAccessVO implements Serializable {
 	
 	private long boardId;
 
-	//Email id is UserID
-	private String userId;
+	private int userId;
 
 	private char accessStatus;
 
@@ -33,14 +32,14 @@ public class BoardAccessVO implements Serializable {
 	/**
 	 * @return the userId
 	 */
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
