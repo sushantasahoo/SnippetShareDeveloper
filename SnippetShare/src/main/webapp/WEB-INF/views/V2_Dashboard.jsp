@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -78,13 +80,14 @@
 						</c:forEach>
 					</c:if>
 				</div>
+				
 
 				<div class="col-md-4 portfolio-item">
-					<c:if test="${ not empty privateBoardList }">
+					<c:if test="${ not empty privateSubscribedList }">
 						<h3>Private Boards</h3>
-						<c:forEach var="privateBoard" items="${privateBoardList}">
-							<h4>${publicBoard.title}</h4>
-							<p>${publicBoard.description}</p>
+						<c:forEach var="privateBoard" items="${privateSubscribedList}">
+							<h4>${privateBoard.title}</h4>
+							<p>${privateBoard.description}</p>
 							<a class="btn btn-primary" href="#">View Board <span
 								class="glyphicon glyphicon-chevron-right"></span></a>
 						</c:forEach>
@@ -92,14 +95,17 @@
 				</div>
 
 				<div class="col-md-4 portfolio-item">
-					<c:if test="${ not empty privateWithoutAccessList }">
+					<c:if test="${ not empty privateUnsubscribedList }">
 						<h3>Private Boards</h3>
-						<c:forEach var="privateBoard" items="${privateWithoutAccessList}">
-							<h4>${publicBoard.title}</h4>
-							<p>${publicBoard.description}</p>
+						<c:forEach var="privateBoard" items="${privateUnsubscribedList}">
+							<h4>${privateBoard.title}</h4>
+							<p>${privateBoard.description}</p>
 							<a class="btn btn-primary" href="#">View Board <span
 								class="glyphicon glyphicon-chevron-right"></span></a>
 						</c:forEach>
+					</c:if>
+					<c:if test="${empty privateUnsubscribedList }">
+						<h4>No Content Here</h4>
 					</c:if>
 				</div>
 			</div>
@@ -215,7 +221,6 @@
 
 	<!-- Contact Form JavaScript -->
 	<script src="js/jqBootstrapValidation.js"></script>
-	<script src="js/contact_me.js"></script>
 
 	<!-- Custom Theme JavaScript -->
 	<script src="js/agency.js"></script>
