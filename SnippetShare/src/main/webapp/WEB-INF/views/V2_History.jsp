@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,10 +52,7 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll" href="#">Back</a></li>
-					<li><a class="page-scroll" href="#">Profile</a></li>
-					<li><a class="page-scroll active" href="#">Activity</a></li>
-					<li><a class="page-scroll" href="#">History</a></li>
+					<li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Home</a></li>
 					<li><a class="page-scroll" href="#">Log Out</a></li>
 				</ul>
 			</div>
@@ -69,25 +66,19 @@
 		<div class="container">
 			<div class="intro-text">
 				<div class="intro-lead-in">History</div>
-				<form class="Dashboard method="post">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-7">
-								<c:if test="${ not empty historyList }">
-									<h3>History</h3>
-									<c:forEach var="history" items="${historyList}">
-										<h4>${history.title}</h4>
-										<p>${history.description}</p>
-										<a class="btn btn-primary" href="#"><span
-											class="glyphicon glyphicon-chevron-right"></span></a>
-									</c:forEach>
-								</c:if>
-								<c:if test="${empty historyList}" }>
-								    <h3>No content to display</h3>
-								</c:if>
-							</div>
-						</div>
-					</div>
+				<form class="Dashboard" method="post">
+					<c:if test="${ not empty historyList }">
+						<h3>History</h3>
+						<c:forEach var="history" items="${historyList}">
+							<h4>${history.title}</h4>
+							<p>${history.description}</p>
+							<a class="btn btn-primary" href="#"><span
+								class="glyphicon glyphicon-chevron-right"></span></a>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty historyList}">
+						<h4>No History available</h4>
+					</c:if>
 				</form>
 			</div>
 		</div>

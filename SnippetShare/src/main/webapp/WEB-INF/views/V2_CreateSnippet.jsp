@@ -104,12 +104,10 @@
 						name="title" id="inputTitle" required
 						data-validation-required-message="Please enter your .">
 
-				<p>By creating/editing a snippet you agree to our Terms of Service.</p>
+				<p>By creating a snippet you agree to our Terms of Service.</p>
 				<br />
 				<button class="btn btn-lg btn-success" type="submit">Create</button>
 					
-				<button class="btn btn-lg btn-default" type="submit">Update</button>
-				
 			</form>
 		</div>
 	</div>

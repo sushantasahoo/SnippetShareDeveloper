@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Snippet Share - Dashboard</title>
+<title>Snippet Share - Snippet Details</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -52,18 +50,8 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
-				<li><a class="page-scroll"
-					href="${pageContext.request.contextPath}/CreateBoard">New Board</a></li>
-					<li><a class="page-scroll"
-					href="#publicBoard">Public Boards</a></li>
-					<li><a class="page-scroll"
-					href="#privateBoard">Private Boards</a></li>
-				<li><a class="page-scroll"
-					href="${pageContext.request.contextPath}/viewProfile">Profile</a></li>
-				<li><a class="page-scroll" href="#">Notification</a></li>
-				<li><a class="page-scroll" href="#">History</a></li>
-				<li><a class="page-scroll"
-					href="${pageContext.request.contextPath}/signout">Log Out</a></li>
+				<li><a class="page-scroll" href="#">Back</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signout">Log Out</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -74,103 +62,57 @@
 	<header>
 	<div class="container">
 		<div class="intro-text">
-			<h2>Welcome</h2>
-			<h2>${UserSession.getFirstname()}</h2>
+		<div class="intro-lead-in">Snippet Details</div>
+			<form class="Dashboard method="post">
+				<div class="form-group" >
+					<input type="text" class="form-control" placeholder="Title *"
+						name="title" id="inputTitle" required
+						data-validation-required-message="Please enter your .">
+					<p class="help-block text-danger"></p>
+				</div>
+
+				<div class="form-group">
+					<select name="category" class="form-control">
+						<option value="Business">Business</option>
+						<option value="Sports">Sports</option>
+						<option value="Health">Health</option>
+						<option value="School">School</option>
+						<option value="Politics">Politics</option>
+						<option value="Military">Military</option>
+						<option value="Software">Software</option>
+						<option value="Economics">Economics</option>
+						<option value="History">History</option>
+						<option value="Environment">Environment</option>
+					</select>
+				</div>
+
+				
+				<div class="form-group">
+					<select name="category" class="form-control">
+						<option value="Public">Public</option>
+						<option value="Private">Private</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+						<textarea rows="10" id="inputContent" class="form-control" 
+					       placeholder="Add Content Here" required></textarea>
+					<p class="help-block text-danger"></p>
+				</div>
+				
+			<input type="text" class="form-control" placeholder="Tags"
+						name="title" id="inputTitle" required
+						data-validation-required-message="Please enter your .">
+
+				<p>By editing a snippet you agree to our Terms of Service.</p>
+				<br />
+					
+				<button class="btn btn-lg btn-success" type="submit">Update</button>
+				<button class="btn btn-lg btn-danger" type="submit">Delete</button>
+			</form>
 		</div>
 	</div>
 	</header>
-
-
-	<!-- Public Grid Section -->
-	<section id="publicBoard" class="bg-light-gray">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<h2 class="section-heading">Public Boards</h2>
-				<div class="Dashboard form-group">
-					<select name="category" class="form-control">
-					    <option value="All">ALL</option>
-						<option value="Business">Business</option>
-						<option value="Sports">Sports</option>
-						<option value="Health">Health</option>
-						<option value="School">School</option>
-						<option value="Politics">Politics</option>
-						<option value="Military">Military</option>
-						<option value="Software">Software</option>
-						<option value="Economics">Economics</option>
-						<option value="History">History</option>
-						<option value="Environment">Environment</option>
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<c:if test="${ not empty publicBoardList }">
-				<div class="col-md-4 col-sm-6 portfolio-item">
-					<a href="#portfolioModal1" class="portfolio-link"
-						data-toggle="modal">
-						<div class="portfolio-hover">
-							<div class="portfolio-hover-content">
-								<i class="fa fa-plus fa-3x"></i>
-							</div>
-						</div> <img src="img/portfolio/roundicons.png" class="img-responsive"
-						alt="">
-					</a>
-					<div class="portfolio-caption">
-						<h4>${publicBoard.title}</h4>
-						<p class="text-muted">${publicBoard.description}</p>
-					</div>
-				</div>
-			</c:if>
-		</div>
-	</div>
-	</section>
-
-	<!-- Private Grid Section -->
-	<section id="privateBoard" class="bg-light-gray">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<h2 class="section-heading">Private Boards</h2>
-				<div class="Dashboard form-group">
-					<select name="category" class="form-control">
-					    <option value="All">ALL</option>
-						<option value="Business">Business</option>
-						<option value="Sports">Sports</option>
-						<option value="Health">Health</option>
-						<option value="School">School</option>
-						<option value="Politics">Politics</option>
-						<option value="Military">Military</option>
-						<option value="Software">Software</option>
-						<option value="Economics">Economics</option>
-						<option value="History">History</option>
-						<option value="Environment">Environment</option>
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<c:if test="${ not empty privateBoardList }">
-				<div class="col-md-4 col-sm-6 portfolio-item">
-					<a href="#portfolioModal1" class="portfolio-link"
-						data-toggle="modal">
-						<div class="portfolio-hover">
-							<div class="portfolio-hover-content">
-								<i class="fa fa-plus fa-3x"></i>
-							</div>
-						</div> <img src="img/portfolio/roundicons.png" class="img-responsive"
-						alt="">
-					</a>
-					<div class="portfolio-caption">
-						<h4>${privateBoardList.title}</h4>
-						<p class="text-muted">${privateBoardList.description}</p>
-					</div>
-				</div>
-			</c:if>
-		</div>
-	</div>
-	</section>
-
 
 	<footer>
 	<div class="container">
@@ -203,9 +145,9 @@
 
 	<!-- Contact Form JavaScript -->
 	<script src="js/jqBootstrapValidation.js"></script>
+	<script src="js/contact_me.js"></script>
 
 	<!-- Custom Theme JavaScript -->
 	<script src="js/agency.js"></script>
-
 </body>
 </html>
