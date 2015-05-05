@@ -70,6 +70,20 @@ public class BoardAccessDaoImpl implements BoardAccessDao{
 		int rows = jdbcTemplateObject.update(SQL, params, types);
 		System.out.println(rows + " row(s) deleted.");
 	}
+	
+	@Override
+	public List<BoardAccessVO> getBoardAccessRequest(int boardId) {
+		//P denotes pending requests for particular boardId
+		String SQL = "SELECT * from `snippet`.board_access` WHERE `board_id` = ? AND `access_status` = 'P'";
+		List<BoardAccessVO> boardAccessRequest =  jdbcTemplateObject.query(SQL, 
+				new Object[]{ boardId }, new BoardAccessMapper());
+
+		if(boardAccessRequest!=null && boardAccessRequest.size()>0){
+			return boardAccessRequest;
+		}
+		else 
+			return null;
+	}
 
 
 }

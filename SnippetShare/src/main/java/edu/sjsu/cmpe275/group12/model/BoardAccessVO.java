@@ -7,25 +7,25 @@ public class BoardAccessVO implements Serializable {
 
 	private static final long serialVersionUID = 2L;
 
-	private long boardAccessId;
+	private int boardAccessId;
 	
-	private long boardId;
+	private int boardId;
 
 	private int userId;
 
-	private char accessStatus;
+	private String accessStatus;
 
 	/**
 	 * @return the boardId
 	 */
-	public long getBoardId() {
+	public int getBoardId() {
 		return boardId;
 	}
 
 	/**
 	 * @param boardId the boardId to set
 	 */
-	public void setBoardId(long boardId) {
+	public void setBoardId(int boardId) {
 		this.boardId = boardId;
 	}
 
@@ -46,28 +46,28 @@ public class BoardAccessVO implements Serializable {
 	/**
 	 * @return the accessStatus
 	 */
-	public char getAccessStatus() {
+	public String getAccessStatus() {
 		return accessStatus;
 	}
 
 	/**
 	 * @param accessStatus the accessStatus to set
 	 */
-	public void setAccessStatus(char accessStatus) {
+	public void setAccessStatus(String accessStatus) {
 		this.accessStatus = accessStatus;
 	}
 
 	/**
 	 * @return the boardAccessId
 	 */
-	public long getBoardAccessId() {
+	public int getBoardAccessId() {
 		return boardAccessId;
 	}
 
 	/**
 	 * @param boardAccessId the boardAccessId to set
 	 */
-	public void setBoardAccessId(long boardAccessId) {
+	public void setBoardAccessId(int boardAccessId) {
 		this.boardAccessId = boardAccessId;
 	}
 
