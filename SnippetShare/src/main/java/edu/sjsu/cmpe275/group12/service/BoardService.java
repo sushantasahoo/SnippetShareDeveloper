@@ -57,7 +57,7 @@ public class BoardService {
 	 */
 	public BoardVO getBoardbyId(BoardVO boardVO) {
 	
-		return boardVO;
+		return boardVO; 
 	}
 
 	
