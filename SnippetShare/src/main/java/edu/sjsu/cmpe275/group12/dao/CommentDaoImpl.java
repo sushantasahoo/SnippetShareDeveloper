@@ -64,4 +64,10 @@ public class CommentDaoImpl implements CommentDao {
 		System.out.println(rows + " row(s) deleted.");
 	}
 
+	@Override
+	public void updateComment(CommentVO comment) {
+		String SQL = "UPDATE `snippet`.`comment` SET `comment` =  ?  WHERE `comment_id` = ? ;";
+		jdbcTemplateObject.update(SQL, comment.getComment(), comment.getCommentId() );
+	}
+
 }

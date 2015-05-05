@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe275.group12.service;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -39,8 +41,8 @@ public class BoardService {
 	public BoardVO updateBoard(BoardVO boardVO) {
 		if (boardVO.getTitle() != null && !boardVO.getTitle().equals("")
 				&& boardVO.getBoardId() != 0) {
-			 boardDao.updateBoard(boardVO);
-			 return boardVO;
+			boardDao.updateBoard(boardVO);
+			return boardVO;
 		} else {
 			return boardVO;
 		}
@@ -48,17 +50,70 @@ public class BoardService {
 	}
 
 	/**
-	 * updated User with provided user object
+	 * User board with provided boardId
 	 * 
 	 * @param
 	 * @return
 	 */
-	public BoardVO getBoardbyId(BoardVO boardVO) {
-	
-		return boardVO; 
+	public BoardVO getBoardbyId(int boardId) {
+		if(boardId != 0){
+			return boardDao.getBoardbyId(boardId); 
+		}
+		return null;
 	}
 
-//	
+	/**
+	 * Get List of all boards in application, provide userId for authenticity 
+	 * @param userid
+	 * @return
+	 */
+	public List<BoardVO> getAllBoardList(int userId){
+		if(userId != 0){
+			return boardDao.getAllBoardList();
+		}
+		return null;
+
+	}
+
+	/**
+	 * Get All boards of user including private boards
+	 * @param userid
+	 * @return
+	 */
+	public List<BoardVO> getBoardByUserId(int userId){
+		if(userId != 0){
+			return boardDao.getBoardByUserId(userId);
+		}
+		return null;
+
+	}
+
+	/**
+	 * List all boards of user with given access type 
+	 * Key-U for public boards and key-R for private boards
+	 * @param accessType
+	 * @return
+	 */
+	public List<BoardVO> getBoardByAccessType(String accessType){
+		if(accessType.equals("U")||accessType.equals("R")){
+			return boardDao.getBoardsByAccessType(accessType);
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * List of all boards based on category
+	 * @param category
+	 * @return
+	 */
+	public List<BoardVO> getBoardByCategory(String category){
+		if(!category.equals("") && category!=null){
+			return getBoardByCategory(category);
+		}
+		return null;
+	}
+
 	/**
 	 * delete user with given userID and Returns boolean as token of success
 	 * 

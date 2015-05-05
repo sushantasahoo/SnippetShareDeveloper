@@ -11,4 +11,7 @@ public class CommentService {
 
 	 CommentDao commentDao = 
       (CommentDao)context.getBean("commentDaoImpl");
+	 
+	 
+	 
 }

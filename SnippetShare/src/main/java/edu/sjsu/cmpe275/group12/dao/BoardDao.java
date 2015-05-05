@@ -10,8 +10,9 @@ public interface BoardDao {
 	public void updateBoard(BoardVO board);
 	public BoardVO getBoardbyId(int boardId);
 	public List<BoardVO> getBoardByUserId(int userId);
-	public List<BoardVO> getBoardsByAccessType(char accessType);
+	public List<BoardVO> getBoardsByAccessType(String accessType);
 	public List<BoardVO> getBoardsByCategory(String category);
 	public List<BoardVO> getBoardsByTitle(String title);
 	public void deleteBoardById(int boardId);
+	public List<BoardVO> getAllBoardList();
 }

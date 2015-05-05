@@ -59,7 +59,7 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public List<BoardVO> getBoardsByAccessType(char accessType) {
+	public List<BoardVO> getBoardsByAccessType(String accessType) {
 		String SQL = "SELECT * from `snippet`.board` WHERE `access_type` = ?";
 		List<BoardVO> board =  jdbcTemplateObject.query(SQL, 
 				new Object[]{accessType}, new BoardMapper());
@@ -112,6 +112,18 @@ public class BoardDaoImpl implements BoardDao{
 		String SQL = "SELECT * from `snippet`.board` WHERE `user_id` = ?";
 		List<BoardVO> board =  jdbcTemplateObject.query(SQL, 
 				new Object[]{userId}, new BoardMapper());
+
+		if(board!=null && board.size()>0){
+			return board;
+		}
+		else 
+			return null;
+	}
+
+	@Override
+	public List<BoardVO> getAllBoardList() {
+		String SQL = "SELECT * from `snippet`.board`";
+		List<BoardVO> board =  jdbcTemplateObject.query(SQL, new BoardMapper());
 
 		if(board!=null && board.size()>0){
 			return board;
