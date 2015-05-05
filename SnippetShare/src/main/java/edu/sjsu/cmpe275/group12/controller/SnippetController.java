@@ -46,6 +46,4 @@ public class SnippetController {
 	public String commentOnSnippet(Locale locale, Model model){
 		return null;
 	}
-	
-	
 }

@@ -19,6 +19,7 @@ import edu.sjsu.cmpe275.group12.dao.BoardDao;
 import edu.sjsu.cmpe275.group12.dao.UserDao;
 import edu.sjsu.cmpe275.group12.model.BoardVO;
 import edu.sjsu.cmpe275.group12.model.UserVO;
+import edu.sjsu.cmpe275.group12.service.UserService;
 
 /**
  * Handles requests for the application home page.
@@ -92,24 +93,17 @@ public class BoardController {
 		//modelAndView.addObject("publicBoards", boardDao.getBoardsByAccessType('U'));
 		return modelAndView;
 	}
+	
 	boolean authenticateUser(UserVO user) {
-		// UserVO user1=userDao.getUser(user.getEmail());
-		// --mocking
-		UserVO user1 = new UserVO();
-		user1.setEmail("vin@gmail.com");
-		user1.setPassword("12345");
-		// --mocking
-
-		// Authenticate User
-		if (user != null) {
-			if (user1.getPassword().equals(user.getPassword())) {
-				return true;
-			} else {
-				return false;
-			}
+		UserService userService = new UserService();
+		UserVO user1 = userService.getUser(user.getEmail(), user.getPassword());
+		
+		if (user1 != null) {
+			return true;
 		} else {
 			return false;
 		}
+
 
 	}
 }

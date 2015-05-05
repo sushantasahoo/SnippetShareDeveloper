@@ -48,7 +48,6 @@ public class UserController {
 				DateFormat.LONG, locale);
 
 		String formattedDate = dateFormat.format(date);
-
 		model.addAttribute("serverTime", formattedDate);
 
 		return new ModelAndView("HomePage");
@@ -162,20 +161,11 @@ public class UserController {
 	}
 
 	boolean authenticateUser(UserVO user) {
-		// UserVO user1=userDao.getUser(user.getEmail());
-		// --mocking
-		UserVO user1 = new UserVO();
-		user1.setEmail("vin@gmail.com");
-		user1.setPassword("12345");
-		// --mocking
-
-		// Authenticate User
-		if (user != null) {
-			if (user1.getPassword().equals(user.getPassword())) {
-				return true;
-			} else {
-				return false;
-			}
+		UserService userService = new UserService();
+		UserVO user1 = userService.getUser(user.getEmail(), user.getPassword());
+		
+		if (user1 != null) {
+			return true;
 		} else {
 			return false;
 		}
