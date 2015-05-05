@@ -1,13 +1,7 @@
 package edu.sjsu.cmpe275.group12.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +10,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import edu.sjsu.cmpe275.group12.dao.BoardDao;
-import edu.sjsu.cmpe275.group12.dao.UserDao;
 import edu.sjsu.cmpe275.group12.model.UserVO;
 import edu.sjsu.cmpe275.group12.service.UserService;
 import edu.sjsu.cmpe275.group12.util.SnippetConstants;
@@ -68,16 +60,21 @@ public class UserController {
 		} else {
 			modelAndView.addObject("Cannot Create Account",
 					"Email ID already exists");
-			modelAndView.setViewName("V2_Register");
+			modelAndView.setViewName("V2_HomePage");
 		}
 		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
-	public ModelAndView signin() {
+	public ModelAndView signinGet(@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView= new ModelAndView();
+		if (authenticateUser(userSession)) {
+			modelAndView.setViewName("V2_Dashboard");
+		}
+		else{
 		System.out.println("In SignIn get method");
-		modelAndView.setViewName("redirect:V2_SignIn");
+		modelAndView.setViewName("redirect:V2_HomePage");
+		}
 		return modelAndView;
 	}
 
@@ -103,22 +100,22 @@ public class UserController {
 			} else {
 				modelAndView.addObject("AuthenticationFailure",
 						SnippetConstants.INVALID_USER);
-				modelAndView.setViewName("V2_SignIn");
+				modelAndView.setViewName("V2_HomePage");
 			}
 		} else {
 			modelAndView.addObject("AuthenticationFailure",
 					SnippetConstants.INVALID_USER);
-			modelAndView.setViewName("V2_SignIn");
+			modelAndView.setViewName("V2_HomePage");
 		}
 
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/signout", method = RequestMethod.POST)
+	@RequestMapping(value = "/signout", method = RequestMethod.GET)
 	public ModelAndView signout(SessionStatus sessionStatus) {
 		ModelAndView modelAndView = new ModelAndView();
 		sessionStatus.setComplete();
-		modelAndView.setViewName("V2_SignIn");
+		modelAndView.setViewName("V2_HomePage");
 		return modelAndView;
 	}
 
@@ -131,7 +128,7 @@ public class UserController {
 		} else {
 			modelAndView.addObject("AuthenticationFailure",
 					SnippetConstants.INVALID_USER);
-			modelAndView.setViewName("V2_SignIn");
+			modelAndView.setViewName("V2_HomePage");
 		}
 		return modelAndView;
 	}
@@ -148,7 +145,7 @@ public class UserController {
 		} else {
 			modelAndView.addObject("AuthenticationFailure",
 					"Login Again Session Expired");
-			modelAndView.setViewName("V2_SignIn");
+			modelAndView.setViewName("V2_HomePage");
 		}
 		return modelAndView;
 	}
@@ -167,7 +164,7 @@ public class UserController {
 		} else {
 			modelAndView.addObject("AuthenticationFailure",
 					SnippetConstants.INVALID_USER);
-			modelAndView.setViewName("V2_SignIn");
+			modelAndView.setViewName("V2_HomePage");
 		}
 		return modelAndView;
 	}
