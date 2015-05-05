@@ -41,18 +41,15 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	@Override
-	public List<CommentVO> getComment(long snippetId) {
+	public List<CommentVO> getComment(int snippetId) {
 		// TODO Auto-generated method stub
-		 String SQL = "select * from Comment where snippet_id="+snippetId;
-	      List <CommentVO> commentList = jdbcTemplateObject.query(SQL, 
-	                                new CommentsMapper());
-	      return commentList;
+		return null;
 	}
 
 	@Override
-	public void deleteComment(long commentId) {
+	public void deleteComment(int commentId) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

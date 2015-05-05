@@ -1,10 +1,13 @@
 package edu.sjsu.cmpe275.group12.dao;
 
+import java.sql.Types;
+
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -34,9 +37,15 @@ public class BoardAccessDaoImpl implements BoardAccessDao{
 
 
 	@Override
-	public void createBoardAccess(BoardAccessVO user) {
-		// TODO Auto-generated method stub
-
+	public void createBoardAccess(BoardAccessVO bAccess) {
+		String SQL = "INSERT INTO `snippet`.`board_access`(`board_access_id`,`board_id`,`user_id`,`access_status`) VALUES(?,?,?,?)";
+		try{
+			jdbcTemplateObject.update(SQL, bAccess.getBoardAccessId(), bAccess.getBoardId(), bAccess.getUserId(), bAccess.getAccessStatus());
+		}
+		catch(DuplicateKeyException ex){
+			return;
+		}
+		return;
 	}
 
 	@Override
@@ -46,15 +55,18 @@ public class BoardAccessDaoImpl implements BoardAccessDao{
 	}
 
 	@Override
-	public BoardAccessVO getBoardAccess(long boardId, String email) {
+	public BoardAccessVO getBoardAccess(int boardId, int userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteBoardAccess(long boardId, String email) {
-		// TODO Auto-generated method stub
-
+	public void deleteBoardAccess(int boardId, int userId) {
+		String SQL = "DELETE FROM `snippet`.`board_access` WHERE board_id = ? AND user_id=? ;";
+		Object[] params = { boardId, userId };
+		int[] types = {Types.INTEGER};
+		int rows = jdbcTemplateObject.update(SQL, params, types);
+		System.out.println(rows + " row(s) deleted.");
 	}
 
 

@@ -103,7 +103,7 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public void deleteBoardById(int boardId) {
-		String SQL = "DELETE FROM `snippet`.`user` WHERE board_id = ? ;";
+		String SQL = "DELETE FROM `snippet`.`board` WHERE board_id = ? ;";
 		Object[] param_boardId = { boardId };
 		int[] types = {Types.INTEGER};
 		int rows = jdbcTemplateObject.update(SQL, param_boardId, types);

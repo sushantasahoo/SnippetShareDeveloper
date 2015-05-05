@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class BoardVO implements Serializable {
 
 
-	private long boardId;
+	private int boardId;
 
 	private String title;
 
@@ -22,14 +22,14 @@ public class BoardVO implements Serializable {
 	/**
 	 * @return the boardId
 	 */
-	public long getBoardId() {
+	public int getBoardId() {
 		return boardId;
 	}
 
 	/**
 	 * @param boardId the boardId to set
 	 */
-	public void setBoardId(long boardId) {
+	public void setBoardId(int boardId) {
 		this.boardId = boardId;
 	}
 
