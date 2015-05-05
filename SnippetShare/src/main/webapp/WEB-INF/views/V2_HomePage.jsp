@@ -186,7 +186,7 @@
 
 			<div class="form-group">
 				<input type="password" class="form-control" placeholder="Password *"
-					name="password" id="inputPassword" required
+					name="password" id="inputSignInPassword" required
 					data-validation-required-message="Please enter your password.">
 				<p class="help-block text-danger"></p>
 			</div>
