@@ -89,7 +89,8 @@
 		<div class="row">
 			<div class="col-lg-12 text-center">
 				<h2 class="section-heading">Public Boards</h2>
-				<div class="Dashboard form-group">
+				
+				<div class="Dashboard form-group form-inline">
 					<select name="category" class="form-control">
 						<option value="All">ALL</option>
 						<option value="Business">Business</option>
@@ -103,7 +104,9 @@
 						<option value="History">History</option>
 						<option value="Environment">Environment</option>
 					</select>
-				</div>
+					<button name="publicCategorySearch" id=publicCategorySearch" class="btn btn-defalut">Search</button> </br>
+					</div>
+				
 			</div>
 		</div>
 		<div class="row">
@@ -139,7 +142,7 @@
 		<div class="row">
 			<div class="col-lg-12 text-center">
 				<h2 class="section-heading">Private Boards</h2>
-				<div class="Dashboard form-group">
+				<div class="Dashboard form-group form-inline">
 					<select name="category" class="form-control">
 						<option value="All">ALL</option>
 						<option value="Business">Business</option>
@@ -153,6 +156,7 @@
 						<option value="History">History</option>
 						<option value="Environment">Environment</option>
 					</select>
+					<button name="privateCategorySearch" id=privateCategorySearch" class="btn btn-defalut">Search</button> </br>
 				</div>
 			</div>
 		</div>
@@ -165,7 +169,7 @@
 							<a href="#" onclick="$(this).closest('form').submit()"
 								class="portfolio-link" data-toggle="modal">
 								<div class="portfolio-hover"></div> <img
-								src="img/portfolio/roundicons.png" class="img-responsive" alt="">
+								src="img/portfolio/roundicons.png" class="img-responsive" alt=""></a>
 								<div class="portfolio-caption">
 									<h4>${privateBoard.getTitle()}</h4>
 									<p class="text-muted">${privateBoard.getDescription()}</p>
