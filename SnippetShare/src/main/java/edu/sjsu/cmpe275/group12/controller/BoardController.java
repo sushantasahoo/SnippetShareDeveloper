@@ -87,8 +87,7 @@ public class BoardController {
 				modelAndView.setViewName("V2_DashBoard");
 			}
 		} else {
-			modelAndView.addObject("AuthenticationFailure",
-					"UserId and Password Invalid");
+			modelAndView.addObject("error", "UserId and Password Invalid");
 			modelAndView.setViewName("V2_ViewBoard");
 		}
 		return modelAndView;
@@ -111,8 +110,7 @@ public class BoardController {
 			modelAndView.addObject(boardVO1);
 			modelAndView.setViewName("ViewBoard");
 		} else {
-			modelAndView.addObject("AuthenticationFailure",
-					SnippetConstants.INVALID_USER);
+			modelAndView.addObject("error", SnippetConstants.INVALID_USER);
 			modelAndView.setViewName("ViewBoard");
 		}
 		return modelAndView;
@@ -127,7 +125,6 @@ public class BoardController {
 			List<SnippetVO> snippetList = snippetService
 					.getSnippetsByBoardId(boardId);
 			System.out.println("Board id " + boardId);
-			System.out.println(snippetList + "--------------------");
 			if (snippetList != null) {
 				modelAndView.addObject("snippetList", snippetList);
 				modelAndView.addObject("boardId", boardId);
@@ -139,8 +136,7 @@ public class BoardController {
 				modelAndView.addObject("boardId", boardId);
 			}
 		} else {
-			modelAndView.addObject("AuthenticationFailure",
-					SnippetConstants.INVALID_USER);
+			modelAndView.addObject("error", SnippetConstants.INVALID_USER);
 			modelAndView.setViewName("V2_HomePage");
 		}
 		return modelAndView;
@@ -181,19 +177,17 @@ public class BoardController {
 				modelAndView.setViewName("V2_ViewPrivateBoard");
 				return modelAndView;
 			} else {
-				modelAndView.addObject("AuthenticationFailure",
+				modelAndView.addObject("error",
 						SnippetConstants.ACCESS_REQUEST_FAILED);
 				modelAndView.setViewName("V2_ViewPrivateBoard");
 				return modelAndView;
 			}
 		}
-		modelAndView.addObject("AuthenticationFailure",
-				SnippetConstants.INVALID_USER);
+		modelAndView.addObject("error", SnippetConstants.INVALID_USER);
 		modelAndView.setViewName("V2_ViewPrivateBoard");
 		return modelAndView;
 	}
 
-	
 	@RequestMapping(value = "/deleteBoard/{id}", method = RequestMethod.GET)
 	public ModelAndView deleteBoard(@ModelAttribute("board") BoardVO boardVO,
 			@ModelAttribute("userSession") UserVO userSession) {
@@ -223,15 +217,12 @@ public class BoardController {
 			modelAndView.addObject("privateBoardList", privateBoardList);
 			modelAndView.setViewName("V2_ViewPrivateBoard");
 		} else {
-			modelAndView.addObject("AuthenticationFailure",
-					SnippetConstants.INVALID_USER);
+			modelAndView.addObject("error", SnippetConstants.INVALID_USER);
 			modelAndView.setViewName("V2_HomePage");
 		}
 		return modelAndView;
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/viewNotification", method = RequestMethod.GET)
 	public ModelAndView viewNotification(
 			@ModelAttribute("userSession") UserVO userSession) {
@@ -248,34 +239,72 @@ public class BoardController {
 			modelAndView.addObject("activityList", activityList);
 			modelAndView.setViewName("V2_Activity");
 		} else {
-			modelAndView.addObject("AuthenticationFailure",
-					SnippetConstants.INVALID_USER);
+			modelAndView.addObject("error", SnippetConstants.INVALID_USER);
 			modelAndView.setViewName("V2_HomePage");
 		}
 		return modelAndView;
 	}
-	
-	@RequestMapping(value = "/approve", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/{requestId}/approve", method = RequestMethod.GET)
 	public ModelAndView approveRequest(
+			@PathVariable("requestId") int requestId,
 			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
 		BoardAccessService boardAccessService = new BoardAccessService();
-		BoardService boardService = new BoardService();
 
-		BoardAccessVO bAccess = new BoardAccessVO();
-		SnippetService snippetService = new SnippetService();
 		if (SnippetUtil.authenticateUser(userSession)) {
-			List<BoardVO> activityList = boardAccessService
-					.getBoardApprovalList(userSession.getUserId());
+			boolean isApproved = boardAccessService.approveRequest(requestId,
+					userSession.getUserId());
+			if (isApproved) {
+				List<BoardVO> activityList = boardAccessService
+						.getBoardApprovalList(userSession.getUserId());
 
-			modelAndView.addObject("activityList", activityList);
-			modelAndView.setViewName("V2_Activity");
+				modelAndView.addObject("activityList", activityList);
+				modelAndView.setViewName("V2_Activity");
+			} else {
+				List<BoardVO> activityList = boardAccessService
+						.getBoardApprovalList(userSession.getUserId());
+				modelAndView.addObject("error", "Approve Request failed");
+				modelAndView.addObject("activityList", activityList);
+
+				modelAndView.setViewName("V2_Activity");
+			}
+
 		} else {
-			modelAndView.addObject("AuthenticationFailure",
-					SnippetConstants.INVALID_USER);
+			modelAndView.addObject("error", SnippetConstants.INVALID_USER);
 			modelAndView.setViewName("V2_HomePage");
 		}
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/{requestId}/reject", method = RequestMethod.GET)
+	public ModelAndView rejectRequest(@PathVariable("requestId") int requestId,
+			@ModelAttribute("userSession") UserVO userSession) {
+		ModelAndView modelAndView = new ModelAndView();
+		BoardAccessService boardAccessService = new BoardAccessService();
+
+		if (SnippetUtil.authenticateUser(userSession)) {
+			boolean isApproved = boardAccessService.declineRequest(requestId,
+					userSession.getUserId());
+			if (isApproved) {
+				List<BoardVO> activityList = boardAccessService
+						.getBoardApprovalList(userSession.getUserId());
+
+				modelAndView.addObject("activityList", activityList);
+				modelAndView.setViewName("V2_Activity");
+			} else {
+				List<BoardVO> activityList = boardAccessService
+						.getBoardApprovalList(userSession.getUserId());
+				modelAndView.addObject("error", "Approve Request failed");
+				modelAndView.addObject("activityList", activityList);
+
+				modelAndView.setViewName("V2_Activity");
+			}
+
+		} else {
+			modelAndView.addObject("error", SnippetConstants.INVALID_USER);
+			modelAndView.setViewName("V2_HomePage");
+		}
+		return modelAndView;
+	}
 }

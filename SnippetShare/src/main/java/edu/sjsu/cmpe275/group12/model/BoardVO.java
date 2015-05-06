@@ -17,6 +17,8 @@ public class BoardVO implements Serializable {
 	private String description;
 
 	private String accessType;
+	
+	private int requestId;
 
 	
 	/**
@@ -101,6 +103,20 @@ public class BoardVO implements Serializable {
 	 */
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	/**
+	 * @return the requestId
+	 */
+	public int getRequestId() {
+		return requestId;
+	}
+
+	/**
+	 * @param requestId the requestId to set
+	 */
+	public void setRequestId(int requestId) {
+		this.requestId = requestId;
 	}
 
 }

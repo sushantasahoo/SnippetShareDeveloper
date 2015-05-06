@@ -42,11 +42,10 @@ public class BoardAccessDaoImpl implements BoardAccessDao {
 	}
 
 	@Override
-	public void updateBoardAccess(BoardAccessVO bAccess) {
-		String SQL = "UPDATE `snippet`.`board_access` SET `board_id` = ? , `user_id` = ?, `access_status` = ? WHERE `board_access_id` = ?;";
-		jdbcTemplateObject.update(SQL, bAccess.getBoardId(),
-				bAccess.getUserId(), bAccess.getAccessStatus(),
-				bAccess.getBoardAccessId());
+	public void updateBoardAccess(int requestId, int userId,
+			String approvalStatus) {
+		String SQL = "UPDATE `snippet`.`board_access` SET `access_status` = ? WHERE `board_access_id` = ?, user_id= ?;";
+		jdbcTemplateObject.update(SQL, approvalStatus, requestId, userId );
 	}
 
 	@Override
@@ -101,11 +100,10 @@ public class BoardAccessDaoImpl implements BoardAccessDao {
 
 	public List<BoardVO> getBoardApprovalLis(int userId) {
 		System.out.println("User id " + userId);
-		String SQL = "SELECT  board.title, board.description, board.board_id, board_access.user_id FROM snippet.board, snippet.board_access  where board.board_id = board_access.board_id and board_access.access_status='P' and board.user_id= ?";
+		String SQL = "SELECT  board.title, board.description, board.board_id, board_access.user_id, board_access.board_access_id FROM snippet.board, snippet.board_access  where board.board_id = board_access.board_id and board_access.access_status='P' and board.user_id= ?";
 		List<BoardVO> approvalList = jdbcTemplateObject.query(SQL,
 				new Object[] { userId }, new ApprovalListMapper());
-		System.out
-				.println("boardAccessRequest -- " + approvalList.size());
+		System.out.println("boardAccessRequest -- " + approvalList.size());
 		if (approvalList != null && approvalList.size() > 0) {
 			return approvalList;
 		} else

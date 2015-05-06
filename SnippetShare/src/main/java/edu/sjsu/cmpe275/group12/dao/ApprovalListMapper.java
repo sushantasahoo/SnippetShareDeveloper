@@ -24,6 +24,7 @@ public class ApprovalListMapper implements RowMapper<BoardVO> {
 		board.setTitle(rs.getString("title"));
 		board.setUserId(rs.getInt("user_id"));
 		board.setDescription(rs.getString("description"));
+		board.setRequestId(rs.getInt("board_access_id"));
 		
 		return board;
 	}
