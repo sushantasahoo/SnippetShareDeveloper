@@ -32,6 +32,8 @@
 	rel='stylesheet' type='text/css'>
 
 </head>
+
+
 <body>
 <body id="page-top" class="index">
 
@@ -75,14 +77,13 @@
 				<div class="row">
 					<div class="col-md-4">
 						<c:if test="${ not empty privateBoardList }">
-							<h3>Private -- Boards</h3>
+							<h3>Private Boards</h3>
 							<c:forEach var="privateBoard" items="${privateBoardList}">
 								<h4>${privateBoard.getTitle()}</h4>
-								<a class="btn btn-primary" href="#requestModal1"
+								<a class="btn btn-primary" href="#${ privateBoard.getBoardId() }"
 									class="portfolio-link" data-toggle="modal">Request Access <span></span></a>
 							</c:forEach>
 						</c:if>
-
 						<c:if test="${ not empty snippetList }">
 							<h4>No Boards Available.</h4>
 						</c:if>
@@ -93,26 +94,12 @@
 	</div>
 	</header>
 
-	<footer>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<span class="copyright">Copyright &copy; CMPE 2015 Team 12</span>
-			</div>
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
-				<ul class="list-inline quicklinks">
-					<li><a href="#">Privacy Policy</a></li>
-					<li><a href="#">Terms of Use</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	</footer>
 
-	<div class="portfolio-modal modal fade" id="requestModal1"
+<c:if test="${ not empty privateBoardList }">
+	<c:forEach var="privateBoard" items="${privateBoardList}">
+	<div class="portfolio-modal modal fade" id="${privateBoard.getBoardId()}"
 		tabindex="-1" role="dialog" aria-hidden="true">
-		<form>
+		<form method="post" method="${pageContext.request.contextPath}/requestBoardAccess/${privateBoard.getBoardId()}">
 			<div class="modal-content">
 				<div class="close-modal" data-dismiss="modal">
 					<div class="lr">
@@ -133,7 +120,7 @@
 								<button type="button" class="btn btn-lg btn-default"
 									data-dismiss="modal">Back</button>
 
-								<button type="button" class="btn btn-lg btn-success">
+								<button type="submit" class="btn btn-lg btn-success">
 									Request Access</button>
 							</div>
 						</div>
@@ -142,6 +129,27 @@
 			</div>
 		</form>
 	</div>
+	</c:forEach>
+</c:if>
+	
+	
+		<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<span class="copyright">Copyright &copy; CMPE 2015 Team 12</span>
+			</div>
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<ul class="list-inline quicklinks">
+					<li><a href="#">Privacy Policy</a></li>
+					<li><a href="#">Terms of Use</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</footer>
+	
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
 
