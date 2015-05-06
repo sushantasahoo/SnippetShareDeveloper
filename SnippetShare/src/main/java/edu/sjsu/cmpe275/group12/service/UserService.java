@@ -68,6 +68,7 @@ public class UserService {
 				&& !user.getFirstname().equals("")
 				&& user.getPassword() != null && !user.getPassword().equals("")) {
 			userDao.updateUser(user);
+			
 			return true;
 		}
 		return false;

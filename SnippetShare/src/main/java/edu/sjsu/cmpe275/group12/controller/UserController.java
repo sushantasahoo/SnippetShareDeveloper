@@ -7,11 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.sjsu.cmpe275.group12.model.AddressVO;
 import edu.sjsu.cmpe275.group12.model.BoardVO;
 import edu.sjsu.cmpe275.group12.model.UserVO;
 import edu.sjsu.cmpe275.group12.service.BoardAccessService;
@@ -35,7 +37,7 @@ public class UserController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(UserController.class);
 
-/*	*//**
+	/*	*//**
 	 * Simply selects the home view to render by returning its name.
 	 *//*
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -75,13 +77,13 @@ public class UserController {
 		}
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public ModelAndView signinGet(@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView= new ModelAndView();
 		BoardService boardService=new BoardService();
 		BoardAccessService boardAccessService =new BoardAccessService();
-		
+
 		if (SnippetUtil.authenticateUser(userSession)) {
 			List<BoardVO> publicBoardList= boardService.getBoardByAccessType("U");
 			List<BoardVO> privateBoardList=boardAccessService.getBordAccessByUser(userSession.getUserId());
@@ -90,8 +92,8 @@ public class UserController {
 			modelAndView.setViewName("V2_Dashboard");
 		}
 		else{
-		System.out.println("In SignIn get method");
-		modelAndView.setViewName("redirect:V2_HomePage");
+			System.out.println("In SignIn get method");
+			modelAndView.setViewName("redirect:V2_HomePage");
 		}
 		return modelAndView;
 	}
@@ -133,7 +135,7 @@ public class UserController {
 
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/signout", method = RequestMethod.GET)
 	public ModelAndView signout(SessionStatus sessionStatus) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -159,12 +161,30 @@ public class UserController {
 	@RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
 	public ModelAndView updateProfile(
 			@ModelAttribute("userSession") UserVO userSession,
-			@ModelAttribute("user") UserVO user) {
+			@ModelAttribute("user") UserVO user, @RequestParam("street") String street, @RequestParam("city") String city, 
+			@RequestParam("state") String state, @RequestParam("zip") String zip) {
 		ModelAndView modelAndView = new ModelAndView();
-		if (SnippetUtil.authenticateUser(userSession)) {
-			// userDao.updateUser(user);
-			System.out.println("Updated");
-			modelAndView.setViewName("V2_Profile");
+		UserService updateUser = new UserService();
+		if (SnippetUtil.authenticateUser(userSession)) {	
+			user.setPassword(userSession.getPassword());
+			user.setEmail(userSession.getEmail());
+			user.setUserId(userSession.getUserId());
+			AddressVO address = new AddressVO();
+			address.setCity(city);
+			address.setState(state);
+			address.setStreet(street);
+			address.setZip(Long.parseLong(zip));
+			user.setAddress(address);
+			if(updateUser.updateUser(user)){
+				System.out.println("Updated");
+				
+				modelAndView.setViewName("V2_Profile");
+			}
+			else{
+				modelAndView.addObject("Error Updating user",
+						"Update profile failed");
+				modelAndView.setViewName("V2_HomePage");
+			}
 		} else {
 			modelAndView.addObject("AuthenticationFailure",
 					"Login Again Session Expired");
@@ -179,7 +199,7 @@ public class UserController {
 			@ModelAttribute("user") UserVO user) {
 		ModelAndView modelAndView = new ModelAndView();
 		UserService userService=new UserService();
-		
+
 		if (SnippetUtil.authenticateUser(userSession)) {
 			userService.deleteUser(user.getUserId());
 			System.out.println("Deleted");
@@ -192,8 +212,8 @@ public class UserController {
 		return modelAndView;
 	}
 
-	
-	
+
+
 	@RequestMapping(value = "/accessRequest", method = RequestMethod.GET)
 	public ModelAndView accessRequest(@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -201,7 +221,7 @@ public class UserController {
 		if (SnippetUtil.authenticateUser(userSession)) {
 			boardService.getBoardNonAccessByUser(userSession.getUserId());
 			modelAndView.setViewName("V2_AccessBoard");
-			
+
 		} else {
 			modelAndView.addObject("AuthenticationFailure",
 					SnippetConstants.INVALID_USER);

@@ -72,6 +72,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
 				    <li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Home</a></li>
+				    <li><a id ="deleteuser" class="page-scroll" href="#" >Delete Profile</a></li>
 					<li><a class="page-scroll" href="${pageContext.request.contextPath}/signout">Log Out</a></li>
 				</ul>
 			</div>
@@ -85,7 +86,7 @@
 		<div class="container">
 			<div class="intro-text">
 				<div class="intro-lead-in">Profile Details</div>
-				<form class="form-signin" method="post">
+				<form class="form-signin" method = "POST" action="${pageContext.request.contextPath}/updateProfile">
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="First Name *"
 							value=${userSession.getFirstname() } 
