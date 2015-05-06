@@ -52,10 +52,7 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll" href="#">Back</a></li>
-					<li><a class="page-scroll" href="#">Profile</a></li>
-					<li><a class="page-scroll active" href="#">Activity</a></li>
-					<li><a class="page-scroll" href="#">History</a></li>
+					<li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Home</a></li>
 					<li><a class="page-scroll" href="#">Log Out</a></li>
 				</ul>
 			</div>
@@ -68,28 +65,22 @@
 	<header>
 		<div class="container">
 			<div class="intro-text">
-				<div class="intro-lead-in">Activity</div>
-				<form class="Dashboard method="post">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-7">
-								<c:if test="${ not empty activityList }">
-									<h3>Requests</h3>
-									<c:forEach var="activity" items="${activityList}">
-										<h4>${history.title}</h4>
-										<p>${history.description}</p>
-										<a class="btn btn-primary" href="#">Grant Access<span
-											class="glyphicon glyphicon-chevron-right"></span></a>
-										<a class="btn btn-danger" href="#">Reject Access<span
-											class="glyphicon glyphicon-chevron-right"></span></a>
-									</c:forEach>
-								</c:if>
-								<c:if test="${empty activityList}" }>
-								    <h3>No content to display</h3>
-								</c:if>
-							</div>
-						</div>
-					</div>
+				<div class="intro-lead-in">Notifications/div>
+				<form class="Dashboard" method="post">
+						<c:if test="${ not empty activityList }">
+							<h3>Requests</h3>
+							<c:forEach var="activity" items="${activityList}">
+								<h4>${history.title}</h4>
+								<p>${history.description}</p>
+								<a class="btn btn-primary" href="#">Grant Access<span
+									class="glyphicon glyphicon-chevron-right"></span></a>
+								<a class="btn btn-danger" href="#">Reject Access<span
+									class="glyphicon glyphicon-chevron-right"></span></a>
+							</c:forEach>
+						</c:if>
+						<c:if test="${empty activityList}">
+							<h3>No </h3>
+						</c:if>
 				</form>
 			</div>
 		</div>

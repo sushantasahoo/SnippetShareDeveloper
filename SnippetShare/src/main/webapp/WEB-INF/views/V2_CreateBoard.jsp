@@ -50,7 +50,7 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
-				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Back</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Home</a></li>
 				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signout">Log Out</a></li>
 			</ul>
 		</div>
@@ -103,10 +103,6 @@
 				<br />
 				<button class="btn btn-lg btn-success" type="submit">Create</button>
 					
-				<button class="btn btn-lg btn-default" type="submit">Update</button>
-				
-				<button class="btn btn-lg btn-danger" type="submit">Delete</button>
-				
 			</form>
 		</div>
 	</div>
