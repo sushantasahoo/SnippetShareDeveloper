@@ -76,10 +76,9 @@
 		<div class="intro-text">
 			<form>
 				<div class="row">
-
 					<c:if test="${ not empty snippetList }">
 						<c:forEach var="snippet" items="${snippetList}">
-							<form>
+							<form action="/snippet/${boardId}/${snippet.getSnippetId()}">
 								<div class="col-md-4 col-sm-6 portfolio-item">
 									<div class="portfolio-caption">
 										<h4>${snippet.getTitle()}</h4>
