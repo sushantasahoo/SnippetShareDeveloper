@@ -161,7 +161,7 @@ public class BoardController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "requestBoardAccess/{boardId}", method = RequestMethod.GET)
+	@RequestMapping(value = "requestBoardAccess/{boardId}", method = RequestMethod.POST)
 	public ModelAndView requestBoardAccess(@ModelAttribute("userSession")UserVO userSession, Model model,
 			@PathVariable("boardId") int boardId ) {
 		ModelAndView modelAndView = new ModelAndView();
