@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.sjsu.cmpe275.group12.dao.CommentDao;
-import edu.sjsu.cmpe275.group12.model.BoardVO;
 import edu.sjsu.cmpe275.group12.model.CommentVO;
 
 public class CommentService {
