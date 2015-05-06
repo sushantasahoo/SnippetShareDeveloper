@@ -235,7 +235,7 @@ public class BoardController {
 		if (SnippetUtil.authenticateUser(userSession)) {
 			List<BoardVO> activityList = boardAccessService
 					.getBoardApprovalList(userSession.getUserId());
-
+			
 			modelAndView.addObject("activityList", activityList);
 			modelAndView.setViewName("V2_Activity");
 		} else {
@@ -245,7 +245,7 @@ public class BoardController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/{requestId}/approve", method = RequestMethod.GET)
+	@RequestMapping(value = "/{requestId}/approve", method = RequestMethod.POST)
 	public ModelAndView approveRequest(
 			@PathVariable("requestId") int requestId,
 			@ModelAttribute("userSession") UserVO userSession) {
@@ -255,6 +255,7 @@ public class BoardController {
 		if (SnippetUtil.authenticateUser(userSession)) {
 			boolean isApproved = boardAccessService.approveRequest(requestId,
 					userSession.getUserId());
+			System.out.println("isapporved ------- "+isApproved);
 			if (isApproved) {
 				List<BoardVO> activityList = boardAccessService
 						.getBoardApprovalList(userSession.getUserId());
