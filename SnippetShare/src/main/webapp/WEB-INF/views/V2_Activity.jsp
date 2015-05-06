@@ -29,6 +29,20 @@
 	rel='stylesheet' type='text/css'>
 
 </head>
+
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript">
+function myfunction(requestID, actionMethod, actionType) {
+	$.ajax({
+		  type: actionType,
+		  url: "/" + requestID + "/" + actionMethod,
+		  data: data,
+		  success: success,
+		  dataType: dataType
+		});
+	};
+</script>
+
 <body>
 <body id="page-top" class="index">
 
@@ -65,17 +79,16 @@
 	<header>
 		<div class="container">
 			<div class="intro-text">
-				<div class="intro-lead-in">Notifications/div>
+				<div class="intro-lead-in">Notifications</div>
 				<form class="Dashboard" method="post">
 						<c:if test="${ not empty activityList }">
 							<h3>Requests</h3>
 							<c:forEach var="activity" items="${activityList}">
-								<h4>${history.title}</h4>
-								<p>${history.description}</p>
-								<a class="btn btn-primary" href="#">Grant Access<span
-									class="glyphicon glyphicon-chevron-right"></span></a>
-								<a class="btn btn-danger" href="#">Reject Access<span
-									class="glyphicon glyphicon-chevron-right"></span></a>
+								<h4>${activity.title}</h4>
+								<p>${activity.description}</p>
+				
+									<button  class="btn-primary" id=${activity.getRequestId} type="submit" onClick=myfunction("${activity.getRequestId()}", "accept" ,"POST")>Accept</button>
+									<button class="btn-danger" id=${activity.getRequestId} type="submit" onClick=myfunction("${activity.getRequestId()}", "reject" ,"DELETE")>Reject</button>
 							</c:forEach>
 						</c:if>
 						<c:if test="${empty activityList}">

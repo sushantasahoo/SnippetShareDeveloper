@@ -79,10 +79,10 @@ public class BoardAccessService {
 	 * @param bAccess
 	 * @return
 	 */
-	public boolean approveRequest(BoardAccessVO bAccess){
-		if(bAccess.getUserId()!=0 && bAccess.getAccessStatus().equals("A") 
-				&& bAccess.getBoardId() != 0){
-			boardAccessDao.updateBoardAccess(bAccess);
+	public boolean approveRequest(int requestId, int userId){
+		if(requestId!=0 && userId != 0){
+		
+			boardAccessDao.updateBoardAccess(requestId, userId, "A");
 			return true;
 		}
 		return false;
@@ -108,4 +108,13 @@ public class BoardAccessService {
 		}
 		return null;
 	}
+	
+	
+	public List<BoardVO> getBoardApprovalList(int userId){
+		if(userId != 0){
+			return boardAccessDao.getBoardApprovalLis(userId);
+		}
+		return null;
+	}
+	
 }

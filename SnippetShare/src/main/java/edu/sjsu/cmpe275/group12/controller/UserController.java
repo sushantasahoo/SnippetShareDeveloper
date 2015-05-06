@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.sjsu.cmpe275.group12.mail.agent.GoogleMailAgent;
+import edu.sjsu.cmpe275.group12.mail.agent.MailAgent;
 import edu.sjsu.cmpe275.group12.model.AddressVO;
 import edu.sjsu.cmpe275.group12.model.BoardVO;
 import edu.sjsu.cmpe275.group12.model.UserVO;
@@ -65,6 +67,10 @@ public class UserController {
 
 		boolean isCreated = userService.createUser(user);
 		if (isCreated) {
+			// Send Email notification
+			MailAgent mailAgent = new GoogleMailAgent();
+			mailAgent.sendRegistrationMail(user.getFirstname(), user.getEmail(), "", "");
+
 			List<BoardVO> publicBoardList= boardService.getBoardByAccessType("U");
 			List<BoardVO> privateBoardList=boardAccessService.getBordAccessByUser(user.getUserId());
 			modelAndView.addObject("publicBoardList",publicBoardList);
