@@ -90,10 +90,12 @@ public class BoardAccessDaoImpl implements BoardAccessDao{
 	@Override
 	public List<BoardVO> getBordAccessByUser(int userId) {
 		//P denotes pending requests for particular boardId
+		System.out.println("User id "+userId);
 		String SQL = "SELECT board.title, board.description, board.category, board.board_id FROM snippet.board, snippet.board_access  where board.board_id = board_access.board_id and board_access.access_status='A' and board_access.user_id= ?  ";
 		List<BoardVO> boardAccessRequest =  jdbcTemplateObject.query(SQL, 
 				new Object[]{ userId }, new BoardMapper());
-
+		
+		System.out.println("boardAccessRequest -- "+boardAccessRequest.size());
 		if(boardAccessRequest!=null && boardAccessRequest.size()>0){
 			return boardAccessRequest;
 		}

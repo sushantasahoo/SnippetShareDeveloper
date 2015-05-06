@@ -162,8 +162,9 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "requestBoardAccess/{boardId}", method = RequestMethod.POST)
-	public ModelAndView requestBoardAccess(@ModelAttribute("userSession")UserVO userSession, Model model,
-			@PathVariable("boardId") int boardId ) {
+	public ModelAndView requestBoardAccess(
+			@ModelAttribute("userSession") UserVO userSession, Model model,
+			@PathVariable("boardId") int boardId) {
 		ModelAndView modelAndView = new ModelAndView();
 		BoardAccessService boardAccessService = new BoardAccessService();
 		BoardService boardService = new BoardService();
@@ -173,14 +174,13 @@ public class BoardController {
 		bAccess.setBoardId(boardId);
 		bAccess.setAccessStatus("P");
 		if (SnippetUtil.authenticateUser(userSession)) {
-			if (boardAccessService.createBoardAccess(bAccess)){
+			if (boardAccessService.createBoardAccess(bAccess)) {
 				List<BoardVO> privateBoardList = boardService
-						.getBoardByAccessType("R"); 
-
+						.getBoardNonAccessByUser(userSession.getUserId());
 				modelAndView.addObject("privateBoardList", privateBoardList);
 				modelAndView.setViewName("V2_ViewPrivateBoard");
-				 return modelAndView;
-			}else{
+				return modelAndView;
+			} else {
 				modelAndView.addObject("AuthenticationFailure",
 						SnippetConstants.ACCESS_REQUEST_FAILED);
 				modelAndView.setViewName("V2_ViewPrivateBoard");
@@ -217,7 +217,7 @@ public class BoardController {
 		SnippetService snippetService = new SnippetService();
 		if (SnippetUtil.authenticateUser(userSession)) {
 			List<BoardVO> privateBoardList = boardService
-					.getBoardByAccessType("R");
+					.getBoardNonAccessByUser(userSession.getUserId());
 
 			modelAndView.addObject("privateBoardList", privateBoardList);
 			modelAndView.setViewName("V2_ViewPrivateBoard");
