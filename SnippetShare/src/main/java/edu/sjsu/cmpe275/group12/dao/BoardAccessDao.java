@@ -13,5 +13,6 @@ public interface BoardAccessDao {
 	public void deleteBoardAccess(int boardId, int userId);
 	public List<BoardAccessVO> getBoardAccessRequest(int boardId);
 	public List<BoardVO> getBordAccessByUser(int userId);
+	public List<BoardVO> getBoardApprovalLis(int userId);
 	
 }

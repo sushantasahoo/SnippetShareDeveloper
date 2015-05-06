@@ -108,4 +108,13 @@ public class BoardAccessService {
 		}
 		return null;
 	}
+	
+	
+	public List<BoardVO> getBoardApprovalList(int userId){
+		if(userId != 0){
+			return boardAccessDao.getBoardApprovalLis(userId);
+		}
+		return null;
+	}
+	
 }

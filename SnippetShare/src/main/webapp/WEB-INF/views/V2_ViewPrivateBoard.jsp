@@ -99,7 +99,7 @@
 	<c:forEach var="privateBoard" items="${privateBoardList}">
 	<div class="portfolio-modal modal fade" id="${privateBoard.getBoardId()}"
 		tabindex="-1" role="dialog" aria-hidden="true">
-		<form method="post" method="${pageContext.request.contextPath}/requestBoardAccess/${privateBoard.getBoardId()}">
+		<form method="post" action="${pageContext.request.contextPath}/requestBoardAccess/${privateBoard.getBoardId()}">
 			<div class="modal-content">
 				<div class="close-modal" data-dismiss="modal">
 					<div class="lr">

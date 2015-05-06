@@ -193,24 +193,7 @@ public class BoardController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "openRequest/{boardId}", method = RequestMethod.POST)
-	public ModelAndView openRequest(
-			@ModelAttribute("userSession") UserVO userSession, Model model,
-			@PathVariable("boardId") int boardId) {
-		ModelAndView modelAndView = new ModelAndView();
-		if (SnippetUtil.authenticateUser(userSession)) {
-			modelAndView.setViewName("V2_RequestAccess");
-			modelAndView.addObject("boardId", boardId);
-			return modelAndView;
-		} else {
-			modelAndView.addObject("AuthenticationFailure",
-					SnippetConstants.INVALID_USER);
-			modelAndView.setViewName("V2_ViewPrivateBoard");
-			return modelAndView;
-		}
-
-	}
-
+	
 	@RequestMapping(value = "/deleteBoard/{id}", method = RequestMethod.GET)
 	public ModelAndView deleteBoard(@ModelAttribute("board") BoardVO boardVO,
 			@ModelAttribute("userSession") UserVO userSession) {
@@ -239,6 +222,54 @@ public class BoardController {
 
 			modelAndView.addObject("privateBoardList", privateBoardList);
 			modelAndView.setViewName("V2_ViewPrivateBoard");
+		} else {
+			modelAndView.addObject("AuthenticationFailure",
+					SnippetConstants.INVALID_USER);
+			modelAndView.setViewName("V2_HomePage");
+		}
+		return modelAndView;
+	}
+	
+	
+	
+	@RequestMapping(value = "/viewNotification", method = RequestMethod.GET)
+	public ModelAndView viewNotification(
+			@ModelAttribute("userSession") UserVO userSession) {
+		ModelAndView modelAndView = new ModelAndView();
+		BoardAccessService boardAccessService = new BoardAccessService();
+		BoardService boardService = new BoardService();
+
+		BoardAccessVO bAccess = new BoardAccessVO();
+		SnippetService snippetService = new SnippetService();
+		if (SnippetUtil.authenticateUser(userSession)) {
+			List<BoardVO> activityList = boardAccessService
+					.getBoardApprovalList(userSession.getUserId());
+
+			modelAndView.addObject("activityList", activityList);
+			modelAndView.setViewName("V2_Activity");
+		} else {
+			modelAndView.addObject("AuthenticationFailure",
+					SnippetConstants.INVALID_USER);
+			modelAndView.setViewName("V2_HomePage");
+		}
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/approve", method = RequestMethod.GET)
+	public ModelAndView approveRequest(
+			@ModelAttribute("userSession") UserVO userSession) {
+		ModelAndView modelAndView = new ModelAndView();
+		BoardAccessService boardAccessService = new BoardAccessService();
+		BoardService boardService = new BoardService();
+
+		BoardAccessVO bAccess = new BoardAccessVO();
+		SnippetService snippetService = new SnippetService();
+		if (SnippetUtil.authenticateUser(userSession)) {
+			List<BoardVO> activityList = boardAccessService
+					.getBoardApprovalList(userSession.getUserId());
+
+			modelAndView.addObject("activityList", activityList);
+			modelAndView.setViewName("V2_Activity");
 		} else {
 			modelAndView.addObject("AuthenticationFailure",
 					SnippetConstants.INVALID_USER);
