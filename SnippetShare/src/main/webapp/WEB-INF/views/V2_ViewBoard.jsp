@@ -52,10 +52,8 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
-				<li><a class="page-scroll" href="#">Back</a></li>
-				<li><a class="page-scroll" href="#">Profile</a></li>
-				<li><a class="page-scroll" href="#">Activity</a></li>
-				<li><a class="page-scroll" href="#">History</a></li>
+				<li><a class="page-scroll" href="#">Home</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/createSnippet">New Snippet</a></li>
 				<li><a class="page-scroll" href="#">Log Out</a></li>
 			</ul>
 		</div>
@@ -70,7 +68,7 @@
 		<form>
 			<div class="row">
 				<div class="col-md-4">
-					<c:if test="${ not empty publicBoardList }">
+					<c:if test="${ not empty snippetList }">
 						<h3>Public Boards</h3>
 						<c:forEach var="snippet" items="${snippetList}">
 							<h4>${snippet.getTitle()}</h4>
@@ -79,6 +77,9 @@
 							<a class="btn btn-primary" href="/">View Snippet <span
 								class="glyphicon glyphicon-chevron-right"></span></a>
 						</c:forEach>
+					</c:if>
+					<h4>No Sinppets Available. Please create a New Snippet</h4>
+					<c:if test="${ not empty snippetList }">
 					</c:if>
 				</div>
 			</div>
