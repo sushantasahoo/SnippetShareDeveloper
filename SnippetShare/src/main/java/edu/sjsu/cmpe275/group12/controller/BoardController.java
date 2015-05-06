@@ -40,7 +40,8 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(BoardController.class);
 
-	// ********************************Snippet Share APIs**********************************//
+	// ********************************Snippet Share
+	// APIs**********************************//
 
 	// Board APIs
 
@@ -59,10 +60,11 @@ public class BoardController {
 		if (SnippetUtil.authenticateUser(userSession)) {
 			boolean isCreated = boardService.createBoard(boardVO);
 
-			System.out.println("Board Created: Title ID: "+ boardVO.getTitle()+"  Category: "+boardVO.getCategory());
+			System.out.println("Board Created: Title ID: " + boardVO.getTitle()
+					+ "  Category: " + boardVO.getCategory());
 
 			if (isCreated) {
-				if(boardVO.getAccessType().equals("R")){
+				if (boardVO.getAccessType().equals("R")) {
 					BoardAccessVO bAccess = new BoardAccessVO();
 					bAccess.setUserId(userSession.getUserId());
 					bAccess.setBoardId(boardVO.getBoardId());
@@ -70,10 +72,12 @@ public class BoardController {
 					boardAccessService.createOwnBoardAccess(bAccess);
 				}
 				modelAndView.addObject(boardVO);
-				List<BoardVO> publicBoardList= boardService.getBoardByAccessType("U");
-				List<BoardVO> privateBoardList=boardAccessService.getBordAccessByUser(userSession.getUserId());
-				modelAndView.addObject("publicBoardList",publicBoardList);
-				modelAndView.addObject("privateBoardList",privateBoardList);
+				List<BoardVO> publicBoardList = boardService
+						.getBoardByAccessType("U");
+				List<BoardVO> privateBoardList = boardAccessService
+						.getBordAccessByUser(userSession.getUserId());
+				modelAndView.addObject("publicBoardList", publicBoardList);
+				modelAndView.addObject("privateBoardList", privateBoardList);
 				modelAndView.addObject("userSession", userSession);
 				modelAndView.setViewName("V2_Dashboard");
 
@@ -82,8 +86,7 @@ public class BoardController {
 						"Board already exists");
 				modelAndView.setViewName("V2_DashBoard");
 			}
-		}
-		else{
+		} else {
 			modelAndView.addObject("AuthenticationFailure",
 					"UserId and Password Invalid");
 			modelAndView.setViewName("V2_ViewBoard");
@@ -121,20 +124,21 @@ public class BoardController {
 		ModelAndView modelAndView = new ModelAndView();
 		SnippetService snippetService = new SnippetService();
 		if (SnippetUtil.authenticateUser(userSession)) {
-			List <SnippetVO> snippetList = snippetService.getSnippetsByBoardId(boardId);
-			System.out.println("Board id "+boardId);
-			System.out.println(snippetList+"--------------------");
-			if (snippetList != null){				
-				modelAndView.addObject("snippetList",snippetList);
-				modelAndView.addObject("boardId",boardId);
+			List<SnippetVO> snippetList = snippetService
+					.getSnippetsByBoardId(boardId);
+			System.out.println("Board id " + boardId);
+			System.out.println(snippetList + "--------------------");
+			if (snippetList != null) {
+				modelAndView.addObject("snippetList", snippetList);
+				modelAndView.addObject("boardId", boardId);
 				modelAndView.setViewName("V2_ViewBoard");
-			}
-			else {
-				modelAndView.addObject("snippetList",new ArrayList<SnippetVO>());
+			} else {
+				modelAndView.addObject("snippetList",
+						new ArrayList<SnippetVO>());
 				modelAndView.setViewName("V2_ViewBoard");
-				modelAndView.addObject("boardId",boardId);
+				modelAndView.addObject("boardId", boardId);
 			}
-		}else {
+		} else {
 			modelAndView.addObject("AuthenticationFailure",
 					SnippetConstants.INVALID_USER);
 			modelAndView.setViewName("V2_HomePage");
@@ -145,7 +149,7 @@ public class BoardController {
 	@RequestMapping(value = "/viewPrivateBoard/{boardId}", method = RequestMethod.POST)
 	public ModelAndView viewPrivateBoard(
 			@ModelAttribute("userSession") UserVO userSession,
-			@PathVariable("id") long boardId) {
+			@PathVariable("id") int boardId) {
 		ModelAndView modelAndView = new ModelAndView();
 		/*
 		 * if(null!=boardAccessDao.getBoardAccess(boardId,
@@ -157,9 +161,36 @@ public class BoardController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/requestBoardAccess", method = RequestMethod.GET)
-	public String requestBoardAccess(Locale locale, Model model) {
-		return null;
+	@RequestMapping(value = "requestBoardAccess/{boardId}", method = RequestMethod.GET)
+	public ModelAndView requestBoardAccess(@ModelAttribute("userSession")UserVO userSession, Model model,
+			@PathVariable("boardId") int boardId ) {
+		ModelAndView modelAndView = new ModelAndView();
+		BoardAccessService boardAccessService = new BoardAccessService();
+		BoardService boardService = new BoardService();
+
+		BoardAccessVO bAccess = new BoardAccessVO();
+		bAccess.setUserId(userSession.getUserId());
+		bAccess.setBoardId(boardId);
+		bAccess.setAccessStatus("P");
+		if (SnippetUtil.authenticateUser(userSession)) {
+			if (boardAccessService.createBoardAccess(bAccess)){
+				List<BoardVO> privateBoardList = boardService
+						.getBoardByAccessType("R");
+
+				modelAndView.addObject("privateBoardList", privateBoardList);
+				modelAndView.setViewName("V2_ViewPrivateBoard");
+				 return modelAndView;
+			}else{
+				modelAndView.addObject("AuthenticationFailure",
+						SnippetConstants.ACCESS_REQUEST_FAILED);
+				modelAndView.setViewName("V2_ViewPrivateBoard");
+				return modelAndView;
+			}
+		}
+		modelAndView.addObject("AuthenticationFailure",
+				SnippetConstants.INVALID_USER);
+		modelAndView.setViewName("V2_ViewPrivateBoard");
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/deleteBoard/{id}", method = RequestMethod.GET)
@@ -180,25 +211,22 @@ public class BoardController {
 
 	@RequestMapping(value = "/viewUnsubscribedBoard", method = RequestMethod.GET)
 	public ModelAndView listPrivateBoard(
-	@ModelAttribute("userSession") UserVO userSession)
-	{
+			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
 		BoardService boardService = new BoardService();
 		SnippetService snippetService = new SnippetService();
 		if (SnippetUtil.authenticateUser(userSession)) {
-		List<BoardVO> privateBoardList = boardService.getBoardByAccessType("R");
-		
-		modelAndView.addObject("privateBoardList",privateBoardList);
-		modelAndView.setViewName("V2_ViewPrivateBoard");
-		}
-		else{
+			List<BoardVO> privateBoardList = boardService
+					.getBoardByAccessType("R");
+
+			modelAndView.addObject("privateBoardList", privateBoardList);
+			modelAndView.setViewName("V2_ViewPrivateBoard");
+		} else {
 			modelAndView.addObject("AuthenticationFailure",
 					SnippetConstants.INVALID_USER);
 			modelAndView.setViewName("V2_HomePage");
 		}
 		return modelAndView;
 	}
-	
-	
 
 }
