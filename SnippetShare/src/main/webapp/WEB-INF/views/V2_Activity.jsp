@@ -65,7 +65,7 @@
 	<header>
 		<div class="container">
 			<div class="intro-text">
-				<div class="intro-lead-in">Notifications/div>
+				<div class="intro-lead-in">Notifications</div>
 				<form class="Dashboard" method="post">
 						<c:if test="${ not empty activityList }">
 							<h3>Requests</h3>
