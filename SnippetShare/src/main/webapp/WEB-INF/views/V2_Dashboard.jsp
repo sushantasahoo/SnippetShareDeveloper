@@ -54,12 +54,18 @@
 				<li class="hidden"><a href="#page-top"></a></li>
 				<li><a class="page-scroll"
 					href="${pageContext.request.contextPath}/CreateBoard">New Board</a></li>
-				<li><a class="page-scroll" href="#publicBoard">Public Boards</a></li>
-				<li><a class="page-scroll" href="#privateBoard">Private Boards</a></li>
-				<li><a class="page-scroll" href="${pageContext.request.contextPath}/viewUnsubscribedBoard">Subscribe</a></li>
-				<li><a class="page-scroll" href="${pageContext.request.contextPath}/viewProfile">Profile</a></li>
-				<li><a class="page-scroll" href="${pageContext.request.contextPath}/viewNotification">Notification</a></li>
-				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signout">Log Out</a></li>
+				<li><a class="page-scroll" href="#publicBoard">Public
+						Boards</a></li>
+				<li><a class="page-scroll" href="#privateBoard">Private
+						Boards</a></li>
+				<li><a class="page-scroll"
+					href="${pageContext.request.contextPath}/viewUnsubscribedBoard">Subscribe</a></li>
+				<li><a class="page-scroll"
+					href="${pageContext.request.contextPath}/viewProfile">Profile</a></li>
+				<li><a class="page-scroll"
+					href="${pageContext.request.contextPath}/viewNotification">Notification</a></li>
+				<li><a class="page-scroll"
+					href="${pageContext.request.contextPath}/signout">Log Out</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -83,7 +89,7 @@
 		<div class="row">
 			<div class="col-lg-12 text-center">
 				<h2 class="section-heading">Public Boards</h2>
-				<div class="Dashboard form-group" >
+				<div class="Dashboard form-group">
 					<select name="category" class="form-control">
 						<option value="All">ALL</option>
 						<option value="Business">Business</option>
@@ -102,22 +108,21 @@
 		</div>
 		<div class="row">
 			<c:if test="${ not empty publicBoardList }">
-			
+
 				<c:forEach var="publicBoard" items="${publicBoardList}">
-				<form method="GET" name="${publicBoard.getBoardId()}"
+					<form method="GET" name="${publicBoard.getBoardId()}"
 						action="${pageContext.request.contextPath}/viewBoard/${publicBoard.getBoardId()}">
-					<div class="col-md-3 portfolio-item">
-						<a href="#" onclick="$(this).closest('form').submit()"
-							class="portfolio-link" data-toggle="modal">
-							<div class="portfolio-hover">
-							</div> <img src="img/portfolio/roundicons.png" class="img-responsive"
-							alt="">
-						</a>
-						<div class="portfolio-caption">
-							<h4>${publicBoard.getTitle()}</h4>
-							<p class="text-muted">${publicBoard.getDescription()}</p>
+						<div class="col-md-3 portfolio-item">
+							<a href="#" onclick="$(this).closest('form').submit()"
+								class="portfolio-link" data-toggle="modal">
+								<div class="portfolio-hover"></div> <img
+								src="img/portfolio/roundicons.png" class="img-responsive" alt="">
+							</a>
+							<div class="portfolio-caption">
+								<h4>${publicBoard.getTitle()}</h4>
+								<p class="text-muted">${publicBoard.getDescription()}</p>
+							</div>
 						</div>
-					</div>
 					</form>
 				</c:forEach>
 			</c:if>
@@ -156,20 +161,15 @@
 				<c:forEach var="privateBoard" items="${privateBoardList}">
 					<form method="post"
 						action="${pageContext.request.contextPath}/viewBoard/${privateBoard.getBoardId()}">
-						<div class="col-md-4 col-sm-6 portfolio-item">
+						<div class="col-md-3 portfolio-item">
 							<a href="#" onclick="$(this).closest('form').submit()"
 								class="portfolio-link" data-toggle="modal">
-								<div class="portfolio-hover">
-									<div class="portfolio-hover-content">
-										<i class="fa fa-plus fa-3x"></i>
-									</div>
-								</div> <img src="img/portfolio/roundicons.png" class="img-responsive"
-								alt="">
-							</a>
-							<div class="portfolio-caption">
-								<h4>${privateBoard.getTitle()}</h4>
-								<p class="text-muted">${privateBoard.getDescription()}</p>
-							</div>
+								<div class="portfolio-hover"></div> <img
+								src="img/portfolio/roundicons.png" class="img-responsive" alt="">
+								<div class="portfolio-caption">
+									<h4>${privateBoard.getTitle()}</h4>
+									<p class="text-muted">${privateBoard.getDescription()}</p>
+								</div>
 						</div>
 					</form>
 				</c:forEach>

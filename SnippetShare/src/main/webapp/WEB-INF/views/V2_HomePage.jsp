@@ -29,248 +29,256 @@
 </head>
 
 <script>
-    function myFunction() {
-        var pass1 = document.getElementById("inputPassword").value;
-        var pass2 = document.getElementById("inputConfirmPassword").value;
-        var ok = true;
-        if (pass1 != pass2) {
-            //alert("Passwords Do not match");
-            document.getElementById("inputPassword").style.borderColor = "#E34234";
-            document.getElementById("inputConfirmPassword").style.borderColor = "#E34234";
-            alert("Passwords Mis-match!!!");
-            ok=false;
-        }
+	function myFunction() {
+		var pass1 = document.getElementById("inputPassword").value;
+		var pass2 = document.getElementById("inputConfirmPassword").value;
+		var ok = true;
+		if (pass1 != pass2) {
+			//alert("Passwords Do not match");
+			document.getElementById("inputPassword").style.borderColor = "#E34234";
+			document.getElementById("inputConfirmPassword").style.borderColor = "#E34234";
+			alert("Passwords Mis-match!!!");
+			ok = false;
+		}
 
-        return ok;
-    }
+		return ok;
+	}
 </script>
 <body id="page-top" class="index">
 
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header page-scroll">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand page-scroll" href="#page-top">Snippet
-				Share</a>
-		</div>
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header page-scroll">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand page-scroll" href="#page-top">Snippet
+					Share</a>
+			</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right">
-				<li class="hidden"><a href="#page-top"></a></li>
-				<li><a class="page-scroll" href="#services">Services</a></li>
-				<li><a class="page-scroll" href="#team">Team</a></li>
-				<li><a class="page-scroll" href="#signin">SignIn</a></li>
-				<li><a class="page-scroll" href="#register">Register</a></li>
-			</ul>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="hidden"><a href="#page-top"></a></li>
+					<li><a class="page-scroll" href="#services">Services</a></li>
+					<li><a class="page-scroll" href="#team">Team</a></li>
+					<li><a class="page-scroll" href="#signin">SignIn</a></li>
+					<li><a class="page-scroll" href="#register">Register</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
 		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container-fluid --> </nav>
+		<!-- /.container-fluid -->
+	</nav>
 
 	<!-- Header -->
 	<header>
-	<div class="container">
-		<div class="intro-text">
-			<h1>Welcome To Our Snippet Share !</h1>
-			<div class="intro-lead-in">The simplest way to create and share
-				snippets</div>
-			<a href="#services" class="page-scroll btn btn-xl">Register Now</a>
+		<div class="container">
+			<div class="intro-text">
+				<h1>Welcome To Our Snippet Share !</h1>
+				<div class="intro-lead-in">The simplest way to create and
+					share snippets</div>
+				<a href="#register" class="page-scroll btn btn-xl">Register Now</a>
+			</div>
 		</div>
-	</div>
 	</header>
 
 	<!-- Services Section -->
 	<section id="services">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<h2 class="section-heading">Services</h2>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<h2 class="section-heading">Services</h2>
+				</div>
+			</div>
+			<div class="row text-center">
+				<div class="col-md-4">
+					<h4 class="service-heading">Create Boards</h4>
+					<p class="text-muted">You can create either Public or Private
+						Board.</p>
+				</div>
+				<div class="col-md-4">
+					<h4 class="service-heading">Create Snippets</h4>
+					<p class="text-muted">You can create snippets.</p>
+				</div>
+				<div class="col-md-4">
+					<h4 class="service-heading">Comment</h4>
+					<p class="text-muted">Comment on the snippets shared by other
+						users.</p>
+				</div>
+				<div class="col-md-4">
+					<h4 class="service-heading">Comment</h4>
+					<p class="text-muted">Comment on the snippets shared by other
+						users.</p>
+				</div>
+				<div class="col-md-4">
+					<h4 class="service-heading">Comment</h4>
+					<p class="text-muted">Comment on the snippets shared by other
+						users.</p>
+				</div>
+
 			</div>
 		</div>
-		<div class="row text-center">
-			<div class="col-md-4">
-				<h4 class="service-heading">Create Boards</h4>
-				<p class="text-muted">You can create either Public or Private Board.</p>
-			</div>
-			<div class="col-md-4">
-				<h4 class="service-heading">Create Snippets</h4>
-				<p class="text-muted">You can create snippets.</p>
-			</div>
-			<div class="col-md-4">
-				<h4 class="service-heading">Comment</h4>
-				<p class="text-muted">Comment on the snippets shared by other users.</p>
-			</div>
-			<div class="col-md-4">
-				<h4 class="service-heading">Comment</h4>
-				<p class="text-muted">Comment on the snippets shared by other users.</p>
-			</div>
-			<div class="col-md-4">
-				<h4 class="service-heading">Comment</h4>
-				<p class="text-muted">Comment on the snippets shared by other users.</p>
-			</div>
-			
-		</div>
-	</div>
 	</section>
 
 	<!-- Team Section -->
 	<section id="team" class="bg-light-gray">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<h2 class="section-heading">Our Amazing Team</h2>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<h2 class="section-heading">Our Amazing Team</h2>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="team-member">
+						<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
+						<h4>Avadhut</h4>
+						<p class="text-muted">000000</p>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="team-member">
+						<img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
+						<h4>Sushantha Sahoo</h4>
+						<p class="text-muted">000000</p>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="team-member">
+						<img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
+						<h4>Srisha</h4>
+						<p class="text-muted">000000</p>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="team-member">
+						<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
+						<h4>Vaibhav</h4>
+						<p class="text-muted">000000</p>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="team-member">
+						<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
+						<h4>Vinay</h4>
+						<p class="text-muted">000000</p>
+					</div>
+				</div>
 			</div>
 		</div>
-		
-		<div class="row">
-			<div class="col-sm-4">
-				<div class="team-member">
-					<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
-					<h4>Avadhut</h4>
-					<p class="text-muted">000000</p>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="team-member">
-					<img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
-					<h4>Sushantha Sahoo</h4>
-					<p class="text-muted">000000</p>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="team-member">
-					<img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
-					<h4>Srisha</h4>
-					<p class="text-muted">000000</p>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="team-member">
-					<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
-					<h4>Vaibhav</h4>
-					<p class="text-muted">000000</p>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="team-member">
-					<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
-					<h4>Vinay</h4>
-					<p class="text-muted">000000</p>
-				</div>
-			</div>
-		</div>
-	</div>
 	</section>
 
-	<section id="signin" style="color:white">
-	<div class="signinform">
-		<form class="form-signin" method="post"
-			action="${pageContext.request.contextPath}/signin">
-			<h2 class="form-signin-heading">Please sign in</h2>
+	<section id="signin" style="color: white">
+		<div class="signinform">
+			<form class="form-signin" method="post"
+				action="${pageContext.request.contextPath}/signin">
+				<h2 class="form-signin-heading">Please sign in</h2>
 
-			<div class="form-group">
-				<input type="email" class="form-control" placeholder="Email *"
-					name="email" id="inputEmail" required
-					data-validation-required-message="Please enter your email.">
-				<p class="help-block text-danger"></p>
-			</div>
+				<div class="form-group">
+					<input type="email" class="form-control" placeholder="Email *"
+						name="email" id="inputEmail" required
+						data-validation-required-message="Please enter your email.">
+					<p class="help-block text-danger"></p>
+				</div>
 
-			<div class="form-group">
-				<input type="password" class="form-control" placeholder="Password *"
-					name="password" id="inputSignInPassword" required
-					data-validation-required-message="Please enter your password.">
-				<p class="help-block text-danger"></p>
-			</div>
+				<div class="form-group">
+					<input type="password" class="form-control"
+						placeholder="Password *" name="password" id="inputSignInPassword"
+						required
+						data-validation-required-message="Please enter your password.">
+					<p class="help-block text-danger"></p>
+				</div>
 
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
 					In</button>
 			</form>
-	</div>
+		</div>
 	</section>
 
-	<section id="register" style="color:white">
-	<div class="RegisterForm" method="post" action="${pageContext.request.contextPath}/createAccount" onsubmit="return myFunction()">
-		<form class="form-signin" method="post"
+	<section id="register" style="color: white">
+		<div class="RegisterForm" method="post"
 			action="${pageContext.request.contextPath}/createAccount"
 			onsubmit="return myFunction()">
-			<h2 class="form-signin-heading">Create an account</h2>
+			<form class="form-signin" method="post"
+				action="${pageContext.request.contextPath}/createAccount"
+				onsubmit="return myFunction()">
+				<h2 class="form-signin-heading">Create an account</h2>
 
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="First Name *"
-					name="firstname" id="inputFirstName" required
-					data-validation-required-message="Please enter your first name.">
-				<p class="help-block text-danger"></p>
-			</div>
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="First Name *"
+						name="firstname" id="inputFirstName" required
+						data-validation-required-message="Please enter your first name.">
+					<p class="help-block text-danger"></p>
+				</div>
 
-			<div class="form-group">
-				<input type="text" class="form-control" name="lastname"
-					placeholder="Last Name *" id="inputLastName" required
-					data-validation-required-message="Please enter your last name.">
-				<p class="help-block text-danger"></p>
-			</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="lastname"
+						placeholder="Last Name *" id="inputLastName" required
+						data-validation-required-message="Please enter your last name.">
+					<p class="help-block text-danger"></p>
+				</div>
 
-			<div class="form-group">
-				<input type="email" class="form-control" placeholder="Email *"
-					name="email" id="inputEmail" required
-					data-validation-required-message="Please enter your email address.">
-				<p class="help-block text-danger"></p>
-			</div>
+				<div class="form-group">
+					<input type="email" class="form-control" placeholder="Email *"
+						name="email" id="inputEmail" required
+						data-validation-required-message="Please enter your email address.">
+					<p class="help-block text-danger"></p>
+				</div>
 
 
-			<div class="form-group">
-				<input type="tel" class="form-control" placeholder="Phone *"
-					name="mobileNumber" id="inputPhone" required
-					data-validation-required-message="Please enter your phone number.">
-				<p class="help-block text-danger"></p>
-			</div>
+				<div class="form-group">
+					<input type="tel" class="form-control" placeholder="Phone *"
+						name="mobileNumber" id="inputPhone" required
+						data-validation-required-message="Please enter your phone number.">
+					<p class="help-block text-danger"></p>
+				</div>
 
-			<div class="form-group">
-				<input type="password" class="form-control" placeholder="Password *"
-					name="password" id="inputPassword" required
-					data-validation-required-message="Please enter password.">
-				<p class="help-block text-danger"></p>
-			</div>
+				<div class="form-group">
+					<input type="password" class="form-control"
+						placeholder="Password *" name="password" id="inputPassword"
+						required data-validation-required-message="Please enter password.">
+					<p class="help-block text-danger"></p>
+				</div>
 
-			<div class="form-group">
-				<input type="password" class="form-control"
-					placeholder="Confirm Password *" name="password1"
-					id="inputConfirmPassword" required
-					data-validation-required-message="Please enter password.">
-				<p class="help-block text-danger"></p>
-			</div>
+				<div class="form-group">
+					<input type="password" class="form-control"
+						placeholder="Confirm Password *" name="password1"
+						id="inputConfirmPassword" required
+						data-validation-required-message="Please enter password.">
+					<p class="help-block text-danger"></p>
+				</div>
 
-			<p>By creating an account you agree to our Terms of Service.</p>
-			<input class="btn btn-lg btn-primary btn-block" TYPE="submit"
-				value="Create My Account">
+				<p>By creating an account you agree to our Terms of Service.</p>
+				<input class="btn btn-lg btn-primary btn-block" TYPE="submit"
+					value="Create My Account">
 
-		</form>
-	</div>
+			</form>
+		</div>
 	</section>
 
 	<footer>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<span class="copyright">Copyright &copy; CMPE 2015 Team 12</span>
-			</div>
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
-				<ul class="list-inline quicklinks">
-					<li><a href="#">Privacy Policy</a></li>
-					<li><a href="#">Terms of Use</a></li>
-				</ul>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<span class="copyright">Copyright &copy; CMPE 2015 Team 12</span>
+				</div>
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<ul class="list-inline quicklinks">
+						<li><a href="#">Privacy Policy</a></li>
+						<li><a href="#">Terms of Use</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
-	</div>
 	</footer>
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>

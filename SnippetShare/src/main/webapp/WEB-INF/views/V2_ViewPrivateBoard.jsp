@@ -78,13 +78,13 @@
 							<h3>Private -- Boards</h3>
 							<c:forEach var="privateBoard" items="${privateBoardList}">
 								<h4>${privateBoard.getTitle()}</h4>
-								<a class="btn btn-primary" href="#requestModal1" class="portfolio-link"
-					data-toggle="modal">Request Access <span></span></a>
+								<a class="btn btn-primary" href="#requestModal1"
+									class="portfolio-link" data-toggle="modal">Request Access <span></span></a>
 							</c:forEach>
 						</c:if>
-						
+
 						<c:if test="${ not empty snippetList }">
-						<h4>No Boards Available.</h4>
+							<h4>No Boards Available.</h4>
 						</c:if>
 					</div>
 				</div>
