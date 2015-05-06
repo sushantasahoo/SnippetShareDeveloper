@@ -9,13 +9,16 @@
 <title>Snippet Share - Board</title>
 
 <!-- Bootstrap Core CSS -->
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+	rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="${pageContext.request.contextPath}/css/agency.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/agency.css"
+	rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
 	rel="stylesheet" type="text/css">
@@ -53,7 +56,9 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
 				<li><a class="page-scroll" href="#">Home</a></li>
-				<li><a class="page-scroll" href="${pageContext.request.contextPath}/${boardId}/createSnippet">New Snippet</a></li>
+				<li><a class="page-scroll"
+					href="${pageContext.request.contextPath}/${boardId}/createSnippet">New
+						Snippet</a></li>
 				<li><a class="page-scroll" href="#">Log Out</a></li>
 			</ul>
 		</div>
@@ -62,29 +67,31 @@
 	<!-- /.container-fluid --> </nav>
 
 	<!-- Header -->
-	 <header>
+	<header>
 	<div class="container">
-	<div class="intro-text">
-		<form>
-			<div class="row">
-				<div class="col-md-4">
-					<c:if test="${ not empty snippetList }">
-						<h3>Public Boards</h3>
-						<c:forEach var="snippet" items="${snippetList}">
-							<h4>${snippet.getTitle()}</h4>
-							<p>${snippet.getTags()}</p>
-							<p>${snippet.getContent()}</p>
-							<a class="btn btn-primary" href="/">View Snippet <span
-								class="glyphicon glyphicon-chevron-right"></span></a>
-						</c:forEach>
-					</c:if>
-					<h4>No Sinppets Available. Please create a New Snippet</h4>
-					<c:if test="${ not empty snippetList }">
-					</c:if>
+		<div class="intro-text">
+			<form>
+				<div class="row">
+					<div class="col-md-4">
+						<c:if test="${ not empty snippetList }">
+							<h3>Public Boards</h3>
+							<c:forEach var="snippet" items="${snippetList}">
+								<form method="post" action="">
+									<h4>${snippet.getTitle()}</h4>
+									<p>${snippet.getTags()}</p>
+									<p>${snippet.getContent()}</p>
+									<a class="btn btn-primary" href="/">View Snippet <span
+										class="glyphicon glyphicon-chevron-right"></span></a>
+								</form>
+							</c:forEach>
+						</c:if>
+						<c:if test="${ not empty snippetList }">
+							<h4>No Sinppets Available. Please create a New Snippet</h4>
+						</c:if>
+					</div>
 				</div>
-			</div>
-		</form>
-	</div>
+			</form>
+		</div>
 	</div>
 	</header>
 

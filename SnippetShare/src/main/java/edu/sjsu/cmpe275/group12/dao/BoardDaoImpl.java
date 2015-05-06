@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe275.group12.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 
@@ -9,6 +11,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+
+import com.mysql.jdbc.Connection;
+
 import edu.sjsu.cmpe275.group12.model.BoardVO;
 
 public class BoardDaoImpl implements BoardDao{
@@ -35,6 +43,32 @@ public class BoardDaoImpl implements BoardDao{
 			return false;
 		}
 		
+	}
+	
+	@Override
+	public int getLastInsertedBoardId(){
+		String SQL ="select last_insert_id()";
+		List<BoardVO> boardId =  jdbcTemplateObject.query(SQL, new IntegerMapper());
+		
+		if(boardId!=null && boardId.size()>0){
+			System.out.println(boardId.get(0).getBoardId());
+			return boardId.get(0).getBoardId();
+		}
+		else 
+			return 0;
+	}
+	
+	@Override
+	public int getBoardIdByTitle(String title, int id){
+		String SQL = "SELECT * from `snippet`.`board` WHERE `title` = ? AND user_id = ?";
+		List<BoardVO> board =  jdbcTemplateObject.query(SQL, 
+				new Object[]{title, id}, new IntegerMapper());
+
+		if(board!=null && board.size()>0){
+			return board.get(0).getBoardId();
+		}
+		else 
+			return 0;
 	}
 
 	@Override

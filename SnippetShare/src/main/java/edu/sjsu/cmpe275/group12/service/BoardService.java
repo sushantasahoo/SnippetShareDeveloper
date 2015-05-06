@@ -23,12 +23,22 @@ public class BoardService {
 	public boolean createBoard(BoardVO boardVO) {
 		if (boardVO.getTitle() != null && !boardVO.getTitle().equals("")
 				&& boardVO.getUserId() != 0) {
-			return boardDao.createBoard(boardVO);
+			boolean isdone = boardDao.createBoard(boardVO);
+			int id =getBoardIdByTitle(boardVO.getTitle(), boardVO.getUserId());
+			boardVO.setBoardId(id);
+			return isdone;
 		} else {
 			return false;
 		}
 	}
 
+	public int getBoardIdByTitle(String title, int id){
+		if(title!=null){
+			return boardDao.getBoardIdByTitle(title, id);
+		}
+		return 0;
+	}
+	
 	/**
 	 * Returns user details for given email and password If user doesn't exists
 	 * returns null else returns userVO object

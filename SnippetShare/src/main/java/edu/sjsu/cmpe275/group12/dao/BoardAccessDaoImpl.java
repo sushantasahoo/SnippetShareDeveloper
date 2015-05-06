@@ -34,9 +34,9 @@ public class BoardAccessDaoImpl implements BoardAccessDao{
 
 	@Override
 	public boolean createBoardAccess(BoardAccessVO bAccess) {
-		String SQL = "INSERT INTO `snippet`.`board_access`(`board_access_id`,`board_id`,`user_id`,`access_status`) VALUES(?,?,?,?)";
+		String SQL = "INSERT INTO `snippet`.`board_access`(`board_id`,`user_id`,`access_status`) VALUES(?,?,?)";
 		try{
-			jdbcTemplateObject.update(SQL, bAccess.getBoardAccessId(), bAccess.getBoardId(), bAccess.getUserId(), bAccess.getAccessStatus());
+			jdbcTemplateObject.update(SQL, bAccess.getBoardId(), bAccess.getUserId(), bAccess.getAccessStatus());
 			return true;
 		}
 		catch(DuplicateKeyException ex){

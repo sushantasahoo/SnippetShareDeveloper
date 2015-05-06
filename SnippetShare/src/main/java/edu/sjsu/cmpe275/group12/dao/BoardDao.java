@@ -16,4 +16,6 @@ public interface BoardDao {
 	public void deleteBoardById(int boardId);
 	public List<BoardVO> getAllBoardList();
 	public List<BoardVO> getBoardNonAccessByUser(int userId);
+	int getLastInsertedBoardId();
+	int getBoardIdByTitle(String title, int id);
 }

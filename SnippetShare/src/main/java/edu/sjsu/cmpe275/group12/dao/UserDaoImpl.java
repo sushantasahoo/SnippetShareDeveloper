@@ -28,6 +28,7 @@ public class UserDaoImpl implements UserDao{
 		try{
 		jdbcTemplateObject.update(SQL, user.getUserId(),
 				user.getFirstname(), user.getLastname(), user.getEmail(), user.getMobileNumber(), user.getPassword());
+		
 		}
 		catch(DuplicateKeyException ex){
 			return false;
