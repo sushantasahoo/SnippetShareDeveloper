@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.sjsu.cmpe275.group12.model.CommentVO;
 import edu.sjsu.cmpe275.group12.model.SnippetVO;
 import edu.sjsu.cmpe275.group12.model.UserVO;
 import edu.sjsu.cmpe275.group12.service.CommentService;
@@ -151,17 +152,22 @@ public class SnippetController {
 	 * @param userSession
 	 * @return
 	 */
-	@RequestMapping(value = "/{snippetId}/commentOnSnippet", method = RequestMethod.GET)
+	@RequestMapping(value = "/snippet/{boardId}/{snippetId}", method = RequestMethod.GET)
 	public ModelAndView commentOnSnippet(
 			@PathVariable("snippetId") int snippetId,
+			@PathVariable("boardId") int boardId,
 			@ModelAttribute("snippetVO") SnippetVO snippetVO,
 			@ModelAttribute("userSession") UserVO userSession) {
-		
 		ModelAndView modelAndView = new ModelAndView();
+		SnippetService snippetService = new SnippetService();
 		CommentService commentService = new CommentService();
 		if (SnippetUtil.authenticateUser(userSession)) {
-		//	commentService.g
-			
+			SnippetVO snippet = snippetService.getSnippetById(snippetId);
+			List<CommentVO> comments = commentService.getBoardbyId(snippetId);
+			modelAndView.addObject("snippet", snippet);
+			modelAndView.addObject("boardId", boardId);
+			modelAndView.addObject("comments", comments);
+			modelAndView.setViewName("V2_ViewSnippet");
 		}
 		modelAndView.setViewName("V2_ViewBoard");
 		return null;
@@ -185,5 +191,31 @@ public class SnippetController {
 		}
 		return null;
 	}
-
+	
+	@RequestMapping(value = "/postComment/{boardId}/{snippetId}/", method = RequestMethod.POST)
+	public ModelAndView openSnippet(@ModelAttribute("commentVO") CommentVO commentVO,
+			@PathVariable("boardId") int boardId,
+			@PathVariable("snippetId") int snippetId,
+			@ModelAttribute("userSession") UserVO userSession) {
+		ModelAndView modelAndView = new ModelAndView();
+		SnippetService snippetService = new SnippetService();
+		CommentService commentService = new CommentService();
+		if (SnippetUtil.authenticateUser(userSession)) {
+			commentVO.setSnippetId(snippetId);
+			commentVO.setUserId(userSession.getUserId());
+			if(commentService.createComment(commentVO)){
+				modelAndView.setViewName("V2_SnippetDetails");	
+			}
+			else{
+				modelAndView.addObject("Cannot add Comment",
+						SnippetConstants.COMMENT_CREATION_FAILED);
+				modelAndView.setViewName("V2_SnippetDetails");
+			}
+		}
+		return modelAndView;
+		
+	}
+	
+	
+	
 }
