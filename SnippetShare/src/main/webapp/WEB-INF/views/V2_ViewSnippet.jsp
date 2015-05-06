@@ -7,13 +7,13 @@
 <title>Snippet Share - Board</title>
 
 <!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="css/agency.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/agency.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
 	rel="stylesheet" type="text/css">
@@ -50,11 +50,11 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
-				<li><a class="page-scroll" href="#">Back</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Home</a></li>
 				<li><a class="page-scroll" href="#">Dashboard</a></li>
 				<li><a href="#commentModal1" class="portfolio-link"
 					data-toggle="modal">New Comment</a></li>
-				<li><a class="page-scroll" href="#">Log Out</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signout">Log Out</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

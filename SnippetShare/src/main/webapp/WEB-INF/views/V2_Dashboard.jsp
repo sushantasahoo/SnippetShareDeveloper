@@ -60,8 +60,8 @@
 						Boards</a></li>
 				<li><a class="page-scroll"
 					href="${pageContext.request.contextPath}/viewProfile">Profile</a></li>
-				<li><a class="page-scroll" href="#">Notification</a></li>
-				<li><a class="page-scroll" href="#">History</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/viewNotification">Notification</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/viewHistory">History</a></li>
 				<li><a class="page-scroll"
 					href="${pageContext.request.contextPath}/signout">Log Out</a></li>
 			</ul>
@@ -135,11 +135,6 @@
 		</div>
 	</div>
 	</section>
-	
-	<form method="post" action="${pageContext.request.contextPath}/viewBoard/6">
-	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
-					In</button>
-	</form>
 
 	<!-- Private Grid Section -->
 	<section id="privateBoard" class="bg-light-gray">

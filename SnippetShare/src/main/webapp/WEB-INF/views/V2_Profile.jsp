@@ -7,13 +7,13 @@
 <title>Snippet Share - Dashboard</title>
 
 <!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="css/agency.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/agency.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
 	rel="stylesheet" type="text/css">
@@ -50,11 +50,8 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Dashboard</a></li>
-					<li><a class="page-scroll" href="#">Profile</a></li>
-					<li><a class="page-scroll" href="#">Activity</a></li>
-					<li><a class="page-scroll" href="#">History</a></li>
-					<li><a class="page-scroll" href="#">Log Out</a></li>
+				    <li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Home</a></li>
+					<li><a class="page-scroll" href="${pageContext.request.contextPath}/signout">Log Out</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -69,21 +66,26 @@
 				<div class="intro-lead-in">Profile Details</div>
 				<form class="form-signin" method="post">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="First Name *" value =${userSession.getFirstname()} 
-							name="firstname" id="inputFirstName" required data-validation-required-message="Please enter your first name.">
+						<input type="text" class="form-control" placeholder="First Name *"
+							value=${userSession.getFirstname() } 
+							name="firstname"
+							id="inputFirstName" required
+							data-validation-required-message="Please enter your first name.">
 						<p class="help-block text-danger"></p>
 					</div>
 
 					<div class="form-group">
 						<input type="text" class="form-control" name="lastname"
-							placeholder="Last Name *" value =${userSession.getLastname()}  id="inputLastName" required
+							placeholder="Last Name *" value=${userSession.getLastname()
+							}  id="inputLastName" required
 							data-validation-required-message="Please enter your last name.">
 						<p class="help-block text-danger"></p>
 					</div>
 
 					<div class="form-group">
 						<input type="email" class="form-control" placeholder="Email *"
-							name="email" id="inputEmail" value =${userSession.getEmail()} required
+							name="email" readonly id="inputEmail"
+							value=${userSession.getEmail() } required
 							data-validation-required-message="Please enter your email address.">
 						<p class="help-block text-danger"></p>
 					</div>
@@ -91,13 +93,40 @@
 
 					<div class="form-group">
 						<input type="tel" class="form-control" placeholder="Phone *"
-							name="mobileNumber" id="inputPhone" value =${userSession.getMobileNumber()} required
+							name="mobileNumber" id="inputPhone"
+							value=${userSession.getMobileNumber() } required
 							data-validation-required-message="Please enter your phone number.">
 						<p class="help-block text-danger"></p>
 					</div>
 
-					<p>By updating your profile you agree to our Terms of
-						Service.</p>
+
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Street "
+							name="street" id="inputAddress" 
+							value= ${userSession.getAddress().getStreet() } >
+						<p class="help-block text-danger"></p>
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="City "
+							name="city" id="inputAddress"
+							value=${userSession.getAddress().getCity() }>
+						<p class="help-block text-danger"></p>
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="State "
+							name="state" id="inputAddress" value= ${userSession.getAddress().getState() }>
+						<p class="help-block text-danger"></p>
+
+					</div>
+					<div class="form-group">
+						<input type="number" class="form-control" placeholder="Zip "
+							name="zip" id="inputAddress" value=${userSession.getAddress().getZip() }>
+						<p class="help-block text-danger"></p>
+					</div>
+					
+					<p>By updating your profile you agree to our Terms of Service.</p>
 					<br />
 					<button class="btn btn-lg btn-success" type="submit">Update</button>
 
