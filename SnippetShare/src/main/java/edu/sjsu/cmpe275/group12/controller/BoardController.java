@@ -188,7 +188,7 @@ public class BoardController {
 		
 		List<BoardVO> privateBoardList = boardService.getBoardByAccessType("R");
 		
-		modelAndView.addObject(privateBoardList);
+		modelAndView.addObject("privateBoardList",privateBoardList);
 		modelAndView.setViewName("V2_ViewPrivateBoard");
 		return modelAndView;
 	}

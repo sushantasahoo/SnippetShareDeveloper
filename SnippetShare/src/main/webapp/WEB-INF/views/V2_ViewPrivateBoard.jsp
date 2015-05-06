@@ -75,16 +75,16 @@
 				<div class="row">
 					<div class="col-md-4">
 						<c:if test="${ not empty privateBoardList }">
-							<h3>Public Boards</h3>
+							<h3>Private -- Boards</h3>
 							<c:forEach var="privateBoard" items="${privateBoardList}">
 								<h4>${privateBoard.getTitle()}</h4>
-								<p>${privateBoard.getTags()}</p>
-								<a class="btn btn-primary" href="#requestModal1">Request Access <span
-									class="glyphicon glyphicon-chevron-right"></span></a>
+								<a class="btn btn-primary" href="#requestModal1" class="portfolio-link"
+					data-toggle="modal">Request Access <span></span></a>
 							</c:forEach>
 						</c:if>
-						<h4>No Boards Available.</h4>
+						
 						<c:if test="${ not empty snippetList }">
+						<h4>No Boards Available.</h4>
 						</c:if>
 					</div>
 				</div>

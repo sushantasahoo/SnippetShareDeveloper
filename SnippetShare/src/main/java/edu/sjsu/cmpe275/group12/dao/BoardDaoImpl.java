@@ -95,7 +95,7 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public List<BoardVO> getBoardsByAccessType(String accessType) {
 		String SQL = "SELECT * from `snippet`.`board` WHERE `access_type` = ?";
-		System.out.println();
+		System.out.println(accessType);
 		List<BoardVO> board =  jdbcTemplateObject.query(SQL, 
 				new Object[]{accessType}, new BoardMapper());
 
