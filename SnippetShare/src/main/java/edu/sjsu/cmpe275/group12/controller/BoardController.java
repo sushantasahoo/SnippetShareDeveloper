@@ -137,7 +137,7 @@ public class BoardController {
 		}else {
 			modelAndView.addObject("AuthenticationFailure",
 					SnippetConstants.INVALID_USER);
-			modelAndView.setViewName("ViewBoard");
+			modelAndView.setViewName("V2_HomePage");
 		}
 		return modelAndView;
 	}
@@ -185,11 +185,17 @@ public class BoardController {
 		ModelAndView modelAndView = new ModelAndView();
 		BoardService boardService = new BoardService();
 		SnippetService snippetService = new SnippetService();
-		
+		if (SnippetUtil.authenticateUser(userSession)) {
 		List<BoardVO> privateBoardList = boardService.getBoardByAccessType("R");
 		
 		modelAndView.addObject("privateBoardList",privateBoardList);
 		modelAndView.setViewName("V2_ViewPrivateBoard");
+		}
+		else{
+			modelAndView.addObject("AuthenticationFailure",
+					SnippetConstants.INVALID_USER);
+			modelAndView.setViewName("V2_HomePage");
+		}
 		return modelAndView;
 	}
 	
