@@ -74,13 +74,12 @@
 			<form>
 				<div class="row">
 					<div class="col-md-4">
-						<c:if test="${ not empty snippetList }">
+						<c:if test="${ not empty privateBoardList }">
 							<h3>Public Boards</h3>
-							<c:forEach var="snippet" items="${snippetList}">
-								<h4>${snippet.getTitle()}</h4>
-								<p>${snippet.getTags()}</p>
-								<p>${snippet.getContent()}</p>
-								<a class="btn btn-primary" href="/">View Snippet <span
+							<c:forEach var="privateBoard" items="${privateBoardList}">
+								<h4>${privateBoard.getTitle()}</h4>
+								<p>${privateBoard.getTags()}</p>
+								<a class="btn btn-primary" href="#requestModal1">Request Access <span
 									class="glyphicon glyphicon-chevron-right"></span></a>
 							</c:forEach>
 						</c:if>

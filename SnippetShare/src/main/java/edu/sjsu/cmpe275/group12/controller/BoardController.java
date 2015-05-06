@@ -178,19 +178,21 @@ public class BoardController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/listPrivateBoard", method = RequestMethod.GET)
+	@RequestMapping(value = "/viewUnsubscribedBoard", method = RequestMethod.GET)
 	public ModelAndView listPrivateBoard(
 	@ModelAttribute("userSession") UserVO userSession)
 	{
 		ModelAndView modelAndView = new ModelAndView();
 		BoardService boardService = new BoardService();
 		SnippetService snippetService = new SnippetService();
+		
+		List<BoardVO> privateBoardList = boardService.getBoardByAccessType("R");
+		
+		modelAndView.addObject(privateBoardList);
 		modelAndView.setViewName("V2_ViewPrivateBoard");
-		// modelAndView.addObject("publicBoards",
-		// boardDao.getBoardsByAccessType('U'));
 		return modelAndView;
 	}
-
-
+	
+	
 
 }
