@@ -7,6 +7,6 @@ import edu.sjsu.cmpe275.group12.model.CommentVO;
 public interface CommentDao {
 	public boolean createComment(CommentVO comment);
 	public List<CommentVO> getComment(int snippetId);
-	public void deleteComment(int commentId);
+	public int deleteComment(int snippetId);
 	public void updateComment(CommentVO comment);
 }

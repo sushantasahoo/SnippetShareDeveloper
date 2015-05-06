@@ -56,12 +56,13 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	@Override
-	public void deleteComment(int commentId) {
-		String SQL = "DELETE FROM `snippet`.`comment` WHERE board_id = ? ;";
-		Object[] param_boardId = { commentId };
+	public int deleteComment(int snippetId) {
+		String SQL = "DELETE FROM `snippet`.`comment` WHERE snippet_id = ? ;";
+		Object[] param_snippetId = { snippetId };
 		int[] types = {Types.INTEGER};
-		int rows = jdbcTemplateObject.update(SQL, param_boardId, types);
+		int rows = jdbcTemplateObject.update(SQL, param_snippetId, types);
 		System.out.println(rows + " row(s) deleted.");
+		return rows;
 	}
 
 	@Override
