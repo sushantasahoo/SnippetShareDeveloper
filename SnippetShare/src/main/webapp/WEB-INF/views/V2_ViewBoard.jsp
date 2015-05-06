@@ -9,13 +9,13 @@
 <title>Snippet Share - Board</title>
 
 <!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="css/agency.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/agency.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
 	rel="stylesheet" type="text/css">
@@ -53,7 +53,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
 				<li><a class="page-scroll" href="#">Home</a></li>
-				<li><a class="page-scroll" href="${pageContext.request.contextPath}/createSnippet">New Snippet</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/${boardId}/createSnippet">New Snippet</a></li>
 				<li><a class="page-scroll" href="#">Log Out</a></li>
 			</ul>
 		</div>
@@ -62,7 +62,7 @@
 	<!-- /.container-fluid --> </nav>
 
 	<!-- Header -->
-	<header>
+	 <header>
 	<div class="container">
 	<div class="intro-text">
 		<form>
@@ -72,7 +72,7 @@
 						<h3>Public Boards</h3>
 						<c:forEach var="snippet" items="${snippetList}">
 							<h4>${snippet.getTitle()}</h4>
-							<p>${snippet.getTag()}</p>
+							<p>${snippet.getTags()}</p>
 							<p>${snippet.getContent()}</p>
 							<a class="btn btn-primary" href="/">View Snippet <span
 								class="glyphicon glyphicon-chevron-right"></span></a>
@@ -87,37 +87,6 @@
 	</div>
 	</div>
 	</header>
-
-
-	<!-- Portfolio Grid Section -->
-	<section id="portfolio" class="bg-light-gray">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<h2 class="section-heading">Portfolio</h2>
-				<h3 class="section-subheading text-muted">Lorem ipsum dolor sit
-					amet consectetur.</h3>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4 col-sm-6 portfolio-item">
-				<a href="#portfolioModal1" class="portfolio-link"
-					data-toggle="modal">
-					<div class="portfolio-hover">
-						<div class="portfolio-hover-content">
-							<i class="fa fa-plus fa-3x"></i>
-						</div>
-					</div> <img src="img/portfolio/roundicons.png" class="img-responsive"
-					alt="">
-				</a>
-				<div class="portfolio-caption">
-					<h4>Round Icons</h4>
-					<p class="text-muted">Graphic Design</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	</section>
 
 	<footer>
 	<div class="container">
@@ -136,51 +105,6 @@
 	</div>
 	</footer>
 
-	<div class="portfolio-modal modal fade" id="portfolioModal1"
-		tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-content">
-			<div class="close-modal" data-dismiss="modal">
-				<div class="lr">
-					<div class="rl"></div>
-				</div>
-			</div>
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-lg-offset-2">
-						<div class="modal-body">
-							<!-- Project Details Go Here -->
-							<h2>Project Name</h2>
-							<p class="item-intro text-muted">Lorem ipsum dolor sit amet
-								consectetur.</p>
-							<img class="img-responsive img-centered"
-								src="img/portfolio/roundicons-free.png" alt="">
-							<p>Use this area to describe your project. Lorem ipsum dolor
-								sit amet, consectetur adipisicing elit. Est blanditiis dolorem
-								culpa incidunt minus dignissimos deserunt repellat aperiam quasi
-								sunt officia expedita beatae cupiditate, maiores repudiandae,
-								nostrum, reiciendis facere nemo!</p>
-							<p>
-								<strong>Want these icons in this portfolio item sample?</strong>You
-								can download 60 of them for free, courtesy of <a
-									href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">RoundIcons.com</a>,
-								or you can purchase the 1500 icon set <a
-									href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">here</a>.
-							</p>
-							<ul class="list-inline">
-								<li>Date: July 2014</li>
-								<li>Client: Round Icons</li>
-								<li>Category: Graphic Design</li>
-							</ul>
-							<button type="button" class="btn btn-primary"
-								data-dismiss="modal">
-								<i class="fa fa-times"></i> Close Project
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
 

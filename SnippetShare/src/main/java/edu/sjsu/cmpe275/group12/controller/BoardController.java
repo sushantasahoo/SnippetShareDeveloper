@@ -1,5 +1,6 @@
 package edu.sjsu.cmpe275.group12.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -19,6 +20,7 @@ import edu.sjsu.cmpe275.group12.model.SnippetVO;
 import edu.sjsu.cmpe275.group12.model.UserVO;
 import edu.sjsu.cmpe275.group12.service.BoardService;
 import edu.sjsu.cmpe275.group12.service.SnippetService;
+import edu.sjsu.cmpe275.group12.util.SnippetConstants;
 import edu.sjsu.cmpe275.group12.util.SnippetUtil;
 
 /**
@@ -104,21 +106,35 @@ public class BoardController {
 			modelAndView.setViewName("ViewBoard");
 		} else {
 			modelAndView.addObject("AuthenticationFailure",
-					"UserId and Password Invalid");
+					SnippetConstants.INVALID_USER);
 			modelAndView.setViewName("ViewBoard");
 		}
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/viewBoard/{boardId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/viewBoard/{boardId}", method = RequestMethod.GET)
 	public ModelAndView viewBoard(@PathVariable("boardId") int boardId,
 			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
 		SnippetService snippetService = new SnippetService();
 		if (SnippetUtil.authenticateUser(userSession)) {
 			List <SnippetVO> snippetList = snippetService.getSnippetsByBoardId(boardId);
+			System.out.println("Board id "+boardId);
+			System.out.println(snippetList+"--------------------");
+			if (snippetList != null){				
 			modelAndView.addObject("snippetList",snippetList);
+			modelAndView.addObject("boardId",boardId);
 			modelAndView.setViewName("V2_ViewBoard");
+			}
+			else {
+			modelAndView.addObject("snippetList",new ArrayList<SnippetVO>());
+			modelAndView.setViewName("V2_ViewBoard");
+			modelAndView.addObject("boardId",boardId);
+		}
+		}else {
+			modelAndView.addObject("AuthenticationFailure",
+					SnippetConstants.INVALID_USER);
+			modelAndView.setViewName("ViewBoard");
 		}
 		return modelAndView;
 	}

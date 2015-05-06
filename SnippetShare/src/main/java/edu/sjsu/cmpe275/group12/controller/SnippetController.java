@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.sjsu.cmpe275.group12.model.SnippetVO;
@@ -20,6 +21,7 @@ import edu.sjsu.cmpe275.group12.util.SnippetUtil;
 /**
  * Handles requests for the application home page.
  */
+@SessionAttributes("userSession")
 @RestController
 public class SnippetController {
 	/*
@@ -33,17 +35,20 @@ public class SnippetController {
 	 * @param userSession
 	 * @return
 	 */
-	@RequestMapping(value = "/createSnippet", method = RequestMethod.GET)
+	@RequestMapping(value = "/{boardId}/createSnippet", method = RequestMethod.GET)
 	public ModelAndView snippetDashboard(
+			@PathVariable("boardId") int boardId,
 			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
 
 		if (SnippetUtil.authenticateUser(userSession)) {
-			modelAndView.setViewName("V2_SnippetDetails");
+			modelAndView.addObject("boardId", boardId);
+			modelAndView.setViewName("V2_CreateSnippet");
 		} else {
 			modelAndView.addObject("AuthenticationFailure",
-					"UserId and Password Invalid");
-			modelAndView.setViewName("ViewBoard");
+					SnippetConstants.INVALID_USER);
+			modelAndView.addObject("boardId", boardId);
+			modelAndView.setViewName("V2_ViewBoard");
 		}
 		return modelAndView;
 
@@ -55,26 +60,26 @@ public class SnippetController {
 	 * @param userSession
 	 * @return
 	 */
-	@RequestMapping(value = "/addSnippet", method = RequestMethod.POST)
-	public ModelAndView addSnippet(
+	@RequestMapping(value = "/{boardId}/addSnippet", method = RequestMethod.POST)
+	public ModelAndView addSnippet(@PathVariable("boardId") int boardId,
 			@ModelAttribute("snippetVO") SnippetVO snippetVO,
 			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
 		SnippetService snippetService = new SnippetService();
-
+		
 		snippetVO.setUserId(userSession.getUserId());
-
+		snippetVO.setBoardId(boardId);
 		if (SnippetUtil.authenticateUser(userSession)) {
 			boolean isCreated = snippetService.createSnippet(snippetVO);
 			System.out.println("Snippet Created: Title ID: "
 					+ snippetVO.getTitle() + "  Category: "
-					+ snippetVO.getContent());
+					+ snippetVO.getContent()+snippetVO.getBoardId());
 
 			if (isCreated) {
 				// TODO :: Change the name of the view to redirect to all
 				// snippets under particular board
 				modelAndView.addObject(snippetVO);
-				modelAndView.setViewName("ViewBoard");
+				modelAndView.setViewName("V2_ViewBoard");
 			} else {
 				modelAndView.addObject("Cannot Create Board",
 						SnippetConstants.SNIPPET_CREATION_FAILED);
@@ -161,19 +166,16 @@ public class SnippetController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getSnippet/{boardId}", method = RequestMethod.POST)
-	public ModelAndView getSnippetList(
-			@PathVariable("boardId") int boardId ,
+	public ModelAndView getSnippetList(@PathVariable("boardId") int boardId,
 			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
 		SnippetService snippetService = new SnippetService();
 		if (SnippetUtil.authenticateUser(userSession)) {
-			List <SnippetVO>lst = snippetService.getSnippetsByBoardId(boardId);
+			List<SnippetVO> lst = snippetService.getSnippetsByBoardId(boardId);
 			modelAndView.addObject(lst);
 			modelAndView.setViewName("V2_ViewBoard");
 		}
 		return null;
 	}
-			
+
 }
-
-

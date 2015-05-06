@@ -105,6 +105,28 @@
 				<button class="btn btn-lg btn-success" type="submit">Update</button>
 				<button class="btn btn-lg btn-danger" type="submit">Delete</button>
 				
+				
+				
+				<form>
+			<div class="row">
+				<div class="col-md-4">
+					<c:if test="${ not empty snippetList }">
+						<h3>Public Boards</h3>
+						<c:forEach var="snippet" items="${snippetList}">
+							<h4>${snippet.getTitle()}</h4>
+							<p>${snippet.getTag()}</p>
+							<p>${snippet.getContent()}</p>
+							<a class="btn btn-primary" href="/">View Snippet <span
+								class="glyphicon glyphicon-chevron-right"></span></a>
+						</c:forEach>
+					</c:if>
+					<h4>No Sinppets Available. Please create a New Snippet</h4>
+					<c:if test="${ not empty snippetList }">
+					</c:if>
+				</div>
+			</div>
+		</form>
+				
 			</form>
 		</div>
 	</div>

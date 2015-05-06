@@ -21,6 +21,7 @@ public class SnippetService {
 	 * @return
 	 */
 	public boolean createSnippet(SnippetVO snippet){
+		System.out.println("snippet.getBoardId() -- "+snippet.getBoardId());
 		if(snippet.getBoardId()!=0 && snippet.getTitle()!=null && snippet.getUserId() != 0){
 			return snippetDao.createSnippet(snippet);
 		}

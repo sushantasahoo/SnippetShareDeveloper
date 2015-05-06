@@ -76,7 +76,7 @@ public class SnippetDaoImpl implements SnippetDao{
 			String SQL = "SELECT * from `snippet`.`snippet` WHERE `board_id` = ?";
 			List<SnippetVO> snippet =  jdbcTemplateObject.query(SQL, 
 					new Object[]{ boardId }, new SnippetMapper());
-
+			
 			if(snippet!=null && snippet.size()>0){
 				return snippet;
 			}

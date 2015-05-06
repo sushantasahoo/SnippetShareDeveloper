@@ -108,7 +108,7 @@
 			<c:if test="${ not empty publicBoardList }">
 			
 				<c:forEach var="publicBoard" items="${publicBoardList}">
-				<form method="post"
+				<form method="GET" name="${publicBoard.getBoardId()}"
 						action="${pageContext.request.contextPath}/viewBoard/${publicBoard.getBoardId()}">
 					<div class="col-md-4 col-sm-6 portfolio-item">
 						<a
@@ -135,6 +135,11 @@
 		</div>
 	</div>
 	</section>
+	
+	<form method="post" action="${pageContext.request.contextPath}/viewBoard/6">
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+					In</button>
+	</form>
 
 	<!-- Private Grid Section -->
 	<section id="privateBoard" class="bg-light-gray">

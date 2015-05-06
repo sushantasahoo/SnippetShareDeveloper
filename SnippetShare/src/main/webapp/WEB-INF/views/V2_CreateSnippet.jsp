@@ -7,13 +7,13 @@
 <title>Snippet Share - Snippet Details</title>
 
 <!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="css/agency.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/agency.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
 	rel="stylesheet" type="text/css">
@@ -63,7 +63,7 @@
 	<div class="container">
 		<div class="intro-text">
 		<div class="intro-lead-in">Snippet Details</div>
-			<form class="Dashboard method="post">
+			<form class="Dashboard" method="post" action="${pageContext.request.contextPath}/${boardId}/addSnippet">
 				<div class="form-group" >
 					<input type="text" class="form-control" placeholder="Title *"
 						name="title" id="inputTitle" required
@@ -144,7 +144,6 @@
 
 	<!-- Contact Form JavaScript -->
 	<script src="js/jqBootstrapValidation.js"></script>
-	<script src="js/contact_me.js"></script>
 
 	<!-- Custom Theme JavaScript -->
 	<script src="js/agency.js"></script>
