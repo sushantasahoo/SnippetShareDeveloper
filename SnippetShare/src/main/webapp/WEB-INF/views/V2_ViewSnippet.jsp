@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,13 +9,16 @@
 <title>Snippet Share - Board</title>
 
 <!-- Bootstrap Core CSS -->
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+	rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="${pageContext.request.contextPath}/css/agency.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/agency.css"
+	rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
 	rel="stylesheet" type="text/css">
@@ -50,11 +55,13 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
-				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Home</a></li>
-				<li><a class="page-scroll" href="#">Dashboard</a></li>
-				<li><a href="#commentModal1" class="portfolio-link"
-					data-toggle="modal">New Comment</a></li>
-				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signout">Log Out</a></li>
+				<li><a class="page-scroll"
+					href="${pageContext.request.contextPath}/signin">Home</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/addComment/${boardId}/${snippet.getSnippetId()}"
+					class="portfolio-link" data-toggle="modal">New Comment</a></li>
+				<li><a class="page-scroll"
+					href="${pageContext.request.contextPath}/signout">Log Out</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -64,25 +71,32 @@
 	<!-- Header -->
 	<header>
 	<div class="container">
-			<div class="intro-text text-align">
-				<form class="Dashboard"> 
-					<div class="row">
-						<div class="col-md-7">
-						<h2> id="sinppet"> ${snippet.getTitle()} } </h2>
+		<div class="intro-text text-align">
+			<form class="Dashboard">
+				<div class="row">
+					<div class="col-md-7">
+						<h2 id="${snippet}">${snippet.getTitle()}</h2>
 						<h3>Comments</h3>
+						<form>
 							<c:if test="${ not empty comments }">
 								<c:forEach var="comment" items="${comments}">
-									<h4>${comment.getComment()}</h4> </br>
+									<form>
+										<h4>${comment.getComment()}</h4>
+										</br>
+									</form>
 								</c:forEach>
-								</c:if>
-							<c:if test="${empty comments }">
-							<h4>No Comments Found</h4> </br>
 							</c:if>
-						</div>
+
+							<c:if test="${empty comments }">
+								<h4>No Comments Found</h4>
+								</br>
+							</c:if>
+						</form>
 					</div>
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
+	</div>
 	</header>
 
 

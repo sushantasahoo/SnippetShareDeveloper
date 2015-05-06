@@ -51,7 +51,7 @@ public class SnippetDaoImpl implements SnippetDao{
 
 		@Override
 		public SnippetVO getSnippet(int snippetId) {
-			String SQL = "SELECT * from `snippet`.snippet` WHERE `snippet_id` = ?";
+			String SQL = "SELECT * from `snippet`.`snippet` WHERE `snippet_id` = ?";
 			List<SnippetVO> snippet =  jdbcTemplateObject.query(SQL, 
 					new Object[]{ snippetId }, new SnippetMapper());
 

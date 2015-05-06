@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,13 +7,16 @@
 <title>Request Access</title>
 
 <!-- Bootstrap Core CSS -->
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+	rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="${pageContext.request.contextPath}/css/agency.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/agency.css"
+	rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
 	rel="stylesheet" type="text/css">
@@ -30,7 +33,7 @@
 </head>
 <body>
 
-<!-- Navigation -->
+	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -61,20 +64,20 @@
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container-fluid --> </nav>
-<form method="post" id="${privateBoard.getBoardId()}"
-					method="${pageContext.request.contextPath}/postComment/${boardId}/${snippetId}">
-					<div class="Dashboard">
-					<h2>Request Access</h2>
-										<div class="form-group">
-											<textarea rows="10" id="inputContent" class="form-control"
-												placeholder="Add Request Here" required></textarea>
-											<p class="help-block text-danger"></p>
-										</div>
+	<form method="POST" id="${privateBoard.getBoardId()}"
+		action="${pageContext.request.contextPath}/postComment/${boardId}/${snippetId}">
+		<div class="Dashboard">
+			<h2>Post Comment</h2>
+			<div class="form-group">
+				<textarea rows="10" id="comment" name="comment" class="form-control"
+					placeholder="Add Comment Here" required></textarea>
+				<p class="help-block text-danger"></p>
+			</div>
 
 
-										<button type="submit" class="btn btn-lg btn-success">
-											Request Access</button>
-					</div>
-					</form>
+			<button type="submit" class="btn btn-lg btn-success">
+				COMMENT</button>
+		</div>
+	</form>
 </body>
 </html>

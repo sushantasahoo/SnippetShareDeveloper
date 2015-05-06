@@ -74,18 +74,16 @@
 	<header>
 	<div class="container">
 		<div class="intro-text">
-			<form>
 				<div class="row">
 					<c:if test="${ not empty snippetList }">
 						<c:forEach var="snippet" items="${snippetList}">
-							<form action="/snippet/${boardId}/${snippet.getSnippetId()}">
+							<form id= "${snippet.getSnippetId()}" method= "GET" action="${pageContext.request.contextPath}/snippet/${boardId}/${snippet.getSnippetId()}">
 								<div class="col-md-4 col-sm-6 portfolio-item">
 									<div class="portfolio-caption">
 										<h4>${snippet.getTitle()}</h4>
 										<p>${snippet.getTags()}</p>
 										<p>${snippet.getContent()}</p>
-										<a class="btn btn-primary" href="/">View Snippet <span
-											class="glyphicon glyphicon-chevron-right"></span></a>
+										<input type="submit" class="btn btn-primary" value="View Snippet"/>
 									</div>
 								</div>
 							</form>
@@ -96,7 +94,6 @@
 					</c:if>
 				</div>
 		</div>
-		</form>
 	</div>
 
 	</div>

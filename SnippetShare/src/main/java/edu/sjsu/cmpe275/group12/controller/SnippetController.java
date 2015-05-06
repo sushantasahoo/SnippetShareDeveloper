@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -84,7 +85,7 @@ public class SnippetController {
 			} else {
 				modelAndView.addObject("Cannot Create Board",
 						SnippetConstants.SNIPPET_CREATION_FAILED);
-				modelAndView.setViewName("V2_SnippetDetails");
+				modelAndView.setViewName("V2_ViewSnippet");
 			}
 		} else {
 			modelAndView.addObject("AuthenticationFailure",
@@ -122,7 +123,7 @@ public class SnippetController {
 			} else {
 				modelAndView.addObject("Cannot Create Board",
 						SnippetConstants.SNIPPET_CREATION_FAILED);
-				modelAndView.setViewName("V2_SnippetDetails");
+				modelAndView.setViewName("V2_ViewSnippet");
 			}
 		} else {
 			modelAndView.addObject("AuthenticationFailure",
@@ -164,13 +165,27 @@ public class SnippetController {
 		if (SnippetUtil.authenticateUser(userSession)) {
 			SnippetVO snippet = snippetService.getSnippetById(snippetId);
 			List<CommentVO> comments = commentService.getBoardbyId(snippetId);
-			modelAndView.addObject("snippet", snippet);
-			modelAndView.addObject("boardId", boardId);
-			modelAndView.addObject("comments", comments);
-			modelAndView.setViewName("V2_ViewSnippet");
+			if(snippet!=null){
+				modelAndView.addObject("snippet", snippet);
+				modelAndView.addObject("boardId", boardId);
+				modelAndView.addObject("comments", comments);
+				System.out.println(comments);
+				modelAndView.setViewName("V2_ViewSnippet");
+			}
+			else{
+				modelAndView.addObject("Cannot find snippet",
+						SnippetConstants.SNIPPET_FETCHING_FAILED);
+				modelAndView.setViewName("V2_ViewBoard");
+			}
+
 		}
-		modelAndView.setViewName("V2_ViewBoard");
-		return null;
+		else{
+			modelAndView.addObject("AuthenticationFailure",
+					SnippetConstants.INVALID_USER);
+			modelAndView.setViewName("V2_HomePage");
+		}
+
+		return modelAndView;
 	}
 
 	/**
@@ -191,31 +206,55 @@ public class SnippetController {
 		}
 		return null;
 	}
-	
-	@RequestMapping(value = "/postComment/{boardId}/{snippetId}/", method = RequestMethod.POST)
-	public ModelAndView openSnippet(@ModelAttribute("commentVO") CommentVO commentVO,
+
+	@RequestMapping(value = "/addComment/{boardId}/{snippetId}", method = RequestMethod.GET)
+	public ModelAndView addComment(@PathVariable("boardId") int boardId,
+			@PathVariable("snippetId") int snippetId,
+			@ModelAttribute("userSession") UserVO userSession) {
+		ModelAndView modelAndView = new ModelAndView();
+		SnippetService snippetService = new SnippetService();
+		if (SnippetUtil.authenticateUser(userSession)) {
+			modelAndView.addObject("boardId", boardId);
+			modelAndView.addObject("snippetId",snippetId);
+			modelAndView.setViewName("V2_AddComment");
+		}
+		return modelAndView;
+	}
+
+
+
+	@RequestMapping(value = "/postComment/{boardId}/{snippetId}", method = RequestMethod.POST)
+	public ModelAndView postComment(@ModelAttribute("commentVO") CommentVO commentVO,
 			@PathVariable("boardId") int boardId,
 			@PathVariable("snippetId") int snippetId,
+			@RequestParam("comment") String comment, 
 			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
 		SnippetService snippetService = new SnippetService();
 		CommentService commentService = new CommentService();
 		if (SnippetUtil.authenticateUser(userSession)) {
 			commentVO.setSnippetId(snippetId);
+			commentVO.setComment(comment);
 			commentVO.setUserId(userSession.getUserId());
 			if(commentService.createComment(commentVO)){
-				modelAndView.setViewName("V2_SnippetDetails");	
+				SnippetVO snippet = snippetService.getSnippetById(snippetId);
+				List<CommentVO> comments = commentService.getBoardbyId(snippetId);
+				if(snippet!=null){
+					modelAndView.addObject("snippet", snippet);
+					modelAndView.addObject("boardId", boardId);
+					modelAndView.addObject("comments", comments);
+					System.out.println(comments);
+					modelAndView.setViewName("V2_ViewSnippet");
+				}
 			}
 			else{
 				modelAndView.addObject("Cannot add Comment",
 						SnippetConstants.COMMENT_CREATION_FAILED);
-				modelAndView.setViewName("V2_SnippetDetails");
+				modelAndView.setViewName("V2_ViewSnippet");
 			}
 		}
 		return modelAndView;
-		
+
 	}
-	
-	
-	
+
 }
