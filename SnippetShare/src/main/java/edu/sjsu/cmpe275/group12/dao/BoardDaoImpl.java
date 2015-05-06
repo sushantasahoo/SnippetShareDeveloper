@@ -104,14 +104,15 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<BoardVO> getBoardsByCategory(String category) {
-		String SQL = "SELECT * from `snippet`.board` WHERE `category` = ?";
-		List<BoardVO> board = jdbcTemplateObject.query(SQL,
-				new Object[] { category }, new BoardMapper());
+	public List<BoardVO> getBoardsByCategory(String category, String accessType) {
+		String SQL = "SELECT * from `snippet`.`board` WHERE `category` = ? AND  `access_type` = ?";
+		List<BoardVO> board =  jdbcTemplateObject.query(SQL, 
+				new Object[]{category,accessType}, new BoardMapper());
 
-		if (board != null && board.size() > 0) {
+		if(board!=null && board.size()>0){
 			return board;
-		} else
+		}
+		else 
 			return null;
 	}
 

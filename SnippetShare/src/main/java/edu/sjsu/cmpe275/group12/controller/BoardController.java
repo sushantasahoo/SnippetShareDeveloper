@@ -2,7 +2,6 @@ package edu.sjsu.cmpe275.group12.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -305,6 +305,52 @@ public class BoardController {
 		} else {
 			modelAndView.addObject("error", SnippetConstants.INVALID_USER);
 			modelAndView.setViewName("V2_HomePage");
+		}
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/searchPublicBoard", method = RequestMethod.GET)
+	public ModelAndView searchPublicBoard(@ModelAttribute("userSession") UserVO userSession,
+			@RequestParam ("category") String category) {
+		ModelAndView modelAndView= new ModelAndView();
+		BoardService boardService=new BoardService();
+		BoardAccessService boardAccessService =new BoardAccessService();
+
+		if (SnippetUtil.authenticateUser(userSession)) {
+			List<BoardVO> publicBoardByCategory= boardService.getBoardByCategory(category,"U");
+			//List<BoardVO> publicBoardList= boardService.getBoardByAccessType("U");
+			List<BoardVO> privateBoardList= boardService.getBoardByAccessType("R");
+			modelAndView.addObject("publicBoardByCategory",publicBoardByCategory);
+			//modelAndView.addObject("publicBoardList",publicBoardList);
+			modelAndView.addObject("privateBoardList",privateBoardList);
+			modelAndView.setViewName("V2_Dashboard");
+		}
+		else{
+			System.out.println("In SignIn get method");
+			modelAndView.setViewName("redirect:V2_HomePage");
+		}
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/searchPrivateBoard", method = RequestMethod.GET)
+	public ModelAndView searchPrivateBoard(@ModelAttribute("userSession") UserVO userSession,
+			@RequestParam ("category") String category) {
+		ModelAndView modelAndView= new ModelAndView();
+		BoardService boardService=new BoardService();
+		BoardAccessService boardAccessService =new BoardAccessService();
+
+		if (SnippetUtil.authenticateUser(userSession)) {
+			List<BoardVO> privateBoardByCategory= boardService.getBoardByCategory(category,"R");
+			List<BoardVO> publicBoardList= boardService.getBoardByAccessType("U");
+			//List<BoardVO> privateBoardList= boardService.getBoardByAccessType("R");
+			modelAndView.addObject("privateBoardByCategory",privateBoardByCategory);
+			modelAndView.addObject("publicBoardList",publicBoardList);
+			//modelAndView.addObject("privateBoardList",privateBoardList);
+			modelAndView.setViewName("V2_Dashboard");
+		}
+		else{
+			System.out.println("In SignIn get method");
+			modelAndView.setViewName("redirect:V2_HomePage");
 		}
 		return modelAndView;
 	}
