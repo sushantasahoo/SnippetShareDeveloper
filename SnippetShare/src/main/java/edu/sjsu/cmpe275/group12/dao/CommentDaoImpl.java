@@ -32,7 +32,7 @@ public class CommentDaoImpl implements CommentDao {
 
 		try{
 			jdbcTemplateObject.update(SQL, comment.getSnippetId(), comment.getComment(), comment.getUserId());
-			return false;
+			return true;
 		}
 		catch(DuplicateKeyException ex){
 			return false;
@@ -44,7 +44,7 @@ public class CommentDaoImpl implements CommentDao {
 
 	@Override
 	public List<CommentVO> getComment(int snippetId) {
-		String SQL = "SELECT * from `snippet`.comment` WHERE `snippet_id` = ?";
+		String SQL = "SELECT * from `snippet`.`comment` WHERE `snippet_id` = ?";
 		List<CommentVO> comments =  jdbcTemplateObject.query(SQL, 
 				new Object[]{ snippetId }, new CommentMapper());
 
