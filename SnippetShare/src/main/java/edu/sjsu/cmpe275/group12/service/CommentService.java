@@ -20,7 +20,7 @@ public class CommentService {
 	 * @param user
 	 * @return
 	 */
-	public boolean createBoard(CommentVO commentVO) {
+	public boolean createComment(CommentVO commentVO) {
 		if (commentVO.getComment() != null
 				&& !commentVO.getComment().equals("")
 				&& commentVO.getUserId() != 0 && commentVO.getSnippetId() != 0) {
@@ -39,7 +39,7 @@ public class CommentService {
 	 * @return
 	 */
 
-	public CommentVO updateBoard(CommentVO commentVO) {
+	public CommentVO updateComent(CommentVO commentVO) {
 		if (commentVO.getComment() != null
 				&& !commentVO.getComment().equals("")
 				&& commentVO.getUserId() != 0 && commentVO.getSnippetId() != 0) {

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.sjsu.cmpe275.group12.model.BoardVO;
 import edu.sjsu.cmpe275.group12.model.SnippetVO;
 import edu.sjsu.cmpe275.group12.model.UserVO;
+import edu.sjsu.cmpe275.group12.service.BoardAccessService;
 import edu.sjsu.cmpe275.group12.service.BoardService;
 import edu.sjsu.cmpe275.group12.service.SnippetService;
 import edu.sjsu.cmpe275.group12.util.SnippetConstants;
@@ -62,6 +63,8 @@ public class BoardController {
 			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
 		BoardService boardService = new BoardService();
+		BoardAccessService boardAccessService = new BoardAccessService();
+
 		SnippetService snippetService = new SnippetService();
 		
 		boardVO.setUserId(userSession.getUserId());
@@ -73,17 +76,23 @@ public class BoardController {
 			
 			if (isCreated) {
 				modelAndView.addObject(boardVO);
-				modelAndView.setViewName("ViewBoard");
+				List<BoardVO> publicBoardList= boardService.getBoardByAccessType("U");
+				List<BoardVO> privateBoardList=boardAccessService.getBordAccessByUser(userSession.getUserId());
+				modelAndView.addObject("publicBoardList",publicBoardList);
+				modelAndView.addObject("privateBoardList",privateBoardList);
+				modelAndView.addObject("userSession", userSession);
+				modelAndView.setViewName("V2_Dashboard");
+				
 			} else {
 				modelAndView.addObject("Cannot Create Board",
 						"Board already exists");
-				modelAndView.setViewName("DashBoard");
+				modelAndView.setViewName("V2_DashBoard");
 			}
 		}
 		else{
 			modelAndView.addObject("AuthenticationFailure",
 					"UserId and Password Invalid");
-			modelAndView.setViewName("ViewBoard");
+			modelAndView.setViewName("V2_ViewBoard");
 		}
 		return modelAndView;
 	}

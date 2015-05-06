@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.sjsu.cmpe275.group12.model.SnippetVO;
 import edu.sjsu.cmpe275.group12.model.UserVO;
+import edu.sjsu.cmpe275.group12.service.CommentService;
 import edu.sjsu.cmpe275.group12.service.SnippetService;
 import edu.sjsu.cmpe275.group12.util.SnippetConstants;
 import edu.sjsu.cmpe275.group12.util.SnippetUtil;
@@ -36,8 +37,7 @@ public class SnippetController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{boardId}/createSnippet", method = RequestMethod.GET)
-	public ModelAndView snippetDashboard(
-			@PathVariable("boardId") int boardId,
+	public ModelAndView snippetDashboard(@PathVariable("boardId") int boardId,
 			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -66,14 +66,14 @@ public class SnippetController {
 			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
 		SnippetService snippetService = new SnippetService();
-		
+
 		snippetVO.setUserId(userSession.getUserId());
 		snippetVO.setBoardId(boardId);
 		if (SnippetUtil.authenticateUser(userSession)) {
 			boolean isCreated = snippetService.createSnippet(snippetVO);
 			System.out.println("Snippet Created: Title ID: "
 					+ snippetVO.getTitle() + "  Category: "
-					+ snippetVO.getContent()+snippetVO.getBoardId());
+					+ snippetVO.getContent() + snippetVO.getBoardId());
 
 			if (isCreated) {
 				// TODO :: Change the name of the view to redirect to all
@@ -151,11 +151,19 @@ public class SnippetController {
 	 * @param userSession
 	 * @return
 	 */
-	@RequestMapping(value = "/commentOnSnippet", method = RequestMethod.POST)
+	@RequestMapping(value = "/{snippetId}/commentOnSnippet", method = RequestMethod.GET)
 	public ModelAndView commentOnSnippet(
+			@PathVariable("snippetId") int snippetId,
 			@ModelAttribute("snippetVO") SnippetVO snippetVO,
 			@ModelAttribute("userSession") UserVO userSession) {
-
+		
+		ModelAndView modelAndView = new ModelAndView();
+		CommentService commentService = new CommentService();
+		if (SnippetUtil.authenticateUser(userSession)) {
+		//	commentService.g
+			
+		}
+		modelAndView.setViewName("V2_ViewBoard");
 		return null;
 	}
 
