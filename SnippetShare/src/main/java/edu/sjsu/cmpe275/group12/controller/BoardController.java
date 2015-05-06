@@ -175,7 +175,7 @@ public class BoardController {
 		if (SnippetUtil.authenticateUser(userSession)) {
 			if (boardAccessService.createBoardAccess(bAccess)){
 				List<BoardVO> privateBoardList = boardService
-						.getBoardByAccessType("R");
+						.getBoardByAccessType("R"); 
 
 				modelAndView.addObject("privateBoardList", privateBoardList);
 				modelAndView.setViewName("V2_ViewPrivateBoard");
