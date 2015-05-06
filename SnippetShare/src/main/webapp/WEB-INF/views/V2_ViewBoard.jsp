@@ -9,13 +9,16 @@
 <title>Snippet Share - Board</title>
 
 <!-- Bootstrap Core CSS -->
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+	rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="${pageContext.request.contextPath}/css/agency.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/agency.css"
+	rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
 	rel="stylesheet" type="text/css">
@@ -52,9 +55,13 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
-				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Home</a></li>
-				<li><a class="page-scroll" href="${pageContext.request.contextPath}/${boardId}/createSnippet">New Snippet</a></li>
-				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signout">Log Out</a></li>
+				<li><a class="page-scroll"
+					href="${pageContext.request.contextPath}/signin">Home</a></li>
+				<li><a class="page-scroll"
+					href="${pageContext.request.contextPath}/${boardId}/createSnippet">New
+						Snippet</a></li>
+				<li><a class="page-scroll"
+					href="${pageContext.request.contextPath}/signout">Log Out</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -62,57 +69,31 @@
 	<!-- /.container-fluid --> </nav>
 
 	<!-- Header -->
-	 <header>
+	<header>
 	<div class="container">
-	<div class="intro-text">
-		<form>
-			<div class="row">
+		<div class="intro-text">
+			<form>
 				<div class="row">
-			<div class="col-lg-12 text-center">
-				<h2 class="section-heading">Public Boards</h2>
-				<div class="Dashboard form-group">
-					<select name="category" class="form-control">
-						<option value="All">ALL</option>
-						<option value="Business">Business</option>
-						<option value="Sports">Sports</option>
-						<option value="Health">Health</option>
-						<option value="School">School</option>
-						<option value="Politics">Politics</option>
-						<option value="Military">Military</option>
-						<option value="Software">Software</option>
-						<option value="Economics">Economics</option>
-						<option value="History">History</option>
-						<option value="Environment">Environment</option>
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<c:if test="${ not empty privateBoardList }">
-				<c:forEach var="privateBoard" items="${privateBoardList}">
-				<form>
-					<div class="col-md-4 col-sm-6 portfolio-item">
-						<a href="#requestModal1" class="portfolio-link" data-toggle="modal">
-							<div class="portfolio-hover">
-								<div class="portfolio-hover-content">
-									<i class="fa fa-plus fa-3x"></i>
+					<c:if test="${ not empty snippetList }">
+						<c:forEach var="snippet" items="${snippetList}">
+							<form>
+								<div class="col-md-4 col-sm-6 portfolio-item">
+									<div class="portfolio-caption">
+										<h4>${snippet.getTitle()}</h4>
+										<p>${snippet.getTags()}</p>
+										<p>${snippet.getContent()}</p>
+										<a class="btn btn-primary" href="/">View Snippet <span
+											class="glyphicon glyphicon-chevron-right"></span></a>
+									</div>
 								</div>
-							</div> <img src="img/portfolio/roundicons.png" class="img-responsive"
-							alt="">
-						</a>
-						<div class="portfolio-caption">
-							<h4>${publicBoard.getTitle()}</h4>
-							<p class="text-muted">${publicBoard.getDescription()}</p>
-						</div>
-					</div>
-					</form>
-				</c:forEach>
-			</c:if>
-			<c:if test="${empty publicBoardList }">
-				<h4>No Boards Available</h4>
-			</c:if>
+							</form>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty publicBoardList }">
+						<h4>No Snippets available for this board. You can create a new Snippet</h4>
+					</c:if>
+				</div>
 		</div>
-			</div>
 		</form>
 	</div>
 	</div>
