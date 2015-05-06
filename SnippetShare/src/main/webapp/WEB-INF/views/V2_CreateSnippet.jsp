@@ -50,8 +50,8 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
-				<li><a class="page-scroll" href="#">Back</a></li>
-				<li><a class="page-scroll" href="#">Log Out</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Home</a></li>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/signout">Log Out</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

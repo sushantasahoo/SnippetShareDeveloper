@@ -55,11 +55,15 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
-				<li><a class="page-scroll" href="#">Home</a></li>
+
+				<li><a class="page-scroll"
+					href="${pageContext.request.contextPath}/signin">Home</a></li>
 				<li><a class="page-scroll"
 					href="${pageContext.request.contextPath}/${boardId}/createSnippet">New
 						Snippet</a></li>
-				<li><a class="page-scroll" href="#">Log Out</a></li>
+				<li><a class="page-scroll"
+					href="${pageContext.request.contextPath}/signout">Log Out</a></li>
+
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -72,26 +76,30 @@
 		<div class="intro-text">
 			<form>
 				<div class="row">
-					<div class="col-md-4">
-						<c:if test="${ not empty snippetList }">
-							<h3>Public Boards</h3>
-							<c:forEach var="snippet" items="${snippetList}">
-								<form method="post" action="">
-									<h4>${snippet.getTitle()}</h4>
-									<p>${snippet.getTags()}</p>
-									<p>${snippet.getContent()}</p>
-									<a class="btn btn-primary" href="/">View Snippet <span
-										class="glyphicon glyphicon-chevron-right"></span></a>
-								</form>
-							</c:forEach>
-						</c:if>
-						<c:if test="${ not empty snippetList }">
-							<h4>No Sinppets Available. Please create a New Snippet</h4>
-						</c:if>
-					</div>
+
+					<c:if test="${ not empty snippetList }">
+						<c:forEach var="snippet" items="${snippetList}">
+							<form>
+								<div class="col-md-4 col-sm-6 portfolio-item">
+									<div class="portfolio-caption">
+										<h4>${snippet.getTitle()}</h4>
+										<p>${snippet.getTags()}</p>
+										<p>${snippet.getContent()}</p>
+										<a class="btn btn-primary" href="/">View Snippet <span
+											class="glyphicon glyphicon-chevron-right"></span></a>
+									</div>
+								</div>
+							</form>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty publicBoardList }">
+						<h4>No Snippets available for this board. You can create a new Snippet</h4>
+					</c:if>
 				</div>
-			</form>
 		</div>
+		</form>
+	</div>
+
 	</div>
 	</header>
 
@@ -111,6 +119,8 @@
 		</div>
 	</div>
 	</footer>
+
+
 
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
