@@ -54,10 +54,10 @@
 				<li class="hidden"><a href="#page-top"></a></li>
 				<li><a class="page-scroll"
 					href="${pageContext.request.contextPath}/CreateBoard">New Board</a></li>
-					<li><a class="page-scroll"
-					href="#publicBoard">Public Boards</a></li>
-					<li><a class="page-scroll"
-					href="#privateBoard">Private Boards</a></li>
+				<li><a class="page-scroll" href="#publicBoard">Public
+						Boards</a></li>
+				<li><a class="page-scroll" href="#privateBoard">Private
+						Boards</a></li>
 				<li><a class="page-scroll"
 					href="${pageContext.request.contextPath}/viewProfile">Profile</a></li>
 				<li><a class="page-scroll" href="#">Notification</a></li>
@@ -89,7 +89,7 @@
 				<h2 class="section-heading">Public Boards</h2>
 				<div class="Dashboard form-group">
 					<select name="category" class="form-control">
-					    <option value="All">ALL</option>
+						<option value="All">ALL</option>
 						<option value="Business">Business</option>
 						<option value="Sports">Sports</option>
 						<option value="Health">Health</option>
@@ -106,21 +106,26 @@
 		</div>
 		<div class="row">
 			<c:if test="${ not empty publicBoardList }">
-				<div class="col-md-4 col-sm-6 portfolio-item">
-					<a href="#portfolioModal1" class="portfolio-link"
-						data-toggle="modal">
-						<div class="portfolio-hover">
-							<div class="portfolio-hover-content">
-								<i class="fa fa-plus fa-3x"></i>
-							</div>
-						</div> <img src="img/portfolio/roundicons.png" class="img-responsive"
-						alt="">
-					</a>
-					<div class="portfolio-caption">
-						<h4>${publicBoard.title}</h4>
-						<p class="text-muted">${publicBoard.description}</p>
+				<c:forEach var="publicBoard" items="${publicBoardList}">
+					<div class="col-md-4 col-sm-6 portfolio-item">
+						<a href="#portfolioModal1" class="portfolio-link"
+							data-toggle="modal">
+							<div class="portfolio-hover">
+								<div class="portfolio-hover-content">
+									<i class="fa fa-plus fa-3x"></i>
+								</div>
+							</div> <img src="img/portfolio/roundicons.png" class="img-responsive"
+							alt="">
+						</a>
+						<div class="portfolio-caption">
+							<h4>${publicBoard.title}</h4>
+							<p class="text-muted">${publicBoard.description}</p>
+						</div>
 					</div>
-				</div>
+				</c:forEach>
+			</c:if>
+			<c:if test="${empty publicBoardList }">
+				<h4>No Boards Available</h4>
 			</c:if>
 		</div>
 	</div>
@@ -134,7 +139,7 @@
 				<h2 class="section-heading">Private Boards</h2>
 				<div class="Dashboard form-group">
 					<select name="category" class="form-control">
-					    <option value="All">ALL</option>
+						<option value="All">ALL</option>
 						<option value="Business">Business</option>
 						<option value="Sports">Sports</option>
 						<option value="Health">Health</option>
@@ -151,21 +156,26 @@
 		</div>
 		<div class="row">
 			<c:if test="${ not empty privateBoardList }">
-				<div class="col-md-4 col-sm-6 portfolio-item">
-					<a href="#portfolioModal1" class="portfolio-link"
-						data-toggle="modal">
-						<div class="portfolio-hover">
-							<div class="portfolio-hover-content">
-								<i class="fa fa-plus fa-3x"></i>
-							</div>
-						</div> <img src="img/portfolio/roundicons.png" class="img-responsive"
-						alt="">
-					</a>
-					<div class="portfolio-caption">
-						<h4>${privateBoardList.title}</h4>
-						<p class="text-muted">${privateBoardList.description}</p>
+				<c:forEach var="privateBoard" items="${privateBoardList}">
+					<div class="col-md-4 col-sm-6 portfolio-item">
+						<a href="#portfolioModal1" class="portfolio-link"
+							data-toggle="modal">
+							<div class="portfolio-hover">
+								<div class="portfolio-hover-content">
+									<i class="fa fa-plus fa-3x"></i>
+								</div>
+							</div> <img src="img/portfolio/roundicons.png" class="img-responsive"
+							alt="">
+						</a>
+						<div class="portfolio-caption">
+							<h4>${privateBoardList.title}</h4>
+							<p class="text-muted">${privateBoardList.description}</p>
+						</div>
 					</div>
-				</div>
+				</c:forEach>
+			</c:if>
+			<c:if test="${empty privateBoardList }">
+				<h4>No Boards Available</h4>
 			</c:if>
 		</div>
 	</div>
