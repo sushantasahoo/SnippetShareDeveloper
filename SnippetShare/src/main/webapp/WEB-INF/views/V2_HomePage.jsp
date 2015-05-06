@@ -139,37 +139,37 @@
 			<div class="row">
 				<div class="col-sm-4">
 					<div class="team-member">
-						<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
+						<img src="img/team/at.jpg" class="img-responsive img-circle" alt="">
 						<h4>Avadhut</h4>
-						<p class="text-muted">000000</p>
+						<p class="text-muted">010028590</p>
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="team-member">
-						<img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
+						<img src="img/team/ss.jpg" class="img-responsive img-circle" alt="">
 						<h4>Sushantha Sahoo</h4>
-						<p class="text-muted">000000</p>
+						<p class="text-muted">009429160</p>
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="team-member">
-						<img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
+						<img src="img/team/sh.jpg" class="img-responsive img-circle" alt="">
 						<h4>Srisha</h4>
-						<p class="text-muted">000000</p>
+						<p class="text-muted">010034531</p>
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="team-member">
-						<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
+						<img src="img/team/vn.jpg" class="img-responsive img-circle" alt="">
 						<h4>Vaibhav</h4>
-						<p class="text-muted">000000</p>
+						<p class="text-muted">009990474</p>
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="team-member">
-						<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
+						<img src="img/team/vg.jpg" class="img-responsive img-circle" alt="">
 						<h4>Vinay</h4>
-						<p class="text-muted">000000</p>
+						<p class="text-muted">009990357</p>
 					</div>
 				</div>
 			</div>
