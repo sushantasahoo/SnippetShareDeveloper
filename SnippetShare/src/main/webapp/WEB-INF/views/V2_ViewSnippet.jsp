@@ -74,16 +74,17 @@
 			<form class="Dashboard">
 				<div class="row">
 					<div class="col-md-7">
-						<h1>Snippet</h1>
-						<h2 style="color:Red" id="${snippet}">${snippet.getTitle()}</h2><br><br>
-						<h4 style="color:BLUE">${snippet.getTags()} </h4>
-						<h4 style="color:BLUE">${snippet.getContent()} </h4>
+					<div class="Dashboard form-group">
+						<h3 style="color:Green">Snippet</h3></br>
+						<h2 style="color:Red" id="${snippet}" >${snippet.getTitle()}</h2>
+						<h4 style="color:BLUE">Tag: ${snippet.getTags()} </h4>
+						<h4 style="color:BLUE" >Content: ${snippet.getContent()} </h4><br><br>
 						<h3 style="color:Green">Comments</h3>
 						<form>
 							<c:if test="${ not empty comments }">
 								<c:forEach var="comment" items="${comments}">
 									<form>
-										<h4>${comment.getComment()}</h4>
+										<input class="form-control" readonly value="${comment.getComment()}"></input>
 										</br>
 									</form>
 								</c:forEach>
@@ -94,6 +95,7 @@
 								</br>
 							</c:if>
 						</form>
+						</div>
 					</div>
 				</div>
 			</form>

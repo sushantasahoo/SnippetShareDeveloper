@@ -64,20 +64,28 @@
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container-fluid --> </nav>
-	<form method="POST" id="${privateBoard.getBoardId()}"
-		action="${pageContext.request.contextPath}/postComment/${boardId}/${snippetId}">
-		<div class="Dashboard">
-			<h2>Post Comment</h2>
-			<div class="form-group">
-				<textarea rows="10" id="comment" name="comment" class="form-control"
-					placeholder="Add Comment Here" required></textarea>
-				<p class="help-block text-danger"></p>
-			</div>
 
 
-			<button type="submit" class="btn btn-lg btn-success">
-				COMMENT</button>
+	<header>
+	<div class="container">
+		<div class="intro-text">
+			<form method="POST" id="${privateBoard.getBoardId()}"
+				action="${pageContext.request.contextPath}/postComment/${boardId}/${snippetId}">
+				<div class="Dashboard">
+					<h2>Post Comment</h2>
+					<div class="form-group">
+						<textarea rows="10" id="comment" name="comment"
+							class="form-control" placeholder="Add Comment Here" required></textarea>
+						<p class="help-block text-danger"></p>
+					</div>
+
+
+					<button type="submit" class="btn btn-lg btn-success">
+						COMMENT</button>
+				</div>
+			</form>
 		</div>
-	</form>
+	</div>
+	</header>
 </body>
 </html>
