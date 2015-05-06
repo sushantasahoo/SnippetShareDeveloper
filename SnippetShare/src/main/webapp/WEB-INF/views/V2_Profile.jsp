@@ -27,6 +27,27 @@
 	rel='stylesheet' type='text/css'>
 
 </head>
+
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#deleteuser').click(function() {
+			$.ajax({
+				type : "DELETE",
+				url : "/deleteProfile",
+				success : function() {
+					window.location.href = "/signOut/";
+				},
+				error : function() {
+					alert("Error !!! Try again later");
+				}
+
+			});
+		});
+	});
+</script>
+
 <body>
 <body id="page-top" class="index">
 
@@ -128,9 +149,9 @@
 					
 					<p>By updating your profile you agree to our Terms of Service.</p>
 					<br />
-					<button class="btn btn-lg btn-success" type="submit">Update</button>
+					<button class="btn btn-lg btn-success" id="updateuser" type="submit">Update</button>
 
-					<button class="btn btn-lg btn-danger" type="submit">Delete</button>
+					<button class="btn btn-lg btn-danger" id="deleteuser" type="submit">Delete</button>
 
 				</form>
 			</div>
