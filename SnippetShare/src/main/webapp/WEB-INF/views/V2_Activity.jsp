@@ -9,13 +9,13 @@
 <title>Snippet Share - Activity</title>
 
 <!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="css/agency.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/agency.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
 	rel="stylesheet" type="text/css">
@@ -29,19 +29,6 @@
 	rel='stylesheet' type='text/css'>
 
 </head>
-
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script type="text/javascript">
-function myfunction(requestID, actionMethod, actionType) {
-	$.ajax({
-		  type: actionType,
-		  url: "/" + requestID + "/" + actionMethod,
-		  data: data,
-		  success: success,
-		  dataType: dataType
-		});
-	};
-</script>
 
 <body>
 <body id="page-top" class="index">
@@ -66,8 +53,10 @@ function myfunction(requestID, actionMethod, actionType) {
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll" href="${pageContext.request.contextPath}/signin">Home</a></li>
-					<li><a class="page-scroll" href="${pageContext.request.contextPath}/signout">Log Out</a></li>
+					<li><a class="page-scroll"
+						href="${pageContext.request.contextPath}/signin">Home</a></li>
+					<li><a class="page-scroll"
+						href="${pageContext.request.contextPath}/signout">Log Out</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -80,21 +69,21 @@ function myfunction(requestID, actionMethod, actionType) {
 		<div class="container">
 			<div class="intro-text">
 				<div class="intro-lead-in">Notifications</div>
-				<form class="Dashboard" method="post">
-						<c:if test="${ not empty activityList }">
-							<h3>Requests</h3>
-							<c:forEach var="activity" items="${activityList}">
-								<h4>${activity.title}</h4>
-								<p>${activity.description}</p>
-				
-									<button  class="btn-primary" id=${activity.getRequestId} type="submit" onClick=myfunction("${activity.getRequestId()}", "accept" ,"POST")>Accept</button>
-									<button class="btn-danger" id=${activity.getRequestId} type="submit" onClick=myfunction("${activity.getRequestId()}", "reject" ,"DELETE")>Reject</button>
-							</c:forEach>
-						</c:if>
-						<c:if test="${empty activityList}">
-							<h3>No </h3>
-						</c:if>
-				</form>
+				<c:if test="${ not empty activityList }">
+					<h3>Requests</h3>
+					<c:forEach var="activity" items="${activityList}">
+						<form method="POST" action="${pageContext.request.contextPath}/${activity.getRequestId()}/approve">
+							<h4>${activity.getTitle()}</h4>
+							<p>${activity.getDescription()}</p>
+
+							<button class="btn btn-primary" type="submit">Accept</button>
+
+						</form>
+					</c:forEach>
+				</c:if>
+				<c:if test="${empty activityList}">
+					<h3>No</h3>
+				</c:if>
 			</div>
 		</div>
 	</header>

@@ -44,8 +44,10 @@ public class BoardAccessDaoImpl implements BoardAccessDao {
 	@Override
 	public void updateBoardAccess(int requestId, int userId,
 			String approvalStatus) {
-		String SQL = "UPDATE `snippet`.`board_access` SET `access_status` = ? WHERE `board_access_id` = ?, user_id= ?;";
-		jdbcTemplateObject.update(SQL, approvalStatus, requestId, userId );
+		System.out.println("------------------");
+		String SQL = "UPDATE `snippet`.`board_access` SET `access_status` = ? WHERE `board_access_id` = ?;";
+		jdbcTemplateObject.update(SQL, approvalStatus, requestId );
+		System.out.println("scussssssssssssssssss");
 	}
 
 	@Override

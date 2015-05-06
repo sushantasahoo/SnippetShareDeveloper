@@ -81,7 +81,7 @@ public class BoardAccessService {
 	 */
 	public boolean approveRequest(int requestId, int userId){
 		if(requestId!=0 && userId != 0){
-		
+		System.out.println(">>>>>>>>>>>>>>");
 			boardAccessDao.updateBoardAccess(requestId, userId, "A");
 			return true;
 		}

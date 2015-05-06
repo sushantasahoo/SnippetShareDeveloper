@@ -19,7 +19,7 @@ public class GoogleMailAgent implements MailAgent {
 	private static final String SENDER_MAIL_ID = "cmpe275.team12@gmail.com";
 	private static final String SENDER_PASSWORD = "rambharose";
 	VelocityEngine velocityEngine;
-	private final String REGISTRATION_FORM = "resources\\RegistrationMessage.vm";
+	private final String REGISTRATION_FORM = "RegistrationMessage.vm";
 
 	@Override
 	public boolean sendRegistrationMail(String name, String mailID,
@@ -54,7 +54,7 @@ public class GoogleMailAgent implements MailAgent {
 					InternetAddress.parse(mailID));
 			message.setSubject(subject);
 
-			Map<String, Object> model = new HashMap<>();
+			Map<String, Object> model = new HashMap<String, Object>();
 			model.put("name", name);
 			model.put("email", SENDER_MAIL_ID);
 			model.put("message", msg);
