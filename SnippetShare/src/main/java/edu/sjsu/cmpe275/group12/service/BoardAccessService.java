@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import edu.sjsu.cmpe275.group12.dao.BoardAccessDaoImpl;
-import edu.sjsu.cmpe275.group12.model.BoardAccessVO;
 import edu.sjsu.cmpe275.group12.dao.BoardAccessDao;
+import edu.sjsu.cmpe275.group12.model.BoardAccessVO;
+import edu.sjsu.cmpe275.group12.model.BoardVO;
 
 public class BoardAccessService {
 	 ApplicationContext context = 
              new ClassPathXmlApplicationContext("Beans.xml");
 
-      BoardAccessDaoImpl boardAccessDao = 
-      (BoardAccessDaoImpl)context.getBean("boardAccessDaoImpl");
+      BoardAccessDao boardAccessDao = 
+      (BoardAccessDao)context.getBean("boardAccessDaoImpl");
       
       
       /**
@@ -46,6 +46,8 @@ public class BoardAccessService {
     	  
     	  return false;
       }
+      
+     
       
       
       /**
@@ -91,4 +93,10 @@ public class BoardAccessService {
     	 return false;
       }
 
+      public List<BoardVO> getBordAccessByUser(int userId){
+    	  if(userId != 0){
+    		  return boardAccessDao.getBordAccessByUser(userId);
+    	  }
+    	  return null;
+      }
 }

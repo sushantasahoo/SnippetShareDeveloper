@@ -132,4 +132,11 @@ public class BoardService {
 		}
 		return false;
 	}
+	
+	public List<BoardVO> getBoardNonAccessByUser(int userId){
+  	  if(userId != 0){
+  		  return boardDao.getBoardNonAccessByUser(userId);
+  	  }
+  	  return null;
+    }
 }

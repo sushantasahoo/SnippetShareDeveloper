@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe275.group12.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,7 +12,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.sjsu.cmpe275.group12.model.BoardVO;
 import edu.sjsu.cmpe275.group12.model.UserVO;
+import edu.sjsu.cmpe275.group12.service.BoardAccessService;
+import edu.sjsu.cmpe275.group12.service.BoardService;
 import edu.sjsu.cmpe275.group12.service.UserService;
 import edu.sjsu.cmpe275.group12.util.SnippetConstants;
 import edu.sjsu.cmpe275.group12.util.SnippetUtil;
@@ -52,10 +57,16 @@ public class UserController {
 			user.setPassword(SnippetUtil.encryptedPassword(user.getPassword()));
 		}
 		UserService userService = new UserService();
+		BoardService boardService=new BoardService();
+		BoardAccessService boardAccessService =new BoardAccessService();
 		modelAndView.addObject("userSession", user);
-		
+
 		boolean isCreated = userService.createUser(user);
 		if (isCreated) {
+			List<BoardVO> publicBoardList= boardService.getBoardByAccessType("U");
+			List<BoardVO> privateBoardList=boardAccessService.getBordAccessByUser(user.getUserId());
+			modelAndView.addObject("publicBoardList",publicBoardList);
+			modelAndView.addObject("privateBoardList",privateBoardList);
 			modelAndView.setViewName("V2_Dashboard");
 		} else {
 			modelAndView.addObject("Cannot Create Account",
@@ -68,7 +79,14 @@ public class UserController {
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public ModelAndView signinGet(@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView= new ModelAndView();
-		if (authenticateUser(userSession)) {
+		BoardService boardService=new BoardService();
+		BoardAccessService boardAccessService =new BoardAccessService();
+		
+		if (SnippetUtil.authenticateUser(userSession)) {
+			List<BoardVO> publicBoardList= boardService.getBoardByAccessType("U");
+			List<BoardVO> privateBoardList=boardAccessService.getBordAccessByUser(userSession.getUserId());
+			modelAndView.addObject("publicBoardList",publicBoardList);
+			modelAndView.addObject("privateBoardList",privateBoardList);
 			modelAndView.setViewName("V2_Dashboard");
 		}
 		else{
@@ -86,15 +104,20 @@ public class UserController {
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
 	public ModelAndView signin(@ModelAttribute("user") UserVO user) {
 		ModelAndView modelAndView = new ModelAndView();
+		BoardService boardService=new BoardService();
+		BoardAccessService boardAccessService =new BoardAccessService();
 		if (user.getPassword() != null && user.getPassword()!=""){
 			user.setPassword(SnippetUtil.encryptedPassword(user.getPassword()));
 		}
 		UserService userService = new UserService();
 		UserVO user1 = userService.getUser(user.getEmail(), user.getPassword());
-
 		// Authenticate User
 		if (user1 != null) {
 			if (user1.getPassword().equals(user.getPassword())) {
+				List<BoardVO> publicBoardList= boardService.getBoardByAccessType("U");
+				List<BoardVO> privateBoardList=boardAccessService.getBordAccessByUser(user1.getUserId());
+				modelAndView.addObject("publicBoardList",publicBoardList);
+				modelAndView.addObject("privateBoardList",privateBoardList);
 				modelAndView.addObject("userSession", user1);
 				modelAndView.setViewName("V2_Dashboard");
 			} else {
@@ -123,7 +146,7 @@ public class UserController {
 	public ModelAndView viewProfile(
 			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
-		if (authenticateUser(userSession)) {
+		if (SnippetUtil.authenticateUser(userSession)) {
 			modelAndView.setViewName("V2_Profile");
 		} else {
 			modelAndView.addObject("AuthenticationFailure",
@@ -138,7 +161,7 @@ public class UserController {
 			@ModelAttribute("userSession") UserVO userSession,
 			@ModelAttribute("user") UserVO user) {
 		ModelAndView modelAndView = new ModelAndView();
-		if (authenticateUser(userSession)) {
+		if (SnippetUtil.authenticateUser(userSession)) {
 			// userDao.updateUser(user);
 			System.out.println("Updated");
 			modelAndView.setViewName("V2_Profile");
@@ -157,7 +180,7 @@ public class UserController {
 		ModelAndView modelAndView = new ModelAndView();
 		UserService userService=new UserService();
 		
-		if (authenticateUser(userSession)) {
+		if (SnippetUtil.authenticateUser(userSession)) {
 			userService.deleteUser(user.getUserId());
 			System.out.println("Deleted");
 			modelAndView.setViewName("V2_HomePage");
@@ -169,15 +192,21 @@ public class UserController {
 		return modelAndView;
 	}
 
-	boolean authenticateUser(UserVO user) {
-		UserService userService = new UserService();
-		UserVO user1 = userService.getUser(user.getEmail(), user.getPassword());
-		if (user1 != null) {
-			return true;
+	
+	
+	@RequestMapping(value = "/accessRequest", method = RequestMethod.GET)
+	public ModelAndView accessRequest(@ModelAttribute("userSession") UserVO userSession) {
+		ModelAndView modelAndView = new ModelAndView();
+		BoardService boardService = new BoardService();
+		if (SnippetUtil.authenticateUser(userSession)) {
+			boardService.getBoardNonAccessByUser(userSession.getUserId());
+			modelAndView.setViewName("V2_AccessBoard");
+			
 		} else {
-			return false;
+			modelAndView.addObject("AuthenticationFailure",
+					SnippetConstants.INVALID_USER);
+			modelAndView.setViewName("V2_HomePage");
 		}
-
+		return modelAndView;
 	}
-
 }

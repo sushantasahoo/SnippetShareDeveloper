@@ -72,10 +72,11 @@
 				<div class="col-md-4">
 					<c:if test="${ not empty publicBoardList }">
 						<h3>Public Boards</h3>
-						<c:forEach var="publicBoard" items="${publicBoardList}">
-							<h4>${publicBoard.title}</h4>
-							<p>${publicBoard.description}</p>
-							<a class="btn btn-primary" href="#">View Board <span
+						<c:forEach var="snippet" items="${snippetList}">
+							<h4>${snippet.getTitle()}</h4>
+							<p>${snippet.getTag()}</p>
+							<p>${snippet.getContent()}</p>
+							<a class="btn btn-primary" href="/">View Snippet <span
 								class="glyphicon glyphicon-chevron-right"></span></a>
 						</c:forEach>
 					</c:if>

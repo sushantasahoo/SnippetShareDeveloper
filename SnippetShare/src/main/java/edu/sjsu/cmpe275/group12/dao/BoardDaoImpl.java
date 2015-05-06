@@ -26,7 +26,7 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public boolean createBoard(BoardVO board) {
-		String SQL = "INSERT INTO `snippet`.`board`(`title`,`category`,`user_id`,`description`,`access_type`) VALUES(?,?,?,?,?);";
+		String SQL = "INSERT INTO `snippet`.`board`(`title`,`category`,`user_id`,`description`,`access_type`) VALUES(?,?,?,?,?)";
 		try{
 			jdbcTemplateObject.update(SQL, board.getTitle(), board.getCategory(), board.getUserId(), board.getDescription(), board.getAccessType());
 			return true;
@@ -60,7 +60,8 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public List<BoardVO> getBoardsByAccessType(String accessType) {
-		String SQL = "SELECT * from `snippet`.board` WHERE `access_type` = ?";
+		String SQL = "SELECT * from `snippet`.`board` WHERE `access_type` = ?";
+		System.out.println();
 		List<BoardVO> board =  jdbcTemplateObject.query(SQL, 
 				new Object[]{accessType}, new BoardMapper());
 
@@ -122,9 +123,22 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public List<BoardVO> getAllBoardList() {
-		String SQL = "SELECT * from `snippet`.board`";
+		String SQL = "SELECT * from `snippet`.`board`";
 		List<BoardVO> board =  jdbcTemplateObject.query(SQL, new BoardMapper());
 
+		if(board!=null && board.size()>0){
+			return board;
+		}
+		else 
+			return null;
+	}
+
+	@Override
+	public List<BoardVO> getBoardNonAccessByUser(int userId) {
+		String SQL = "SELECT b.title, b.description, b.category, b.board_id FROM `snippet`.`board` `b`,"
+				+ " `snippet`.`board_access` `c` where `b`.`board_id` = `c`.`board_id` and `c`.`user_id` != ? ;";
+		List<BoardVO> board =  jdbcTemplateObject.query(SQL, 
+				new Object[]{userId}, new BoardMapper());
 		if(board!=null && board.size()>0){
 			return board;
 		}

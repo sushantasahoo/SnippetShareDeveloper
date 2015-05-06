@@ -106,10 +106,14 @@
 		</div>
 		<div class="row">
 			<c:if test="${ not empty publicBoardList }">
+			
 				<c:forEach var="publicBoard" items="${publicBoardList}">
+				<form method="post"
+						action="${pageContext.request.contextPath}/viewBoard/${publicBoard.getBoardId()}">
 					<div class="col-md-4 col-sm-6 portfolio-item">
-						<a href="#portfolioModal1" class="portfolio-link"
-							data-toggle="modal">
+						<a
+							href="#" onclick="$(this).closest('form').submit()"
+							class="portfolio-link" data-toggle="modal">
 							<div class="portfolio-hover">
 								<div class="portfolio-hover-content">
 									<i class="fa fa-plus fa-3x"></i>
@@ -118,10 +122,11 @@
 							alt="">
 						</a>
 						<div class="portfolio-caption">
-							<h4>${publicBoard.title}</h4>
-							<p class="text-muted">${publicBoard.description}</p>
+							<h4>${publicBoard.getTitle()}</h4>
+							<p class="text-muted">${publicBoard.getDescription()}</p>
 						</div>
 					</div>
+					</form>
 				</c:forEach>
 			</c:if>
 			<c:if test="${empty publicBoardList }">
@@ -157,26 +162,31 @@
 		<div class="row">
 			<c:if test="${ not empty privateBoardList }">
 				<c:forEach var="privateBoard" items="${privateBoardList}">
-					<div class="col-md-4 col-sm-6 portfolio-item">
-						<a href="#portfolioModal1" class="portfolio-link"
-							data-toggle="modal">
-							<div class="portfolio-hover">
-								<div class="portfolio-hover-content">
-									<i class="fa fa-plus fa-3x"></i>
-								</div>
-							</div> <img src="img/portfolio/roundicons.png" class="img-responsive"
-							alt="">
-						</a>
-						<div class="portfolio-caption">
-							<h4>${privateBoardList.title}</h4>
-							<p class="text-muted">${privateBoardList.description}</p>
+					<form method="post"
+						action="${pageContext.request.contextPath}/viewBoard/${privateBoard.getBoardId()}">
+						<div class="col-md-4 col-sm-6 portfolio-item">
+							<a
+								href="#" onclick="$(this).closest('form').submit()"
+								class="portfolio-link" data-toggle="modal">
+								<div class="portfolio-hover">
+									<div class="portfolio-hover-content">
+										<i class="fa fa-plus fa-3x"></i>
+									</div>
+								</div> <img src="img/portfolio/roundicons.png" class="img-responsive"
+								alt="">
+							</a>
+							<div class="portfolio-caption">
+								<h4>${privateBoard.getTitle()}</h4>
+								<p class="text-muted">${privateBoard.getDescription()}</p>
+							</div>
 						</div>
-					</div>
+					</form>
 				</c:forEach>
 			</c:if>
 			<c:if test="${empty privateBoardList }">
 				<h4>No Boards Available</h4>
 			</c:if>
+
 		</div>
 	</div>
 	</section>

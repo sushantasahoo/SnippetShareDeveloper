@@ -3,6 +3,7 @@ package edu.sjsu.cmpe275.group12.dao;
 import java.util.List;
 
 import edu.sjsu.cmpe275.group12.model.BoardAccessVO;
+import edu.sjsu.cmpe275.group12.model.BoardVO;
 
 public interface BoardAccessDao {
 
@@ -10,6 +11,7 @@ public interface BoardAccessDao {
 	public void updateBoardAccess(BoardAccessVO bAccess);
 	public BoardAccessVO getBoardAccess(int boardId, int userId);
 	public void deleteBoardAccess(int boardId, int userId);
-	List<BoardAccessVO> getBoardAccessRequest(int boardId);
+	public List<BoardAccessVO> getBoardAccessRequest(int boardId);
+	public List<BoardVO> getBordAccessByUser(int userId);
 	
 }

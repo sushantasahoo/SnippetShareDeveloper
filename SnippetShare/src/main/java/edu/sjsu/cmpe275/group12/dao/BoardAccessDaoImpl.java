@@ -9,7 +9,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
+
 import edu.sjsu.cmpe275.group12.model.BoardAccessVO;
+import edu.sjsu.cmpe275.group12.model.BoardVO;
 
 
 public class BoardAccessDaoImpl implements BoardAccessDao{
@@ -77,6 +79,20 @@ public class BoardAccessDaoImpl implements BoardAccessDao{
 		String SQL = "SELECT * from `snippet`.board_access` WHERE `board_id` = ? AND `access_status` = 'P'";
 		List<BoardAccessVO> boardAccessRequest =  jdbcTemplateObject.query(SQL, 
 				new Object[]{ boardId }, new BoardAccessMapper());
+
+		if(boardAccessRequest!=null && boardAccessRequest.size()>0){
+			return boardAccessRequest;
+		}
+		else 
+			return null;
+	}
+
+	@Override
+	public List<BoardVO> getBordAccessByUser(int userId) {
+		//P denotes pending requests for particular boardId
+		String SQL = "SELECT board.title, board.description, board.category, board.board_id FROM snippet.board, snippet.board_access  where board.board_id = board_access.board_id and board_access.access_status='A' and board_access.user_id= ?  ";
+		List<BoardVO> boardAccessRequest =  jdbcTemplateObject.query(SQL, 
+				new Object[]{ userId }, new BoardMapper());
 
 		if(boardAccessRequest!=null && boardAccessRequest.size()>0){
 			return boardAccessRequest;

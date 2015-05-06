@@ -17,9 +17,9 @@ public class BoardMapper implements RowMapper<BoardVO> {
 		board.setBoardId(rs.getInt("board_id"));
 		board.setTitle(rs.getString("title"));
 		board.setCategory(rs.getString("category"));
-		board.setUserId(rs.getInt("user_id"));
+	//	board.setUserId(rs.getInt("user_id"));
 		board.setDescription(rs.getString("description"));
-		board.setAccessType(rs.getString("access_type"));
+	//	board.setAccessType(rs.getString("access_type"));
 	    return board;
 	}
 

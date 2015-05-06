@@ -1,6 +1,5 @@
 package edu.sjsu.cmpe275.group12.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -16,10 +15,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.sjsu.cmpe275.group12.model.BoardVO;
+import edu.sjsu.cmpe275.group12.model.SnippetVO;
 import edu.sjsu.cmpe275.group12.model.UserVO;
 import edu.sjsu.cmpe275.group12.service.BoardService;
 import edu.sjsu.cmpe275.group12.service.SnippetService;
-import edu.sjsu.cmpe275.group12.service.UserService;
 import edu.sjsu.cmpe275.group12.util.SnippetUtil;
 
 /**
@@ -67,6 +66,7 @@ public class BoardController {
 		
 		if (SnippetUtil.authenticateUser(userSession)) {
 			boolean isCreated = boardService.createBoard(boardVO);
+
 			System.out.println("Board Created: Title ID: "+ boardVO.getTitle()+"  Category: "+boardVO.getCategory());
 			
 			if (isCreated) {
@@ -110,11 +110,16 @@ public class BoardController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/viewPublicBoard/{boardId}", method = RequestMethod.POST)
-	public ModelAndView viewPublicBoard(@PathVariable("id") long boardId) {
+	@RequestMapping(value = "/viewBoard/{boardId}", method = RequestMethod.POST)
+	public ModelAndView viewBoard(@PathVariable("boardId") int boardId,
+			@ModelAttribute("userSession") UserVO userSession) {
 		ModelAndView modelAndView = new ModelAndView();
-		// boardDao.getBoardById(boardId);
-		modelAndView.setViewName("ViewBoard");
+		SnippetService snippetService = new SnippetService();
+		if (SnippetUtil.authenticateUser(userSession)) {
+			List <SnippetVO> snippetList = snippetService.getSnippetsByBoardId(boardId);
+			modelAndView.addObject("snippetList",snippetList);
+			modelAndView.setViewName("V2_ViewBoard");
+		}
 		return modelAndView;
 	}
 
