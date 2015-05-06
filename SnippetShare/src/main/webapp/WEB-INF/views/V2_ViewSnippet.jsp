@@ -32,8 +32,7 @@
 	rel='stylesheet' type='text/css'>
 
 </head>
-<body>
-<body id="page-top" class="index">
+<body id="page-top" class="index" bgcolor="#E6E6FA">
 
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -75,8 +74,11 @@
 			<form class="Dashboard">
 				<div class="row">
 					<div class="col-md-7">
-						<h2 id="${snippet}">${snippet.getTitle()}</h2>
-						<h3>Comments</h3>
+						<h1>Snippet</h1>
+						<h2 style="color:Red" id="${snippet}">${snippet.getTitle()}</h2><br><br>
+						<h4 style="color:BLUE">${snippet.getTags()} </h4>
+						<h4 style="color:BLUE">${snippet.getContent()} </h4>
+						<h3 style="color:Green">Comments</h3>
 						<form>
 							<c:if test="${ not empty comments }">
 								<c:forEach var="comment" items="${comments}">
@@ -101,34 +103,7 @@
 
 
 	<!-- Portfolio Grid Section -->
-	<section id="portfolio" class="bg-light-gray">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<h2 class="section-heading">Portfolio</h2>
-				<h3 class="section-subheading text-muted">Lorem ipsum dolor sit
-					amet consectetur.</h3>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4 col-sm-6 portfolio-item">
-				<a href="#portfolioModal1" class="portfolio-link"
-					data-toggle="modal">
-					<div class="portfolio-hover">
-						<div class="portfolio-hover-content">
-							<i class="fa fa-plus fa-3x"></i>
-						</div>
-					</div> <img src="img/portfolio/roundicons.png" class="img-responsive"
-					alt="">
-				</a>
-				<div class="portfolio-caption">
-					<h4>Round Icons</h4>
-					<p class="text-muted">Graphic Design</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	</section>
+	
 
 	<footer>
 	<div class="container">

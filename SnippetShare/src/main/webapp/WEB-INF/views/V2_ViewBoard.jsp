@@ -89,7 +89,7 @@
 							</form>
 						</c:forEach>
 					</c:if>
-					<c:if test="${empty publicBoardList }">
+					<c:if test="${empty snippetList }">
 						<h4>No Snippets available for this board. You can create a new Snippet</h4>
 					</c:if>
 				</div>
