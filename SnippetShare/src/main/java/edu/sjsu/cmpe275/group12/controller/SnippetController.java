@@ -1,5 +1,6 @@
 package edu.sjsu.cmpe275.group12.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -65,23 +66,40 @@ public class SnippetController {
 	@RequestMapping(value = "/{boardId}/addSnippet", method = RequestMethod.POST)
 	public ModelAndView addSnippet(@PathVariable("boardId") int boardId,
 			@ModelAttribute("snippetVO") SnippetVO snippetVO,
-			@ModelAttribute("userSession") UserVO userSession) {
+			@ModelAttribute("userSession") UserVO userSession,
+			@RequestParam("tags") String tags,
+			@RequestParam("title") String title,
+			@RequestParam("content") String content) {
 		ModelAndView modelAndView = new ModelAndView();
 		SnippetService snippetService = new SnippetService();
-
+		snippetVO.setContent(content);
+		snippetVO.setTitle(title);
+		snippetVO.setTags(tags);
 		snippetVO.setUserId(userSession.getUserId());
 		snippetVO.setBoardId(boardId);
 		if (SnippetUtil.authenticateUser(userSession)) {
 			boolean isCreated = snippetService.createSnippet(snippetVO);
-			System.out.println("Snippet Created: Title ID: "
-					+ snippetVO.getTitle() + "  Category: "
-					+ snippetVO.getContent() + snippetVO.getBoardId());
 
 			if (isCreated) {
-				// TODO :: Change the name of the view to redirect to all
-				// snippets under particular board
-				modelAndView.addObject(snippetVO);
-				modelAndView.setViewName("V2_ViewBoard");
+				snippetService = new SnippetService();
+				if (SnippetUtil.authenticateUser(userSession)) {
+					List<SnippetVO> snippetList = snippetService
+							.getSnippetsByBoardId(boardId);
+					System.out.println("Board id " + boardId);
+					if (snippetList != null) {
+						modelAndView.addObject("snippetList", snippetList);
+						modelAndView.addObject("boardId", boardId);
+						modelAndView.setViewName("V2_ViewBoard");
+					} else {
+						modelAndView.addObject("snippetList",
+								new ArrayList<SnippetVO>());
+						modelAndView.setViewName("V2_ViewBoard");
+						modelAndView.addObject("boardId", boardId);
+					}
+				} else {
+					modelAndView.addObject("error", SnippetConstants.INVALID_USER);
+					modelAndView.setViewName("V2_HomePage");
+				}
 			} else {
 				modelAndView.addObject("Cannot Create Board",
 						SnippetConstants.SNIPPET_CREATION_FAILED);

@@ -67,42 +67,21 @@
 				<div class="form-group" >
 					<input type="text" class="form-control" placeholder="Title *"
 						name="title" id="inputTitle" required
-						data-validation-required-message="Please enter your .">
+						data-validation-required-message="Please enter your ." />
 					<p class="help-block text-danger"></p>
 				</div>
 
-				<div class="form-group">
-					<select name="category" class="form-control">
-						<option value="Business">Business</option>
-						<option value="Sports">Sports</option>
-						<option value="Health">Health</option>
-						<option value="School">School</option>
-						<option value="Politics">Politics</option>
-						<option value="Military">Military</option>
-						<option value="Software">Software</option>
-						<option value="Economics">Economics</option>
-						<option value="History">History</option>
-						<option value="Environment">Environment</option>
-					</select>
-				</div>
-
+		
 				
-				<div class="form-group">
-					<select name="category" class="form-control">
-						<option value="Public">Public</option>
-						<option value="Private">Private</option>
-					</select>
-				</div>
 				
 				<div class="form-group">
 						<textarea rows="10" id="inputContent" class="form-control" 
-					       placeholder="Add Content Here" required></textarea>
+					       placeholder="Add Content Here" name="content" required></textarea>
 					<p class="help-block text-danger"></p>
 				</div>
 				
 			<input type="text" class="form-control" placeholder="Tags"
-						name="title" id="inputTitle" required
-						data-validation-required-message="Please enter your .">
+						name="tags" id="inputTags"/>
 
 				<p>By creating a snippet you agree to our Terms of Service.</p>
 				<br />
