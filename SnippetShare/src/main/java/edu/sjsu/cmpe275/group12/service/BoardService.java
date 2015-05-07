@@ -117,9 +117,9 @@ public class BoardService {
 	 * @param category
 	 * @return
 	 */
-	public List<BoardVO> getBoardByCategory(String category){
-		if(!category.equals("") && category!=null){
-			return getBoardByCategory(category);
+	public List<BoardVO> getBoardByCategory(String category, String accessType){
+		if(!category.equals("")  && category!=null && !accessType.equals("") && accessType!=null){
+			return boardDao.getBoardsByCategory(category, accessType);
 		}
 		return null;
 	}

@@ -104,14 +104,15 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<BoardVO> getBoardsByCategory(String category) {
-		String SQL = "SELECT * from `snippet`.board` WHERE `category` = ?";
-		List<BoardVO> board = jdbcTemplateObject.query(SQL,
-				new Object[] { category }, new BoardMapper());
+	public List<BoardVO> getBoardsByCategory(String category, String accessType) {
+		String SQL = "SELECT * from `snippet`.`board` WHERE `category` = ? AND  `access_type` = ?";
+		List<BoardVO> board =  jdbcTemplateObject.query(SQL, 
+				new Object[]{category,accessType}, new BoardMapper());
 
-		if (board != null && board.size() > 0) {
+		if(board!=null && board.size()>0){
 			return board;
-		} else
+		}
+		else 
 			return null;
 	}
 
@@ -161,7 +162,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public List<BoardVO> getBoardNonAccessByUser(int userId) {
-		String SQL = "select * from board b where board_id not in (select board_id from board_Access where user_id =?) and access_type='R';";
+		String SQL = "select * from board b where board_id not in (select board_id from board_access where user_id =?) and access_type='R';";
 		List<BoardVO> board = jdbcTemplateObject.query(SQL,
 				new Object[] { userId }, new BoardMapper());
 		if (board != null && board.size() > 0) {
