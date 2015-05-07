@@ -163,7 +163,7 @@
 		<div class="row">
 			<c:if test="${ not empty privateBoardList }">
 				<c:forEach var="privateBoard" items="${privateBoardList}">
-					<form method="post"
+					<form method="GET"
 						action="${pageContext.request.contextPath}/viewBoard/${privateBoard.getBoardId()}">
 						<div class="col-md-3 portfolio-item">
 							<a href="#" onclick="$(this).closest('form').submit()"
