@@ -20,6 +20,7 @@ public class CommentMapper implements RowMapper<CommentVO> {
 		comment.setSnippetId(rs.getInt("snippet_id"));
 		comment.setComment(rs.getString("comment"));
 		comment.setUserId(rs.getInt("user_id"));
+		comment.setUserName(rs.getString("first_name"));
 	    return comment;
 	}
 

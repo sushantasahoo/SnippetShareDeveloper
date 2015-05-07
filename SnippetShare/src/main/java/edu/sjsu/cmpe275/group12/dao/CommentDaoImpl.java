@@ -44,7 +44,7 @@ public class CommentDaoImpl implements CommentDao {
 
 	@Override
 	public List<CommentVO> getComment(int snippetId) {
-		String SQL = "SELECT * from `snippet`.`comment` WHERE `snippet_id` = ?";
+		String SQL = "select c.*,c.comment_id, u.first_name from snippet.comment c, snippet.user u where snippet_id= ? and u.user_id=c.user_id;";
 		List<CommentVO> comments =  jdbcTemplateObject.query(SQL, 
 				new Object[]{ snippetId }, new CommentMapper());
 

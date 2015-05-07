@@ -71,10 +71,9 @@
 	<header>
 	<div class="container">
 		<div class="intro-text text-align">
-			<form class="Dashboard">
-				<div class="row">
-					<div class="col-md-7">
-					<div class="Dashboard form-group">
+			<form class="Dashboard" style="background-color:White">
+				
+					<div class="Dashboard form-group" >
 						<h3 style="color:Green">Snippet</h3></br>
 						<h2 style="color:Red" id="${snippet}" >${snippet.getTitle()}</h2>
 						<h4 style="color:BLUE">Tag: ${snippet.getTags()} </h4>
@@ -84,8 +83,10 @@
 							<c:if test="${ not empty comments }">
 								<c:forEach var="comment" items="${comments}">
 									<form>
-										<input class="form-control" readonly value="${comment.getComment()}"></input>
+									<div class="form-inline">
+										<p style="color:Black">${comment.getUserName()} :<input class="form-control" readonly value=" ${comment.getComment()}"></input></p>
 										</br>
+										</div>
 									</form>
 								</c:forEach>
 							</c:if>
@@ -96,8 +97,7 @@
 							</c:if>
 						</form>
 						</div>
-					</div>
-				</div>
+					
 			</form>
 		</div>
 	</div>

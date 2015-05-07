@@ -10,6 +10,8 @@ public class CommentVO {
 	private String comment;
 
 	private int userId;
+	
+	private String userName;
 
 
 	/**
@@ -73,6 +75,20 @@ public class CommentVO {
 	 */
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+
+	/**
+	 * @return the userName
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String string) {
+		// TODO Auto-generated method stub
+		this.userName = string;
 	}
 
 
